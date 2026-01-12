@@ -20,7 +20,8 @@ class Entity
 
 	//Object texture
 	SDL_Texture* MyTexture;
-	SDL_Color color;
+	SDL_Renderer* renderer;
+	SDL_Color color = { 255,255,255,255 };
 
 public: 
 
@@ -28,13 +29,14 @@ public:
 
 	//Constructor/Destructor
 	Entity();
-	Entity(SDL_Texture* MyTexture);
+	Entity(SDL_Renderer* renderer);
+	Entity(SDL_Texture* MyTexture, SDL_Renderer* renderer);
 	~Entity();
 
 	void setRect();
 
 	// Render/Update
-	void render(SDL_Renderer* renderer);
+	void render();
 	void update(float dt);
 
 	//StateMachine
