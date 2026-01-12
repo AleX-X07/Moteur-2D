@@ -9,14 +9,14 @@ class GamingLoop
 	int windowX = 1920;
 	int windowY = 1080;
 
-	bool loopTrue = true;
-
 public:
+
+	bool loopTrue = true;
 
 	GamingLoop();
 	~GamingLoop();
 
 	void setWindowXY(int _x, int _y);
-	void gamingLoop();
+	void displayWindow();
 };
 

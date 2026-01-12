@@ -6,7 +6,6 @@ GamingLoop::GamingLoop() {
 }
 
 GamingLoop::~GamingLoop() {
-
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 }
@@ -15,11 +14,9 @@ void GamingLoop::setWindowXY(int _x, int _y) {
 	windowY = _y;
 }
 
-void GamingLoop::gamingLoop() {
-	while (loopTrue) {
-		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-		SDL_RenderClear(renderer);
-		SDL_RenderFillRect(renderer, NULL);
-		SDL_RenderPresent(renderer);
-	}
+void GamingLoop::displayWindow() {
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+	SDL_RenderClear(renderer);
+	SDL_RenderFillRect(renderer, NULL);
+	SDL_RenderPresent(renderer);
 }
