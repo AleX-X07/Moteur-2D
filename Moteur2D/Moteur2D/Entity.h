@@ -37,9 +37,8 @@ public:
 
 	// Render/Update
 	void render();
-	void update(float dt);
-
+	void update(const bool* keys, float dt);
+	void clampToScreen(int windowX, int windowY);
 	//StateMachine
-
 };
 

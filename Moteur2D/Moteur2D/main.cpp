@@ -15,26 +15,32 @@ int main() {
 	//Delta time
 	float dt = 1;
 
-	Entity test = Entity(renderer);
+	int w, h;
+
+	Entity Box = Entity(renderer);
 
 	//GameLoop
 	bool loopTrue = true;
 	while (loopTrue) {
-		test.update(dt);
-		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-		SDL_RenderClear(renderer);
-		SDL_RenderFillRect(renderer, NULL);
-		test.render();
-		SDL_RenderPresent(renderer);
-		
+
 		SDL_Event event;
 		while (SDL_PollEvent(&event)) {
 			if (event.type == SDL_EVENT_QUIT) {
 				loopTrue = false;
 			}
 		}
-	}
 
+		const bool* keys = SDL_GetKeyboardState(NULL);
+		Box.update(keys, dt);
+		SDL_GetWindowSize(window, &w, &h);
+		Box.clampToScreen(w, h);
+		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+		SDL_RenderClear(renderer);
+		SDL_RenderFillRect(renderer, NULL);
+		Box.render();
+		SDL_RenderPresent(renderer);
+	}
+                                 
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
