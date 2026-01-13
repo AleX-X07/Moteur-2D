@@ -30,10 +30,9 @@ public:
 	//Constructor/Destructor
 	Entity();
 	Entity(SDL_Renderer* renderer);
-	Entity(SDL_Texture* MyTexture, SDL_Renderer* renderer);
+	Entity(SDL_Texture* MyTexture, SDL_Renderer* rendere);
+	Entity(SDL_Texture* MyTexture, SDL_Renderer* renderer, float x, float y, float w, float h, int speed, bool collide);
 	~Entity();
-
-	void setRect();
 
 	// Render/Update
 	void render();
