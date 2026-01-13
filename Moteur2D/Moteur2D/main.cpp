@@ -18,7 +18,6 @@ int main() {
 	int w, h;
 
 	Entity Box = Entity(renderer);
-	Entity Box2 = Entity(texture, renderer);
 
 	//GameLoop
 	bool loopTrue = true;
