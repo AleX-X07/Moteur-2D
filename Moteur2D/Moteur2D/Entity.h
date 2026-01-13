@@ -23,7 +23,7 @@ class Entity
 	SDL_Renderer* renderer;
 	SDL_Color color;
 
-	bool onGround = true;
+	bool onGround;
 
 public: 
 

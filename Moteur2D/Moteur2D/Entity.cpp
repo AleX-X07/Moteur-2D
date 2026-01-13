@@ -49,7 +49,7 @@ bool Entity::isColliding(const Entity& entity) const
 }
 
 void Entity::downToGround(){
-    rect.y += 1;
+    rect.y += 10;
 }
 
 void Entity::setOnGround(bool value){
@@ -67,22 +67,24 @@ void Entity::render() {
 }
 
 void Entity::update(const bool* keys, float dt) {
-    float time = dt / 1000.0f;
     float dx = 0, dy = 0;
-    // Chek if z,q,s,d or up,down,left,right are pressed
+    // move left and right
     if (keys[SDL_SCANCODE_LEFT] || keys[SDL_SCANCODE_A]) {
         dx -= 1;
     }
     if (keys[SDL_SCANCODE_RIGHT] || keys[SDL_SCANCODE_D]) {
         dx += 1;
     }
+    // jump
     if (keys[SDL_SCANCODE_SPACE] && onGround) {
-		dy -= 100;
+        for (int X = 0; X < 10; X++) {
+            dy -= 10;
+        }
         onGround = false;
     }
     // Update position of player
-    rect.x += dx * speed * time;
-	rect.y += dy * speed * time;
+    rect.x += dx * speed * dt;
+	rect.y += dy;
 
 }
 
