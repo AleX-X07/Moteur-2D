@@ -1,11 +1,11 @@
 #pragma once
+#include <vector>
 #include <SDL3/SDL.h>
 #include<SDL3_image/SDL_image.h>
 
 class Camera;
 
-class Entity
-{
+class Entity{
 private:
 	//Size object
 	float sizeX;
@@ -32,6 +32,7 @@ private:
 
 	// Physics variables
 	float velocityY;
+	float velocityX;
 	float gravity;
 
 	Uint64 last_time = SDL_GetTicks();
@@ -51,6 +52,10 @@ public:
 	bool isColliding(const Entity& entity) const;
 	void downToGround();
 	void setOnGround(bool value);
+
+	void collision(const std::vector<Entity*>& colliders);
+	void collisionHorizontal(const std::vector<Entity*>& colliders);
+
 
 	// Render/Update
 	void render(Camera& camera);

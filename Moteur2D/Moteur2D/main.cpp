@@ -1,5 +1,6 @@
 #include <iostream>
 #include <SDL3/SDL.h>
+#include <vector>
 
 #include "Entity.h"
 #include "Camera.h"
@@ -35,18 +36,21 @@ int main() {
 	int frameTime;
 	Uint64 last_time = SDL_GetTicks();
 
-	int w, h;
+	int w;
+	int h;
 
-	Entity Player = Entity(MyRessources.player, renderer);
+	auto Player = Entity(MyRessources.player, renderer);
 
 	Player.setColor(0, 255, 0, 255);
-	Entity Ground = Entity(nullptr, renderer, 0, 590, 1920, 80, 0, false);
+	auto Ground = Entity(nullptr, renderer, 0, 590, 1920, 80, 0, false);
 	Ground.setColor(255, 0, 0, 255);
-	Entity Ground1 = Entity(nullptr, renderer, 0, 550, 500, 10, 0, false);
+	auto Ground1 = Entity(nullptr, renderer, 0, 550, 500, 10, 0, false);
 	Ground1.setColor(0, 0, 255, 255);
-	Entity Ground2 = Entity(nullptr, renderer, 300, 510, 50, 10, 0, false);
+	auto Ground2 = Entity(nullptr, renderer, 300, 510, 50, 10, 0, false);
 	Ground2.setColor(0, 0, 255, 255);
 	
+	std::vector<Entity*> grounds = { &Ground, &Ground1, &Ground2 };
+
 	//GameLoop
 	bool loopTrue = true;
 	while (loopTrue) {
@@ -68,12 +72,10 @@ int main() {
 		
 		Player.update(keys, dt);
 
-		if (!Player.isColliding(Ground) && !Player.isColliding(Ground1) && !Player.isColliding(Ground2)) {
-			Player.downToGround();
-			Player.setOnGround(false);
-		}
-		else 
-			Player.setOnGround(true);
+		Player.collisionHorizontal(grounds);
+
+		// Handle vertical collisions
+		Player.collision(grounds);
 
 		camera.setCameraOnPlayer(Player);
 

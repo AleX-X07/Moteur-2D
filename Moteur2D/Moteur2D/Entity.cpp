@@ -14,6 +14,7 @@ Entity::Entity(SDL_Texture* _MyTexture, SDL_Renderer* _renderer) {
     jumpForce = 400.0f;  // Force initiale du saut
     gravity = 800.0f;     // Gravité appliquée
     velocityY = 0.0f;
+    velocityX = 0.0f;
     collide = false;
     MyTexture = _MyTexture;
     renderer = _renderer;
@@ -30,6 +31,7 @@ Entity::Entity(SDL_Texture* _MyTexture, SDL_Renderer* _renderer, float x, float 
     jumpForce = 400.0f;
     gravity = 800.0f;
     velocityY = 0.0f;
+    velocityX = 0.0f;
     collide = _collide;
     MyTexture = _MyTexture;
     renderer = _renderer;
@@ -45,14 +47,12 @@ void Entity::getPosition(float& x, float& y) const{
 	y = rect.y;
 }
 
-bool Entity::isColliding(const Entity& entity) const
-{
+bool Entity::isColliding(const Entity& entity) const{
     if(rect.x + rect.w < entity.rect.x ||
        rect.x > entity.rect.x + entity.rect.w ||
        rect.y + rect.h < entity.rect.y ||
-       rect.y > entity.rect.y + entity.rect.h) {
+       rect.y > entity.rect.y + entity.rect.h) 
         return false;
-	}
     return true;
 }
 
@@ -67,11 +67,80 @@ void Entity::setOnGround(bool value){
         velocityY = 0.0f;
 }
 
+void Entity::collision(const std::vector<Entity*>& colliders){
+    onGround = false;
+    for (auto c : colliders) {
+        if (!SDL_HasRectIntersectionFloat(&rect, &c->rect))
+            continue;
+
+        float playerLeft = rect.x;
+        float playerRight = rect.x + rect.w;
+        float blockLeft = c->rect.x;
+        float blockRight = c->rect.x + c->rect.w;
+
+        // Check horizontal overlap
+        bool horizontalOverlap = playerRight > blockLeft && playerLeft < blockRight;
+        if (!horizontalOverlap)
+            continue;
+
+        float playerTop = rect.y;
+        float playerBottom = rect.y + rect.h;
+        float blockTop = c->rect.y;
+        float blockBottom = c->rect.y + c->rect.h;
+
+        // Vertical collision resolution
+        if (velocityY > 0) {
+            // Landing on top of platform
+            rect.y = blockTop - rect.h;
+            onGround = true;
+        }
+        else if (velocityY < 0) {
+            // Hit ceiling
+            rect.y = blockBottom;
+        }
+        velocityY = 0;
+    }
+}
+
+void Entity::collisionHorizontal(const std::vector<Entity*>& colliders){
+    for (auto c : colliders) {
+        if (!SDL_HasRectIntersectionFloat(&rect, &c->rect))
+            continue;
+
+        float playerTop = rect.y;
+        float playerBottom = rect.y + rect.h;
+        float blockTop = c->rect.y;
+        float blockBottom = c->rect.y + c->rect.h;
+
+        // Check vertical overlap
+        bool verticalOverlap = playerBottom > blockTop && playerTop < blockBottom;
+        if (!verticalOverlap)
+            continue;
+
+        float playerLeft = rect.x;
+        float playerRight = rect.x + rect.w;
+        float blockLeft = c->rect.x;
+        float blockRight = c->rect.x + c->rect.w;
+
+        // Horizontal collision resolution
+        if (velocityX > 0) {
+            // Hit right wall
+            rect.x = blockLeft - rect.w;
+        }
+        else if (velocityX < 0) {
+            // Hit left wall
+            rect.x = blockRight;
+        }
+        velocityX = 0;
+    }
+}
+
+
+
 void Entity::render(Camera& camera) {
     SDL_FRect screenRect = camera.worldToScreen(rect);
-    if (MyTexture) {
-        SDL_RenderTexture(renderer, MyTexture, NULL, &screenRect);
-    }
+    if (MyTexture) 
+        SDL_RenderTexture(renderer, MyTexture, nullptr, &screenRect);
     else {
         SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
         SDL_RenderFillRect(renderer, &screenRect);
@@ -104,18 +173,14 @@ void Entity::update(const bool* keys, float dt) {
 }
 
 void Entity::clampToScreen(int windowX, int windowY) {
-    if (rect.x < 0) {
+    if (rect.x < 0) 
         rect.x = 0;
-    }
-    if (rect.y < 0) {
+    if (rect.y < 0) 
         rect.y = 0;
-    }
-    if (rect.x + rect.w > windowX) {
+    if (rect.x + rect.w > windowX) 
         rect.x = windowX - rect.w;
-    }
-    if (rect.y + rect.h > windowY) {
+    if (rect.y + rect.h > windowY) 
         rect.y = windowY - rect.h;
-    }
 }
 
 void Entity::setColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a){

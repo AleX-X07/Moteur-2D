@@ -27,7 +27,7 @@ void Camera::setCameraOnPlayer(Entity& player) {
 }
 
 
-SDL_FRect Camera::worldToScreen(SDL_FRect& worldRect) {
+SDL_FRect Camera::worldToScreen(SDL_FRect& worldRect) const {
     return {
         (worldRect.x - sizeC.x) * zoom,
         (worldRect.y - sizeC.y) * zoom,

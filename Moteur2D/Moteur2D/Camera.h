@@ -21,6 +21,6 @@ public:
 	Camera(float sw, float sh, float lw, float lh);
 
 	void setCameraOnPlayer(Entity& player);
-	SDL_FRect worldToScreen(SDL_FRect& worldRect);
+	SDL_FRect worldToScreen(SDL_FRect& worldRect) const;
 };
 
