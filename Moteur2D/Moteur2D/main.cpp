@@ -3,14 +3,23 @@
 
 #include "GamingLoop.h"
 #include "Entity.h"
+#include "Camera.h"
 
 int main() {
+	int screenWidth = 640;
+	int screenHeight = 480;
+
+	int levelWidth = 1920;
+	int levelHeight = 1080;
+
+	Camera camera(screenWidth, screenHeight, levelWidth, levelHeight);
+
 	// Creation Window
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 
 	SDL_Init(SDL_INIT_VIDEO);
-	SDL_CreateWindowAndRenderer("Lost Meow", 1920, 1080, SDL_WINDOW_FULLSCREEN, &window, &renderer);
+	SDL_CreateWindowAndRenderer("Lost Meow", screenWidth, screenHeight, NULL, &window, &renderer);
 	
 	//Delta time
 	float dt = 1;
@@ -61,15 +70,17 @@ int main() {
 		else 
 			Player.setOnGround(true);
 
-		Player.clampToScreen(w, h);
+		camera.setCameraOnPlayer(Box);
+
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderClear(renderer);
 		SDL_RenderFillRect(renderer, nullptr);
 
-		Player.render();
-		Ground.render();
-		Ground1.render();
-		Ground2.render();
+		Player.renderPlayer(camera);
+		Ground.renderPlayer(camera);
+		Ground1.renderPlayer(camera);
+		Ground.renderPlayer(camera);
+
 		SDL_RenderPresent(renderer);
 
 		frameTime = SDL_GetTicks() - frameStart;
