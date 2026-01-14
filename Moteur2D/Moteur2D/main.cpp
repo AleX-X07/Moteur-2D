@@ -24,12 +24,14 @@ int main() {
 
 	int w, h;
 
-	Entity Box = Entity(renderer);
-	Box.setColor(0, 255, 0, 255);
+	Entity Player = Entity(renderer);
+	Player.setColor(0, 255, 0, 255);
 	Entity Ground = Entity(nullptr, renderer, 0, 590, 1920, 80, 0, false);
 	Ground.setColor(255, 0, 0, 255);
-	Entity Ground1 = Entity(nullptr, renderer, 0, 580, 500, 10, 0, false);
+	Entity Ground1 = Entity(nullptr, renderer, 0, 550, 500, 10, 0, false);
 	Ground1.setColor(0, 0, 255, 255);
+	Entity Ground2 = Entity(nullptr, renderer, 300, 510, 50, 10, 0, false);
+	Ground2.setColor(0, 0, 255, 255);
 	
 	//GameLoop
 	bool loopTrue = true;
@@ -37,9 +39,8 @@ int main() {
 
 		SDL_Event event;
 		while (SDL_PollEvent(&event)) {
-			if (event.type == SDL_EVENT_QUIT) {
+			if (event.type == SDL_EVENT_QUIT) 
 				loopTrue = false;
-			}
 		}
 
 		float dt = (SDL_GetTicks() - last_time) / 1000.0f;
@@ -47,35 +48,34 @@ int main() {
 		frameStart = SDL_GetTicks();
 
 
-		const bool* keys = SDL_GetKeyboardState(NULL);
+		const bool* keys = SDL_GetKeyboardState(nullptr);
 		
 		SDL_GetWindowSize(window, &w, &h);
 		
-		Box.update(keys, dt);
+		Player.update(keys, dt);
 
-		if (!Box.isColliding(Ground) && !Box.isColliding(Ground1)) {
-			Box.downToGround();
-			Box.setOnGround(false);
+		if (!Player.isColliding(Ground) && !Player.isColliding(Ground1) && !Player.isColliding(Ground2)) {
+			Player.downToGround();
+			Player.setOnGround(false);
 		}
-		else {
-			Box.setOnGround(true);
-		}
+		else 
+			Player.setOnGround(true);
 
-		Box.clampToScreen(w, h);
+		Player.clampToScreen(w, h);
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderClear(renderer);
-		SDL_RenderFillRect(renderer, NULL);
+		SDL_RenderFillRect(renderer, nullptr);
 
-		Box.render();
+		Player.render();
 		Ground.render();
 		Ground1.render();
+		Ground2.render();
 		SDL_RenderPresent(renderer);
 
 		frameTime = SDL_GetTicks() - frameStart;
 
-		if (frameTime < FRAME_DELAY) { // Delay for 60FPS
+		if (frameTime < FRAME_DELAY)  // Delay for 60FPS
 			SDL_Delay(FRAME_DELAY - frameTime);
-		}
 	}
                                  
 	SDL_DestroyRenderer(renderer);
