@@ -5,9 +5,9 @@ Entity::Entity() {
 
 }
 
-Entity::Entity(SDL_Renderer* _renderer) {
+Entity::Entity(SDL_Texture* _MyTexture, SDL_Renderer* _renderer) {
     posX = 1920/2;
-    posY = 1080/2;
+    posY = 1080 / 2;
     sizeX = 50;
     sizeY = 50;
     speed = 200.0f;
@@ -15,10 +15,11 @@ Entity::Entity(SDL_Renderer* _renderer) {
     gravity = 800.0f;     // Gravité appliquée
     velocityY = 0.0f;
     collide = false;
-    MyTexture = nullptr;
+    MyTexture = _MyTexture;
     renderer = _renderer;
     rect = { posX, posY, sizeX, sizeY };
 }
+
 
 Entity::Entity(SDL_Texture* _MyTexture, SDL_Renderer* _renderer, float x, float y, float w, float h, int _speed, bool _collide) {
     posX = x;
@@ -66,16 +67,7 @@ void Entity::setOnGround(bool value){
         velocityY = 0.0f;
 }
 
-void Entity::render() {
-    if (MyTexture) 
-        SDL_RenderTexture(renderer, MyTexture, nullptr, &rect);
-    else {
-        SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
-        SDL_RenderFillRect(renderer, &rect);
-    }
-}
-
-void Entity::renderPlayer(Camera& camera) {
+void Entity::render(Camera& camera) {
     SDL_FRect screenRect = camera.worldToScreen(rect);
     if (MyTexture) {
         SDL_RenderTexture(renderer, MyTexture, NULL, &screenRect);
@@ -112,14 +104,18 @@ void Entity::update(const bool* keys, float dt) {
 }
 
 void Entity::clampToScreen(int windowX, int windowY) {
-    if (rect.x < 0) 
+    if (rect.x < 0) {
         rect.x = 0;
-    if (rect.y < 0) 
+    }
+    if (rect.y < 0) {
         rect.y = 0;
-    if (rect.x + rect.w > windowX) 
+    }
+    if (rect.x + rect.w > windowX) {
         rect.x = windowX - rect.w;
-    if (rect.y + rect.h > windowY) 
+    }
+    if (rect.y + rect.h > windowY) {
         rect.y = windowY - rect.h;
+    }
 }
 
 void Entity::setColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a){

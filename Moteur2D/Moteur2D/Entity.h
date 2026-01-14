@@ -43,7 +43,6 @@ public:
 
 	//Constructor/Destructor
 	Entity();
-	Entity(SDL_Renderer* renderer);
 	Entity(SDL_Texture* MyTexture, SDL_Renderer* renderer);
 	Entity(SDL_Texture* MyTexture, SDL_Renderer* renderer, float x, float y, float w, float h, int speed, bool collide);
 	~Entity();
@@ -54,8 +53,7 @@ public:
 	void setOnGround(bool value);
 
 	// Render/Update
-	void render();
-	void renderPlayer(Camera& camera);
+	void render(Camera& camera);
 	void update(const bool* keys, float dt);
 	void clampToScreen(int windowX, int windowY);
 	void setColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);

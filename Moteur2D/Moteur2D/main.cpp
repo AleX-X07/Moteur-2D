@@ -1,16 +1,16 @@
 #include <iostream>
 #include <SDL3/SDL.h>
 
-#include "GamingLoop.h"
 #include "Entity.h"
 #include "Camera.h"
+#include "LoadRessources.h"
 
 int main() {
-	int screenWidth = 640;
-	int screenHeight = 480;
+	int screenWidth = 1920;
+	int screenHeight = 1080;
 
-	int levelWidth = 1920;
-	int levelHeight = 1080;
+	int levelWidth = 1920*2;
+	int levelHeight = 1080*2;
 
 	Camera camera(screenWidth, screenHeight, levelWidth, levelHeight);
 
@@ -24,6 +24,10 @@ int main() {
 	//Delta time
 	float dt = 1;
 
+	//Ressources
+	LoadRessources MyRessources(renderer);
+	MyRessources.loadAllTexture();
+
 	// FPS
 	const int FPS = 60;
 	const int FRAME_DELAY = 1000 / FPS;
@@ -33,7 +37,8 @@ int main() {
 
 	int w, h;
 
-	Entity Player = Entity(renderer);
+	Entity Player = Entity(MyRessources.player, renderer);
+
 	Player.setColor(0, 255, 0, 255);
 	Entity Ground = Entity(nullptr, renderer, 0, 590, 1920, 80, 0, false);
 	Ground.setColor(255, 0, 0, 255);
@@ -77,10 +82,10 @@ int main() {
 		SDL_RenderFillRect(renderer, nullptr);
 
 		Player.clampToScreen(levelWidth, levelHeight);
-		Player.renderPlayer(camera);
-		Ground.renderPlayer(camera);
-		Ground1.renderPlayer(camera);
-		Ground2.renderPlayer(camera);
+		Player.render(camera);
+		Ground.render(camera);
+		Ground1.render(camera);
+		Ground2.render(camera);
 
 		SDL_RenderPresent(renderer);
 

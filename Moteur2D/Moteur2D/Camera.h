@@ -14,6 +14,8 @@ public:
 	float levelWidth;
 	float levelHeight;
 
+	float zoom = 2.0f;
+
 public:
 
 	Camera(float sw, float sh, float lw, float lh);
