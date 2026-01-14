@@ -9,7 +9,10 @@ Entity::Entity(SDL_Renderer* _renderer) {
     posY = 1080/2;
     sizeX = 50;
     sizeY = 50;
-    speed = 100.0f;
+    speed = 200.0f;
+    jumpForce = 400.0f;  // Force initiale du saut
+    gravity = 800.0f;     // Gravité appliquée
+    velocityY = 0.0f;
     collide = false;
     MyTexture = nullptr;
     renderer = _renderer;
@@ -22,6 +25,9 @@ Entity::Entity(SDL_Texture* _MyTexture, SDL_Renderer* _renderer, float x, float 
     sizeX = w;
     sizeY = h;
     speed = _speed;
+    jumpForce = 400.0f;
+    gravity = 800.0f;
+    velocityY = 0.0f;
     collide = _collide;
     MyTexture = _MyTexture;
     renderer = _renderer;
@@ -49,17 +55,19 @@ bool Entity::isColliding(const Entity& entity) const
 }
 
 void Entity::downToGround(){
-    rect.y += 10;
+    velocityY += gravity * dt; 
+    rect.y += velocityY * dt;
 }
 
 void Entity::setOnGround(bool value){
 	onGround = value;
+    if (onGround)
+        velocityY = 0.0f;
 }
 
 void Entity::render() {
-    if (MyTexture) {
-        SDL_RenderTexture(renderer, MyTexture, NULL, &rect);
-    }
+    if (MyTexture) 
+        SDL_RenderTexture(renderer, MyTexture, nullptr, &rect);
     else {
         SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
         SDL_RenderFillRect(renderer, &rect);
@@ -67,43 +75,42 @@ void Entity::render() {
 }
 
 void Entity::update(const bool* keys, float dt) {
-    float dx = 0, dy = 0;
+    float dx = 0;
+    float dy = 0;
+    cooldownJump += dt;
     // move left and right
-    if (keys[SDL_SCANCODE_LEFT] || keys[SDL_SCANCODE_A]) {
+    if (keys[SDL_SCANCODE_LEFT] || keys[SDL_SCANCODE_A]) 
         dx -= 1;
-    }
-    if (keys[SDL_SCANCODE_RIGHT] || keys[SDL_SCANCODE_D]) {
+    if (keys[SDL_SCANCODE_RIGHT] || keys[SDL_SCANCODE_D]) 
         dx += 1;
-    }
     // jump
-    if (keys[SDL_SCANCODE_SPACE] && onGround) {
-        for (int X = 0; X < 10; X++) {
-            dy -= 10;
-        }
+    if (keys[SDL_SCANCODE_SPACE] && onGround && cooldownJump > 0.3) {
+        velocityY = -jumpForce; //saut
+        cooldownJump = 0;
         onGround = false;
+    }
+
+    if (!onGround) {
+        velocityY += gravity * dt;
+        rect.y += velocityY * dt;
     }
     // Update position of player
     rect.x += dx * speed * dt;
-	rect.y += dy;
 
 }
 
 void Entity::clampToScreen(int windowX, int windowY) {
-    if (rect.x < 0) {
+    if (rect.x < 0) 
         rect.x = 0;
-    }
-    if (rect.y < 0) {
+    if (rect.y < 0) 
         rect.y = 0;
-    }
-    if (rect.x + rect.w > windowX) {
+    if (rect.x + rect.w > windowX) 
         rect.x = windowX - rect.w;
-    }
-    if (rect.y + rect.h > windowY) {
+    if (rect.y + rect.h > windowY) 
         rect.y = windowY - rect.h;
-    }
 }
 
-void Entity::setColor(int r, int g, int b, int a){
+void Entity::setColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a){
     color.r = r;
     color.g = g;
     color.b = b;

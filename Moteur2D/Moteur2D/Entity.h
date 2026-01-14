@@ -14,6 +14,7 @@ class Entity
 
 	// Speed object
 	int speed;
+	float jumpForce;
 
 	// Object collision
 	bool collide;
@@ -23,9 +24,17 @@ class Entity
 	SDL_Renderer* renderer;
 	SDL_Color color;
 
+	float cooldownJump;
 	bool onGround;
 
-public: 
+	// Physics variables
+	float velocityY;
+	float gravity;
+
+	Uint64 last_time = SDL_GetTicks();
+	float dt = (SDL_GetTicks() - last_time) / 1000.0f;
+
+public:
 
 	SDL_FRect rect;
 
@@ -44,7 +53,6 @@ public:
 	void render();
 	void update(const bool* keys, float dt);
 	void clampToScreen(int windowX, int windowY);
-	void setColor(int r, int g, int b, int a);
+	void setColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 	//StateMachine
 };
-
