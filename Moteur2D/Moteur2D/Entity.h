@@ -21,7 +21,9 @@ class Entity
 	//Object texture
 	SDL_Texture* MyTexture;
 	SDL_Renderer* renderer;
-	SDL_Color color = { 255,255,255,255 };
+	SDL_Color color;
+
+	bool onGround;
 
 public: 
 
@@ -34,10 +36,16 @@ public:
 	Entity(SDL_Texture* MyTexture, SDL_Renderer* renderer, float x, float y, float w, float h, int speed, bool collide);
 	~Entity();
 
+	void getPosition(float& x, float& y) const;
+	bool isColliding(const Entity& entity) const;
+	void downToGround();
+	void setOnGround(bool value);
+
 	// Render/Update
 	void render();
 	void update(const bool* keys, float dt);
 	void clampToScreen(int windowX, int windowY);
+	void setColor(int r, int g, int b, int a);
 	//StateMachine
 };
 
