@@ -14,7 +14,10 @@ void LoadRessources::loadAllTexture() {
     surface = IMG_Load("assets/Kitty.png");
     player = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_DestroySurface(surface);
-    //SDL_SetTextureScaleMode(player, SDL_SCALEMODE_NEAREST);
+
+    surface = IMG_Load("assets/ground.png");
+    ground = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_DestroySurface(surface);
 }
 
 // Destructor
@@ -22,5 +25,8 @@ LoadRessources::~LoadRessources() {
     // Destroy all texture
     if (player) {
         SDL_DestroyTexture(player);
+    }
+    if (ground) {
+        SDL_DestroyTexture(ground);
     }
 }

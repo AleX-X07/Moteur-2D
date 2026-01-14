@@ -11,7 +11,7 @@ int main() {
 	int screenHeight = 1080;
 
 	int levelWidth = 1920*2;
-	int levelHeight = 1080*2;
+	int levelHeight = 1080;
 
 	Camera camera(screenWidth, screenHeight, levelWidth, levelHeight);
 
@@ -42,14 +42,18 @@ int main() {
 	auto Player = Entity(MyRessources.player, renderer);
 
 	Player.setColor(0, 255, 0, 255);
-	auto Ground = Entity(nullptr, renderer, 0, 590, 1920, 80, 0, false);
+	auto Ground = Entity(MyRessources.ground, renderer, 0, 880, 200, 250, 0, false);
 	Ground.setColor(255, 0, 0, 255);
-	auto Ground1 = Entity(nullptr, renderer, 0, 550, 500, 10, 0, false);
+	auto Ground1 = Entity(MyRessources.ground, renderer, 300, 820, 100, 300, 0, false);
 	Ground1.setColor(0, 0, 255, 255);
-	auto Ground2 = Entity(nullptr, renderer, 300, 510, 50, 10, 0, false);
+	auto Ground2 = Entity(MyRessources.ground, renderer, 500, 800, 150, 40, 0, false);
 	Ground2.setColor(0, 0, 255, 255);
+	auto Ground3 = Entity(MyRessources.ground, renderer, 700, 830, 200, 30, 0, false);
+	Ground3.setColor(0, 0, 255, 255);
+	auto Ground4 = Entity(MyRessources.ground, renderer, 1000, 780, 200, 120, 0, false);
+	Ground4.setColor(0, 0, 255, 255);
 	
-	std::vector<Entity*> grounds = { &Ground, &Ground1, &Ground2 };
+	std::vector<Entity*> grounds = { &Ground, &Ground1, &Ground2, &Ground3, &Ground4 };
 
 	//GameLoop
 	bool loopTrue = true;
@@ -88,6 +92,8 @@ int main() {
 		Ground.render(camera);
 		Ground1.render(camera);
 		Ground2.render(camera);
+		Ground3.render(camera);
+		Ground4.render(camera);
 
 		SDL_RenderPresent(renderer);
 

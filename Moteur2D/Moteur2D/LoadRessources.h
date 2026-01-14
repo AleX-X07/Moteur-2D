@@ -10,6 +10,7 @@ public:
 
 	//Texture
 	SDL_Texture* player;
+	SDL_Texture* ground;
 
 	// Constructor
 	LoadRessources(SDL_Renderer* rend);
