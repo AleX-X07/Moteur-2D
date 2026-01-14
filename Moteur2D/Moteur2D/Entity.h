@@ -2,8 +2,11 @@
 #include <SDL3/SDL.h>
 #include<SDL3_image/SDL_image.h>
 
+class Camera;
+
 class Entity
 {
+private:
 	//Size object
 	float sizeX;
 	float sizeY;
@@ -43,6 +46,7 @@ public:
 
 	// Render/Update
 	void render();
+	void renderPlayer(Camera& camera);
 	void update(const bool* keys, float dt);
 	void clampToScreen(int windowX, int windowY);
 	void setColor(int r, int g, int b, int a);

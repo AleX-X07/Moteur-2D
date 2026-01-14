@@ -1,4 +1,5 @@
 #include "Entity.h"
+#include "Camera.h"
 
 Entity::Entity() {
 
@@ -63,6 +64,17 @@ void Entity::render() {
     else {
         SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
         SDL_RenderFillRect(renderer, &rect);
+    }
+}
+
+void Entity::renderPlayer(Camera& camera) {
+    SDL_FRect screenRect = camera.worldToScreen(rect);
+    if (MyTexture) {
+        SDL_RenderTexture(renderer, MyTexture, NULL, &screenRect);
+    }
+    else {
+        SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
+        SDL_RenderFillRect(renderer, &screenRect);
     }
 }
 
