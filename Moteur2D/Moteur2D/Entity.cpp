@@ -28,18 +28,6 @@ Entity::Entity(SDL_Texture* _MyTexture, SDL_Renderer* _renderer, float x, float 
     rect = { posX, posY, sizeX, sizeY };
 }
 
-Entity::Entity(SDL_Texture* _MyTexture, SDL_Renderer* _renderer, float x, float y, float w, float h, int _speed, bool _collide) {
-    posX = x;
-    posY = y;
-    sizeX = w;
-    sizeY = h;
-    speed = _speed;
-    collide = false;
-    MyTexture = _MyTexture;
-    renderer = _renderer;
-    rect = { posX, posY, sizeX, sizeY };
-}
-
 Entity::~Entity() {
 
 }
