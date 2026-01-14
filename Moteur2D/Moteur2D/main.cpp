@@ -70,16 +70,17 @@ int main() {
 		else 
 			Player.setOnGround(true);
 
-		camera.setCameraOnPlayer(Box);
+		camera.setCameraOnPlayer(Player);
 
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderClear(renderer);
 		SDL_RenderFillRect(renderer, nullptr);
 
+		Player.clampToScreen(levelWidth, levelHeight);
 		Player.renderPlayer(camera);
 		Ground.renderPlayer(camera);
 		Ground1.renderPlayer(camera);
-		Ground.renderPlayer(camera);
+		Ground2.renderPlayer(camera);
 
 		SDL_RenderPresent(renderer);
 
