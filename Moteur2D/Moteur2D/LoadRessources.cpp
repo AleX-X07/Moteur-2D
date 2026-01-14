@@ -15,6 +15,18 @@ void LoadRessources::loadAllTexture() {
     player = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_DestroySurface(surface);
     //SDL_SetTextureScaleMode(player, SDL_SCALEMODE_NEAREST);
+
+    surface = IMG_Load("assets/BG_layer1.png");
+    bg_layer1 = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_DestroySurface(surface);
+
+    surface = IMG_Load("assets/BG_layer2.png");
+    bg_layer2 = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_DestroySurface(surface);
+
+    surface = IMG_Load("assets/BG_layer3.png");
+    bg_layer3 = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_DestroySurface(surface);
 }
 
 // Destructor
@@ -22,5 +34,14 @@ LoadRessources::~LoadRessources() {
     // Destroy all texture
     if (player) {
         SDL_DestroyTexture(player);
+    }
+    if (bg_layer1) {
+        SDL_DestroyTexture(bg_layer1);
+    }
+    if (bg_layer2) {
+        SDL_DestroyTexture(bg_layer2);
+    }
+    if (bg_layer3) {
+        SDL_DestroyTexture(bg_layer3);
     }
 }

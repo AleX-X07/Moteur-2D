@@ -10,6 +10,9 @@ public:
 
 	//Texture
 	SDL_Texture* player;
+	SDL_Texture* bg_layer1; 
+	SDL_Texture* bg_layer2; 
+	SDL_Texture* bg_layer3;
 
 	// Constructor
 	LoadRessources(SDL_Renderer* rend);

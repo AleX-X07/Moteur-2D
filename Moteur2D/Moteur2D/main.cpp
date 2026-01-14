@@ -4,6 +4,7 @@
 #include "Entity.h"
 #include "Camera.h"
 #include "LoadRessources.h"
+#include "Parallax.h"
 
 int main() {
 	int screenWidth = 1920;
@@ -12,21 +13,26 @@ int main() {
 	int levelWidth = 1920*2;
 	int levelHeight = 1080*2;
 
-	Camera camera(screenWidth, screenHeight, levelWidth, levelHeight);
-
 	// Creation Window
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 
 	SDL_Init(SDL_INIT_VIDEO);
 	SDL_CreateWindowAndRenderer("Lost Meow", screenWidth, screenHeight, NULL, &window, &renderer);
-	
-	//Delta time
-	float dt = 1;
 
 	//Ressources
 	LoadRessources MyRessources(renderer);
 	MyRessources.loadAllTexture();
+
+	Camera camera(screenWidth, screenHeight, levelWidth, levelHeight);
+
+	Parallax parallax(renderer, screenWidth, screenHeight);
+	parallax.addLayer(MyRessources.bg_layer3, 10.0f); // Lointain = lent
+	//parallax.addLayer(MyRessources.bg_layer2, 20.0f); // Moyen
+	parallax.addLayer(MyRessources.bg_layer1, 80.0f); // Proche = rapide
+	
+	//Delta time
+	float dt = 1;
 
 	// FPS
 	const int FPS = 60;
@@ -67,6 +73,7 @@ int main() {
 		SDL_GetWindowSize(window, &w, &h);
 		
 		Player.update(keys, dt);
+		parallax.update(dt);
 
 		if (!Player.isColliding(Ground) && !Player.isColliding(Ground1) && !Player.isColliding(Ground2)) {
 			Player.downToGround();
@@ -80,6 +87,8 @@ int main() {
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderClear(renderer);
 		SDL_RenderFillRect(renderer, nullptr);
+
+		parallax.render();
 
 		Player.clampToScreen(levelWidth, levelHeight);
 		Player.render(camera);
