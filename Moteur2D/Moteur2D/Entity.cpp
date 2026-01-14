@@ -11,8 +11,8 @@ Entity::Entity(SDL_Texture* _MyTexture, SDL_Renderer* _renderer) {
     sizeX = 50;
     sizeY = 50;
     speed = 200.0f;
-    jumpForce = 400.0f;
-    gravity = 800.0f;
+    jumpForce = 350.0f;
+    gravity = 900.0f;
     velocityY = 0.0f;
     velocityX = 0.0f;
     collide = false;
@@ -27,8 +27,8 @@ Entity::Entity(SDL_Texture* _MyTexture, SDL_Renderer* _renderer, float x, float 
     sizeX = w;
     sizeY = h;
     speed = _speed;
-    jumpForce = 400.0f;
-    gravity = 800.0f;
+    jumpForce = 350.0f;
+    gravity = 900.0f;
     velocityY = 0.0f;
     velocityX = 0.0f;
     collide = _collide;
