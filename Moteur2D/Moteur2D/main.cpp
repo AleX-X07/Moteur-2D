@@ -28,10 +28,11 @@ int main() {
 	Camera camera(screenWidth, screenHeight, levelWidth, levelHeight);
 
 	Parallax parallax(renderer, screenWidth, screenHeight);
-	parallax.addLayer(MyRessources.bg_layer3, 10.0f); // Lointain = lent
-	//parallax.addLayer(MyRessources.bg_layer2, 20.0f); // Moyen
-	parallax.addLayer(MyRessources.bg_layer1, 80.0f); // Proche = rapide
-	
+	parallax.addLayer(MyRessources.bg_layer1, 0.1f); // Proche = rapide
+	parallax.addLayer(MyRessources.bg_layer2, 0.3f); // Moyen
+	parallax.addLayer(MyRessources.bg_layer3, 0.5f); // Lointain = lent
+	parallax.addLayer(MyRessources.bg_layer4, 0.8f); // Lointain = lent
+
 	//Delta time
 	float dt = 1;
 
@@ -81,7 +82,7 @@ int main() {
 		SDL_GetWindowSize(window, &w, &h);
 		
 		Player.update(keys, dt);
-		parallax.update(dt);
+		parallax.update(Player.rect.x, Player.rect.y);
 
 		Player.collisionHorizontal(grounds);
 

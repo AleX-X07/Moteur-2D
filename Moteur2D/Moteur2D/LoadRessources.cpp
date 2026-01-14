@@ -30,7 +30,10 @@ void LoadRessources::loadAllTexture() {
 
     surface = IMG_Load("assets/BG_layer3.png");
     bg_layer3 = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_DestroySurface(surface);
 
+    surface = IMG_Load("assets/BG_layer4.png");
+    bg_layer4 = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_DestroySurface(surface);
 }
 
@@ -43,7 +46,7 @@ LoadRessources::~LoadRessources() {
 
     if (ground) {
         SDL_DestroyTexture(ground);
-
+    }
     if (bg_layer1) {
         SDL_DestroyTexture(bg_layer1);
     }
@@ -52,5 +55,8 @@ LoadRessources::~LoadRessources() {
     }
     if (bg_layer3) {
         SDL_DestroyTexture(bg_layer3);
+    }
+    if (bg_layer4) {
+        SDL_DestroyTexture(bg_layer4);
     }
 }

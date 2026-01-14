@@ -12,25 +12,35 @@ void Parallax::addLayer(SDL_Texture* tex, float speed)
     ParallaxLayer layer;
     layer.texture = tex;
     layer.speed = speed;
-    layer.offset = 0.0f;
+    layer.offsetX = 0.0f;
+    layer.offsetY = 0.0f;
     layers.push_back(layer);
 }
 
-void Parallax::update(float deltaTime)
+void Parallax::update(float playerX, float playerY)
 {
     for (auto& layer : layers)
     {
-        layer.offset += layer.speed * deltaTime;
+        // Le déplacement du parallaxe dépend du déplacement de la caméra
+        // speed = 0.0 -> fond statique
+        // speed = 1.0 -> suit exactement la caméra
+        // speed < 1.0 -> effet parallaxe (plus lent que la caméra)
+        layer.offsetX = -playerX * layer.speed;
 
-        // On garde offset dans [0, textureWidth) pour éviter les gros nombres
+        // Wrap l'offset pour éviter les gros nombres
         float texW = 0, texH = 0;
         SDL_GetTextureSize(layer.texture, &texW, &texH);
 
         if (texW > 0)
         {
-            // wrap
-            while (layer.offset >= texW) layer.offset -= texW;
-            while (layer.offset <= -texW) layer.offset += texW;
+            while (layer.offsetX >= texW) layer.offsetX -= texW;
+            while (layer.offsetX <= -texW) layer.offsetX += texW;
+        }
+
+        if (texH > 0)
+        {
+            while (layer.offsetY >= texH) layer.offsetY -= texH;
+            while (layer.offsetY <= -texH) layer.offsetY += texH;
         }
     }
 }
@@ -47,15 +57,21 @@ void Parallax::render()
         if (texW == 0 || texH == 0)
             continue;
 
-        // On part de -texW jusqu'à couvrir tout l'écran
-        // La première “tuile” commence à -texW + offset
-        float startX = -texW + layer.offset;
+        // Normaliser l'offset pour le wrap
+        float normalizedOffset = layer.offsetX;
+        if (texW > 0) {
+            normalizedOffset = fmod(layer.offsetX, texW);
+            if (normalizedOffset > 0) normalizedOffset -= texW;
+        }
+
+        // Dessiner en mode tuile pour couvrir tout l'écran
+        float startX = normalizedOffset;
 
         for (float x = startX; x < screenWidth; x += texW)
         {
             SDL_FRect dst{
                 x,
-                static_cast<float>(screenHeight - texH), // collé en bas, adapte selon ton layout
+                static_cast<float>(screenHeight - texH),
                 static_cast<float>(texW),
                 static_cast<float>(texH)
             };

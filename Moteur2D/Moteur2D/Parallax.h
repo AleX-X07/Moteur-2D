@@ -6,7 +6,8 @@
 struct ParallaxLayer {
     SDL_Texture* texture;
     float speed;
-    float offset;
+    float offsetX;
+    float offsetY;
 };
 
 class Parallax {
@@ -17,7 +18,7 @@ public:
     float screenHeight;
     Parallax(SDL_Renderer* rend, float sw, float sh);
     void addLayer(SDL_Texture* texture, float scrollSpeed);
-    void update(float deltaTime);
+    void update(float playerX, float playerY);
     void render();  // Prend le joueur au lieu de la caméra
     ~Parallax();
 };

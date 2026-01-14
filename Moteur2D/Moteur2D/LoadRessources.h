@@ -14,7 +14,7 @@ public:
 	SDL_Texture* bg_layer1; 
 	SDL_Texture* bg_layer2; 
 	SDL_Texture* bg_layer3;
-
+	SDL_Texture* bg_layer4;
 
 	// Constructor
 	LoadRessources(SDL_Renderer* rend);
