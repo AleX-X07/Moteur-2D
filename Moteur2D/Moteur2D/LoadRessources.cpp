@@ -4,6 +4,11 @@
 LoadRessources::LoadRessources(SDL_Renderer* rend) : renderer(rend) {
     // Initialize of all texture to nullptr
     player = nullptr;
+    ground = nullptr;
+    bg_layer1 = nullptr;
+    bg_layer2 = nullptr;
+    bg_layer3 = nullptr;
+    bg_layer4 = nullptr;
 }
 
 // Load all texture
