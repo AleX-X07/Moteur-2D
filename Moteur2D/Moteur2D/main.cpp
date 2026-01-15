@@ -6,6 +6,10 @@
 #include "Camera.h"
 #include "LoadRessources.h"
 #include "Parallax.h"
+#include "Scene.h"
+#include "Play.h"
+#include "Menu.h"
+#include "SceneManager.h"
 
 int main() {
 	int screenWidth = 1920;
@@ -62,6 +66,12 @@ int main() {
 	
 	std::vector<Entity*> grounds = { &Ground, &Ground1, &Ground2, &Ground3, &Ground4 };
 
+	//Scene
+	
+
+	SceneManager mySM = SceneManager(renderer);
+
+
 	//GameLoop
 	bool loopTrue = true;
 	while (loopTrue) {
@@ -72,47 +82,53 @@ int main() {
 				loopTrue = false;
 		}
 
-		float dt = (SDL_GetTicks() - last_time) / 1000.0f;
-		last_time = SDL_GetTicks();
-		frameStart = SDL_GetTicks();
+	//	float dt = (SDL_GetTicks() - last_time) / 1000.0f;
+	//	last_time = SDL_GetTicks();
+	//	frameStart = SDL_GetTicks();
 
 
+	//	const bool* keys = SDL_GetKeyboardState(nullptr);
+	//	
+	//	SDL_GetWindowSize(window, &w, &h);
+	//	
+	//	Player.update(keys, dt);
+	//	parallax.update(Player.rect.x, Player.rect.y);
+
+	//	Player.collisionHorizontal(grounds);
+
+	//	// Handle vertical collisions
+	//	Player.collision(grounds);
+
+	//	camera.setCameraOnPlayer(Player);
+
+	//	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+	//	SDL_RenderClear(renderer);
+	//	SDL_RenderFillRect(renderer, nullptr);
+
+	//	parallax.render();
+
+	//	Player.clampToScreen(levelWidth, levelHeight);
+	//	Player.render(camera);
+	//	Ground.render(camera);
+	//	Ground1.render(camera);
+	//	Ground2.render(camera);
+	//	Ground3.render(camera);
+	//	Ground4.render(camera);
+
+	//	SDL_RenderPresent(renderer);
+
+	//	frameTime = SDL_GetTicks() - frameStart;
+
+	//	if (frameTime < FRAME_DELAY)  // Delay for 60FPS
+	//		SDL_Delay(FRAME_DELAY - frameTime);
+	
 		const bool* keys = SDL_GetKeyboardState(nullptr);
-		
-		SDL_GetWindowSize(window, &w, &h);
-		
-		Player.update(keys, dt);
-		parallax.update(Player.rect.x, Player.rect.y);
 
-		Player.collisionHorizontal(grounds);
+		mySM.initKeys(keys);
+		mySM.manageState();
 
-		// Handle vertical collisions
-		Player.collision(grounds);
-
-		camera.setCameraOnPlayer(Player);
-
-		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-		SDL_RenderClear(renderer);
-		SDL_RenderFillRect(renderer, nullptr);
-
-		parallax.render();
-
-		Player.clampToScreen(levelWidth, levelHeight);
-		Player.render(camera);
-		Ground.render(camera);
-		Ground1.render(camera);
-		Ground2.render(camera);
-		Ground3.render(camera);
-		Ground4.render(camera);
-
-		SDL_RenderPresent(renderer);
-
-		frameTime = SDL_GetTicks() - frameStart;
-
-		if (frameTime < FRAME_DELAY)  // Delay for 60FPS
-			SDL_Delay(FRAME_DELAY - frameTime);
 	}
-                                 
+
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
