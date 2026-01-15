@@ -1,9 +1,12 @@
 #pragma once
+#include <vector>
 #include <SDL3/SDL.h>
 #include<SDL3_image/SDL_image.h>
 
-class Entity
-{
+class Camera;
+
+class Entity{
+private:
 	//Size object
 	float sizeX;
 	float sizeY;
@@ -14,6 +17,7 @@ class Entity
 
 	// Speed object
 	int speed;
+	float jumpForce;
 
 	// Object collision
 	bool collide;
@@ -21,23 +25,42 @@ class Entity
 	//Object texture
 	SDL_Texture* MyTexture;
 	SDL_Renderer* renderer;
-	SDL_Color color = { 255,255,255,255 };
+	SDL_Color color;
 
-public: 
+	float cooldownJump;
+	bool onGround;
+
+	// Physics variables
+	float velocityY;
+	float velocityX;
+	float gravity;
+
+	Uint64 last_time = SDL_GetTicks();
+	float dt = (SDL_GetTicks() - last_time) / 1000.0f;
+
+public:
 
 	SDL_FRect rect;
 
 	//Constructor/Destructor
 	Entity();
-	Entity(SDL_Renderer* renderer);
 	Entity(SDL_Texture* MyTexture, SDL_Renderer* renderer);
 	Entity(SDL_Texture* MyTexture, SDL_Renderer* renderer, float x, float y, float w, float h, int speed, bool collide);
 	~Entity();
 
+	void getPosition(float& x, float& y) const;
+	bool isColliding(const Entity& entity) const;
+	void downToGround();
+	void setOnGround(bool value);
+
+	void collision(const std::vector<Entity*>& colliders);
+	void collisionHorizontal(const std::vector<Entity*>& colliders);
+
+
 	// Render/Update
-	void render();
+	void render(Camera& camera);
 	void update(const bool* keys, float dt);
 	void clampToScreen(int windowX, int windowY);
+	void setColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 	//StateMachine
 };
-

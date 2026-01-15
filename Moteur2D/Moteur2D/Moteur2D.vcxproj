@@ -135,13 +135,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="GamingLoop.cpp" />
+    <ClCompile Include="LoadRessources.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Parallax.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Entity.h" />
-    <ClInclude Include="GamingLoop.h" />
+    <ClInclude Include="LoadRessources.h" />
+    <ClInclude Include="Parallax.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
