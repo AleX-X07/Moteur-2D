@@ -16,7 +16,7 @@ void LoadRessources::loadAllTexture() {
     SDL_Surface* surface;
 
     // Background Home
-    surface = IMG_Load("assets/Kitty.png");
+    surface = IMG_Load("assets/sprite_Kitty.png");
     player = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_DestroySurface(surface);
 

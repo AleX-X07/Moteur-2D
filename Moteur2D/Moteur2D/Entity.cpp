@@ -66,8 +66,70 @@ void Entity::setOnGround(bool value) {
         velocityY = 0.0f;
 }
 
+void Entity::updateState(const bool* keys) {
+    previousState = currentState;
+    bool _movingLeft = keys[SDL_SCANCODE_LEFT] || keys[SDL_SCANCODE_A];
+    bool _movingRight = keys[SDL_SCANCODE_RIGHT] || keys[SDL_SCANCODE_D];
+
+    if (onGround) {
+        if (_movingLeft && !_movingRight) {
+            currentState = PlayerState::movingLeft;
+        }
+        else if (_movingRight && !_movingLeft) {
+            currentState = PlayerState::movingRight;
+        }
+        else {
+            currentState = PlayerState::idle;
+        }
+    }
+    else { // Seulement si on n'est PAS au sol
+        if (_movingLeft && !_movingRight) {
+            if (velocityY < 0)
+                currentState = PlayerState::jumpingLeft;
+            else
+                currentState = PlayerState::fallingLeft;
+        }
+        else if (_movingRight && !_movingLeft) {
+            if (velocityY < 0)
+                currentState = PlayerState::jumpingRight;
+            else
+                currentState = PlayerState::fallingRight;
+        }
+        else {
+            if (velocityY < 0)
+                currentState = PlayerState::jumpingRight;
+            else
+                currentState = PlayerState::fallingRight;
+        }
+    }
+
+    if (currentState != previousState) {
+        currentFrame = 0;
+        animationTimer = 0.0f;
+    }
+    
+}
+
+PlayerState Entity::getCurrentState() const{
+    return currentState;
+}
+
+void Entity::updateAnimation(float dt){
+    animationTimer += dt;
+    if (animationTimer >= frameDuration) {
+        animationTimer = 0.0f;
+        currentFrame++;
+
+        if (currentFrame >= maxFrames) {
+            currentFrame = 0;
+        }
+
+    }
+}
+
 void Entity::collision(const std::vector<Entity*>& colliders) {
     onGround = false;
+    
     for (auto c : colliders) {
         if (!SDL_HasRectIntersectionFloat(&rect, &c->rect))
             continue;
@@ -87,17 +149,15 @@ void Entity::collision(const std::vector<Entity*>& colliders) {
         float overlapTop = playerBottom - blockTop;
         float overlapBottom = blockBottom - playerTop;
 
-        if (overlapTop < overlapLeft && overlapTop < overlapRight) {
-            if (velocityY > 0) {
-                // Landing on top of platform
+        if (overlapTop < overlapLeft && overlapTop < overlapRight && overlapTop < overlapBottom) {
+            if (velocityY >= 0) {  
                 rect.y = blockTop - rect.h;
                 onGround = true;
                 velocityY = 0;
             }
         }
-        else if (overlapBottom < overlapLeft && overlapBottom < overlapRight) {
+        else if (overlapBottom < overlapLeft && overlapBottom < overlapRight && overlapBottom < overlapTop) {
             if (velocityY < 0) {
-                // Hit ceiling
                 rect.y = blockBottom;
                 velocityY = 0;
             }
@@ -127,14 +187,12 @@ void Entity::collisionHorizontal(const std::vector<Entity*>& colliders) {
         float overlapBottom = blockBottom - playerTop;
         if (overlapLeft < overlapTop && overlapLeft < overlapBottom) {
             if (velocityX > 0 || (playerRight > blockLeft && playerLeft < blockLeft)) {
-                // Hit right wall
                 rect.x = blockLeft - rect.w;
                 velocityX = 0;
             }
         }
         else if (overlapRight < overlapTop && overlapRight < overlapBottom) {
             if (velocityX < 0 || (playerLeft < blockRight && playerRight > blockRight)) {
-                // Hit left wall
                 rect.x = blockRight;
                 velocityX = 0;
             }
@@ -144,8 +202,43 @@ void Entity::collisionHorizontal(const std::vector<Entity*>& colliders) {
 
 void Entity::render(Camera& camera) {
     SDL_FRect screenRect = camera.worldToScreen(rect);
-    if (MyTexture)
-        SDL_RenderTexture(renderer, MyTexture, nullptr, &screenRect);
+
+    if (MyTexture) {
+        // Déterminer la ligne du spritesheet selon l'état
+        int animationRow = 0;
+        switch (currentState) {
+        case PlayerState::idle:
+            animationRow = 0;
+            break;
+        case PlayerState::movingRight:
+            animationRow = 1;
+            break;
+        case PlayerState::movingLeft:
+            animationRow = 2;
+            break;
+        case PlayerState::jumpingRight:
+            animationRow = 3;
+            break;
+        case PlayerState::jumpingLeft:
+            animationRow = 4;
+            break;
+        case PlayerState::fallingRight:
+            animationRow = 5; 
+            break;
+        case PlayerState::fallingLeft:
+            animationRow = 6;
+            break;
+        }
+
+        SDL_FRect srcRect = {
+            currentFrame * spriteWidth,  // x position
+            animationRow * spriteHeight, // y position
+            spriteWidth,                 // largeur
+            spriteHeight                 // hauteur
+        };
+
+        SDL_RenderTexture(renderer, MyTexture, &srcRect, &screenRect);
+    }
     else {
         SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
         SDL_RenderFillRect(renderer, &screenRect);
@@ -159,6 +252,7 @@ void Entity::update(const bool* keys, float dt) {
     velocityX = 0;
     if (keys[SDL_SCANCODE_LEFT] || keys[SDL_SCANCODE_A])
         velocityX =-speed;
+
     if (keys[SDL_SCANCODE_RIGHT] || keys[SDL_SCANCODE_D])
         velocityX = speed;
 
@@ -176,6 +270,7 @@ void Entity::update(const bool* keys, float dt) {
 
     // Update horizontal position
     rect.x += velocityX * dt;
+
 }
 
 void Entity::clampToScreen(int windowX, int windowY) {
