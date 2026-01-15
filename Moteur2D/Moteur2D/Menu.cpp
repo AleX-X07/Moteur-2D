@@ -12,7 +12,11 @@ void Menu::displayScene(LoadRessources& _MyRessources) {
 	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 	SDL_RenderClear(renderer);
 
-	SDL_RenderTexture(renderer, _MyRessources.bg_layer4, nullptr, &rect);
+	if (_MyRessources.bg_layer4) {  // Vérifiez que la texture existe
+		SDL_RenderTexture(renderer, _MyRessources.bg_layer4, nullptr, &rect);
+		printf("image charger");
+	}
+
 
 	SDL_RenderFillRect(renderer, nullptr);
 

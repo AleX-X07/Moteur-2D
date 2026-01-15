@@ -8,7 +8,7 @@ SceneManager::SceneManager(SDL_Renderer* rend) {
 	myMenu = new Menu(renderer);  
 	myPlay = new Play(renderer);
 
-	MyRessources = new LoadRessources(renderer);
+	MyRessources = new LoadRessources(rend);
 	MyRessources->loadAllTexture();
 }
 

@@ -126,7 +126,6 @@ int main() {
 		mySM.initKeys(keys);
 		mySM.manageState();
 
-
 	}
 
 	SDL_DestroyRenderer(renderer);

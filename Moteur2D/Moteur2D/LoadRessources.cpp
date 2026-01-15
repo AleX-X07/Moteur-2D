@@ -12,7 +12,7 @@ LoadRessources::LoadRessources(SDL_Renderer* rend) : renderer(rend) {
 }
 
 // Load one texture
-void LoadRessources::loadTexture(const char* _path, SDL_Texture* _MyTexture)
+void LoadRessources::loadTexture(const char* _path, SDL_Texture*& _MyTexture)
 {
     SDL_Surface* surface;
 
@@ -27,10 +27,10 @@ void LoadRessources::loadAllTexture() {
     loadTexture("assets/Kitty.png", player);
     loadTexture("assets/ground.png", ground);
     loadTexture("assets/BG_layer1.png", bg_layer1);
-    loadTexture("assets/BG_layer2.png", bg_layer1);
-    loadTexture("assets/BG_layer3.png", bg_layer1);
-    loadTexture("assets/BG_layer4.png", bg_layer1);
-
+    loadTexture("assets/BG_layer2.png", bg_layer2);
+    loadTexture("assets/BG_layer3.png", bg_layer3);
+    loadTexture("assets/BG_layer4.png", bg_layer4);
+    
 }
 
 // Destructor
