@@ -11,7 +11,7 @@ int main() {
 	int screenWidth = 1920;
 	int screenHeight = 1080;
 
-	int levelWidth = 1920*2;
+	int levelWidth = 1500;
 	int levelHeight = 1080;
 
 	// Creation Window
@@ -49,18 +49,29 @@ int main() {
 	auto Player = Entity(MyRessources.player, renderer);
 
 	Player.setColor(0, 255, 0, 255);
+
 	auto Ground = Entity(MyRessources.ground, renderer, 0, 880, 200, 250, 0, false);
 	Ground.setColor(255, 0, 0, 255);
 	auto Ground1 = Entity(MyRessources.ground, renderer, 300, 820, 100, 300, 0, false);
 	Ground1.setColor(0, 0, 255, 255);
-	auto Ground2 = Entity(MyRessources.ground, renderer, 500, 800, 150, 40, 0, false);
+	auto Ground2 = Entity(MyRessources.ground, renderer, 500, 800, 150, 50, 0, false);
 	Ground2.setColor(0, 0, 255, 255);
-	auto Ground3 = Entity(MyRessources.ground, renderer, 700, 830, 200, 30, 0, false);
+	auto Ground3 = Entity(MyRessources.ground, renderer, 700, 830, 200, 40, 0, false);
 	Ground3.setColor(0, 0, 255, 255);
 	auto Ground4 = Entity(MyRessources.ground, renderer, 1000, 780, 200, 120, 0, false);
 	Ground4.setColor(0, 0, 255, 255);
-	
-	std::vector<Entity*> grounds = { &Ground, &Ground1, &Ground2, &Ground3, &Ground4 };
+	auto Ground5 = Entity(MyRessources.ground, renderer, 1100, 730, 200, 150, 0, false);
+	Ground5.setColor(0, 0, 255, 255);
+	auto Ground6 = Entity(MyRessources.ground, renderer, 890, 670, 140, 40, 0, false);
+	Ground6.setColor(0, 0, 255, 255);
+	auto Ground7 = Entity(MyRessources.ground, renderer, 830, 620, 100, 40, 0, false);
+	Ground7.setColor(0, 0, 255, 255);
+	auto Ground8 = Entity(MyRessources.ground, renderer, 1050, 580, 200, 20, 0, false);
+	Ground8.setColor(0, 0, 255, 255);
+	auto Ground9 = Entity(MyRessources.ground, renderer, 1350, 550, 200, 600, 0, false);
+	Ground9.setColor(0, 0, 255, 255);
+
+	std::vector<Entity*> grounds = { &Ground, &Ground1, &Ground2, &Ground3, &Ground4, &Ground5, &Ground6, &Ground7, &Ground8, &Ground9 };
 
 	//GameLoop
 	bool loopTrue = true;
@@ -90,21 +101,20 @@ int main() {
 		Player.updateAnimation(dt);
 		parallax.update(Player.rect.x, Player.rect.y);
 
-		camera.setCameraOnPlayer(Player);
-
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderClear(renderer);
 		SDL_RenderFillRect(renderer, nullptr);
 
 		parallax.render();
 
+		for (auto& ground : grounds) {
+			ground->render(camera);
+		}
+
+		camera.setCameraOnPlayer(Player);
 		Player.clampToScreen(levelWidth, levelHeight);
 		Player.render(camera);
-		Ground.render(camera);
-		Ground1.render(camera);
-		Ground2.render(camera);
-		Ground3.render(camera);
-		Ground4.render(camera);
+		
 
 		SDL_RenderPresent(renderer);
 

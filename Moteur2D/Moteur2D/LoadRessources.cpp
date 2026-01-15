@@ -20,10 +20,10 @@ void LoadRessources::loadAllTexture() {
     player = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_DestroySurface(surface);
 
-    surface = IMG_Load("assets/ground.png");
+    surface = IMG_Load("assets/dirt.png");
     ground = SDL_CreateTextureFromSurface(renderer, surface);
-
-    SDL_SetTextureScaleMode(ground, SDL_SCALEMODE_NEAREST);
+    SDL_SetTextureScaleMode(ground, SDL_SCALEMODE_NEAREST); 
+    SDL_DestroySurface(surface);
 
     surface = IMG_Load("assets/BG_layer1.png");
     bg_layer1 = SDL_CreateTextureFromSurface(renderer, surface);
