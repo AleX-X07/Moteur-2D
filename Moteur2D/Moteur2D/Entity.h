@@ -48,7 +48,7 @@ private:
 	float frameDuration = 0.2f;
 	int maxFrames = 4;
 	float spriteWidth = 127.8f;
-	float spriteHeight = 127.8f;
+	float spriteHeight = 128.2f;
 
 public:
 

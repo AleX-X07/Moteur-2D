@@ -88,6 +88,7 @@ int main() {
 		Player.update(keys, dt);
 		Player.updateState(keys);
 		Player.updateAnimation(dt);
+		parallax.update(Player.rect.x, Player.rect.y);
 
 		camera.setCameraOnPlayer(Player);
 
