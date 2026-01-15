@@ -16,14 +16,14 @@ void LoadRessources::loadAllTexture() {
     SDL_Surface* surface;
 
     // Background Home
-    surface = IMG_Load("assets/Kitty.png");
+    surface = IMG_Load("assets/sprite_Kitty.png");
     player = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_DestroySurface(surface);
 
     surface = IMG_Load("assets/ground.png");
     ground = SDL_CreateTextureFromSurface(renderer, surface);
 
-    //SDL_SetTextureScaleMode(player, SDL_SCALEMODE_NEAREST);
+    SDL_SetTextureScaleMode(ground, SDL_SCALEMODE_NEAREST);
 
     surface = IMG_Load("assets/BG_layer1.png");
     bg_layer1 = SDL_CreateTextureFromSurface(renderer, surface);

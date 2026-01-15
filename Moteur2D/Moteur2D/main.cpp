@@ -81,13 +81,14 @@ int main() {
 		
 		SDL_GetWindowSize(window, &w, &h);
 		
-		Player.update(keys, dt);
-		parallax.update(Player.rect.x, Player.rect.y);
-
+		
 		Player.collisionHorizontal(grounds);
-
-		// Handle vertical collisions
 		Player.collision(grounds);
+
+		Player.update(keys, dt);
+		Player.updateState(keys);
+		Player.updateAnimation(dt);
+		parallax.update(Player.rect.x, Player.rect.y);
 
 		camera.setCameraOnPlayer(Player);
 
