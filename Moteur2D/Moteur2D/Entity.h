@@ -5,24 +5,27 @@
 
 class Camera;
 
-class Entity{
+enum class PlayerState {
+	idle,
+	movingLeft,
+	movingRight,
+	jumpingLeft,
+	jumpingRight,
+	fallingLeft,
+	fallingRight
+};
+
+class Entity {
 private:
-	//Size object
 	float sizeX;
 	float sizeY;
-
-	//Position object
 	float posX;
 	float posY;
 
-	// Speed object
 	int speed;
 	float jumpForce;
-
-	// Object collision
 	bool collide;
 
-	//Object texture
 	SDL_Texture* MyTexture;
 	SDL_Renderer* renderer;
 	SDL_Color color;
@@ -30,7 +33,6 @@ private:
 	float cooldownJump;
 	bool onGround;
 
-	// Physics variables
 	float velocityY;
 	float velocityX;
 	float gravity;
@@ -38,11 +40,20 @@ private:
 	Uint64 last_time = SDL_GetTicks();
 	float dt = (SDL_GetTicks() - last_time) / 1000.0f;
 
+	PlayerState currentState = PlayerState::idle;
+	PlayerState previousState = PlayerState::idle;
+
+	int currentFrame = 0;
+	float animationTimer = 0.0f;
+	float frameDuration = 0.2f;
+	int maxFrames = 4;
+	float spriteWidth = 127.8f;
+	float spriteHeight = 127.8f;
+
 public:
 
 	SDL_FRect rect;
 
-	//Constructor/Destructor
 	Entity();
 	Entity(SDL_Texture* MyTexture, SDL_Renderer* renderer);
 	Entity(SDL_Texture* MyTexture, SDL_Renderer* renderer, float x, float y, float w, float h, int speed, bool collide);
@@ -53,14 +64,16 @@ public:
 	void downToGround();
 	void setOnGround(bool value);
 
+	void updateState(const bool* keys);
+	PlayerState getCurrentState() const;
+	void updateAnimation(float dt);
+
 	void collision(const std::vector<Entity*>& colliders);
 	void collisionHorizontal(const std::vector<Entity*>& colliders);
-
 
 	// Render/Update
 	void render(Camera& camera);
 	void update(const bool* keys, float dt);
 	void clampToScreen(int windowX, int windowY);
 	void setColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-	//StateMachine
 };
