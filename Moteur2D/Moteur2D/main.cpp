@@ -25,7 +25,7 @@ int main() {
 	SDL_Init(SDL_INIT_VIDEO);
 	SDL_CreateWindowAndRenderer("Lost Meow", screenWidth, screenHeight, NULL, &window, &renderer);
 
-	//Ressources
+	////Ressources
 	LoadRessources MyRessources(renderer);
 	MyRessources.loadAllTexture();
 
@@ -70,7 +70,6 @@ int main() {
 	
 
 	SceneManager mySM = SceneManager(renderer);
-
 
 	//GameLoop
 	bool loopTrue = true;
@@ -126,6 +125,7 @@ int main() {
 
 		mySM.initKeys(keys);
 		mySM.manageState();
+
 
 	}
 

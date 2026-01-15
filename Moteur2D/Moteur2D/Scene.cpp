@@ -6,5 +6,5 @@ Scene::Scene() {
 }
 
 Scene::~Scene() {
-	SDL_DestroyRenderer(renderer);
+	
 }

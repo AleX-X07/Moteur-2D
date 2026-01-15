@@ -60,6 +60,9 @@
     <ClCompile Include="SceneManager.cpp">
       <Filter>Fichiers sources\Scène</Filter>
     </ClCompile>
+    <ClCompile Include="global.cpp">
+      <Filter>Fichiers sources\Ressources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -85,6 +88,9 @@
     </ClInclude>
     <ClInclude Include="SceneManager.h">
       <Filter>Fichiers d%27en-tête\Scène</Filter>
+    </ClInclude>
+    <ClInclude Include="global.h">
+      <Filter>Fichiers d%27en-tête\Ressources</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

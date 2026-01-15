@@ -1,8 +1,7 @@
 #pragma once
 #include <SDL3/SDL.h>
-#include <iostream>
 
-using namespace std;
+#include "LoadRessources.h"
 
 class Scene
 {
@@ -12,7 +11,6 @@ public:
 
 	Scene();
 	virtual ~Scene();
-	virtual void displayScene() = 0;
-
+	virtual void displayScene(LoadRessources& _MyRessources) = 0;
 };
 

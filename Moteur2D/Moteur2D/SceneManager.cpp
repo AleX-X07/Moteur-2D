@@ -7,19 +7,22 @@ SceneManager::SceneManager(SDL_Renderer* rend) {
 
 	myMenu = new Menu(renderer);  
 	myPlay = new Play(renderer);
+
+	MyRessources = new LoadRessources(renderer);
+	MyRessources->loadAllTexture();
 }
 
 SceneManager::~SceneManager() {
-
-	SDL_DestroyRenderer(renderer);
 
 	delete myMenu;
 	delete myPlay;
 	myMenu = nullptr;
 	myPlay = nullptr;
 
-	delete keys;
 	keys = nullptr;
+
+	delete MyRessources;  
+	MyRessources = nullptr;
 }
 
 void SceneManager::initKeys(const bool* _keys) 
@@ -32,30 +35,21 @@ void SceneManager::manageState() {
 	{
 		case(SceneState::menu) :
 		{
-			myMenu->displayScene();
+			myMenu->displayScene(*MyRessources);
 			if (keys[SDL_SCANCODE_SPACE])
 			{
 				currentState = SceneState::play;
-			}
-			else
-			{
-				cout << "1";
 			}
 		} 
 		break;
 		case(SceneState::play) :
 		{
-			myPlay->displayScene();
+			myPlay->displayScene(*MyRessources);
 			if (keys[SDL_SCANCODE_ESCAPE])
 			{
 				currentState = SceneState::menu;
 			}
-			else
-			{
-				cout << "2";
-			}
 		}
 		break;
 	}
-
 }

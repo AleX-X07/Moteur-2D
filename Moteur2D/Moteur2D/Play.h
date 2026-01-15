@@ -9,6 +9,6 @@ public:
 	Play(SDL_Renderer* _rend);
 	~Play();
 
-	void displayScene() override;
+	void displayScene(LoadRessources& _MyRessources) override;
 };
 

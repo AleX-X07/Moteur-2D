@@ -8,7 +8,7 @@ Play::~Play() {
 
 }
 
-void Play::displayScene() {
+void Play::displayScene(LoadRessources& _MyRessources) {
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 	SDL_RenderClear(renderer);
 	SDL_RenderFillRect(renderer, nullptr);
