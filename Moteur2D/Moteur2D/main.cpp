@@ -6,10 +6,6 @@
 #include "Camera.h"
 #include "LoadRessources.h"
 #include "Parallax.h"
-#include "Scene.h"
-#include "Play.h"
-#include "Menu.h"
-#include "SceneManager.h"
 
 int main() {
 	int screenWidth = 1920;
@@ -25,7 +21,7 @@ int main() {
 	SDL_Init(SDL_INIT_VIDEO);
 	SDL_CreateWindowAndRenderer("Lost Meow", screenWidth, screenHeight, NULL, &window, &renderer);
 
-	////Ressources
+	//Ressources
 	LoadRessources MyRessources(renderer);
 	MyRessources.loadAllTexture();
 
@@ -66,11 +62,6 @@ int main() {
 	
 	std::vector<Entity*> grounds = { &Ground, &Ground1, &Ground2, &Ground3, &Ground4 };
 
-	//Scene
-	
-
-	SceneManager mySM = SceneManager(renderer);
-
 	//GameLoop
 	bool loopTrue = true;
 	while (loopTrue) {
@@ -84,6 +75,7 @@ int main() {
 		float dt = (SDL_GetTicks() - last_time) / 1000.0f;
 		last_time = SDL_GetTicks();
 		frameStart = SDL_GetTicks();
+
 
 		const bool* keys = SDL_GetKeyboardState(nullptr);
 		
@@ -120,12 +112,8 @@ int main() {
 
 		if (frameTime < FRAME_DELAY)  // Delay for 60FPS
 			SDL_Delay(FRAME_DELAY - frameTime);
-
-		/*mySM.initKeys(keys);
-		mySM.manageState();*/
-
 	}
-
+                                 
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();

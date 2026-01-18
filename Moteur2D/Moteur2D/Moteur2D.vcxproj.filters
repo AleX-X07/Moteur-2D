@@ -9,88 +9,40 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Fichiers sources\Ressources">
-      <UniqueIdentifier>{ae7dfaa3-c322-42b3-869d-973751d1fdd5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers d%27en-tête\Ressources">
-      <UniqueIdentifier>{02d91c9d-5714-411d-8919-1c8c8ffe6575}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers sources\Entity">
-      <UniqueIdentifier>{db7e48ba-6934-4bf6-be1b-f2e54ddf76fc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers d%27en-tête\Entity">
-      <UniqueIdentifier>{d75425da-9f27-4f79-944b-c8ac7b075b6c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Fichiers de ressources">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Fichiers d%27en-tête\Scène">
-      <UniqueIdentifier>{291e4093-4014-49ce-8838-20de5125eea4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers sources\Scène">
-      <UniqueIdentifier>{e000b376-3f4a-4037-9d1e-2353593ec8bb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="LoadRessources.cpp">
-      <Filter>Fichiers sources\Ressources</Filter>
+      <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="Parallax.cpp">
-      <Filter>Fichiers sources\Ressources</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>Fichiers sources\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene.cpp">
-      <Filter>Fichiers sources\Scène</Filter>
-    </ClCompile>
-    <ClCompile Include="Menu.cpp">
-      <Filter>Fichiers sources\Scène</Filter>
-    </ClCompile>
-    <ClCompile Include="Play.cpp">
-      <Filter>Fichiers sources\Scène</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>Fichiers sources\Scène</Filter>
-    </ClCompile>
-    <ClCompile Include="global.cpp">
-      <Filter>Fichiers sources\Ressources</Filter>
+      <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Entity.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="LoadRessources.h">
-      <Filter>Fichiers d%27en-tête\Ressources</Filter>
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="Parallax.h">
-      <Filter>Fichiers d%27en-tête\Ressources</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>Fichiers d%27en-tête\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>Fichiers d%27en-tête\Scène</Filter>
-    </ClInclude>
-    <ClInclude Include="Menu.h">
-      <Filter>Fichiers d%27en-tête\Scène</Filter>
-    </ClInclude>
-    <ClInclude Include="Play.h">
-      <Filter>Fichiers d%27en-tête\Scène</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>Fichiers d%27en-tête\Scène</Filter>
-    </ClInclude>
-    <ClInclude Include="global.h">
-      <Filter>Fichiers d%27en-tête\Ressources</Filter>
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

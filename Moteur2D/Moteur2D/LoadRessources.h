@@ -21,7 +21,6 @@ public:
 	LoadRessources(SDL_Renderer* rend);
 
 	// Load all texture
-	void loadTexture(const char* _path, SDL_Texture*& _MyTexture);
 	void loadAllTexture();
 
 	// Destructor
