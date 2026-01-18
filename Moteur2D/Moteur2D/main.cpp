@@ -47,34 +47,8 @@ int main() {
 	int w;
 	int h;
 
-	auto Player = Entity(MyRessources.player, renderer);
-
-	Player.setColor(0, 255, 0, 255);
-
-	auto Ground = Entity(MyRessources.ground, renderer, 0, 880, 200, 250, 0, false);
-	Ground.setColor(255, 0, 0, 255);
-	auto Ground1 = Entity(MyRessources.ground, renderer, 300, 820, 100, 300, 0, false);
-	Ground1.setColor(0, 0, 255, 255);
-	auto Ground2 = Entity(MyRessources.ground, renderer, 500, 800, 150, 50, 0, false);
-	Ground2.setColor(0, 0, 255, 255);
-	auto Ground3 = Entity(MyRessources.ground, renderer, 700, 830, 200, 40, 0, false);
-	Ground3.setColor(0, 0, 255, 255);
-	auto Ground4 = Entity(MyRessources.ground, renderer, 1000, 780, 200, 120, 0, false);
-	Ground4.setColor(0, 0, 255, 255);
-	auto Ground5 = Entity(MyRessources.ground, renderer, 1100, 730, 200, 150, 0, false);
-	Ground5.setColor(0, 0, 255, 255);
-	auto Ground6 = Entity(MyRessources.ground, renderer, 890, 670, 140, 40, 0, false);
-	Ground6.setColor(0, 0, 255, 255);
-	auto Ground7 = Entity(MyRessources.ground, renderer, 830, 620, 100, 40, 0, false);
-	Ground7.setColor(0, 0, 255, 255);
-	auto Ground8 = Entity(MyRessources.ground, renderer, 1050, 580, 200, 20, 0, false);
-	Ground8.setColor(0, 0, 255, 255);
-	auto Ground9 = Entity(MyRessources.ground, renderer, 1350, 550, 200, 600, 0, false);
-	Ground9.setColor(0, 0, 255, 255);
-
-	std::vector<Entity*> grounds = { &Ground, &Ground1, &Ground2, &Ground3, &Ground4, &Ground5, &Ground6, &Ground7, &Ground8, &Ground9 };
-
-	//SceneManager
+	Play playScene(renderer);
+	playScene.createGameObjects(MyRessources);
 	SceneManager sM = SceneManager(renderer);
 
 	//GameLoop
@@ -93,43 +67,23 @@ int main() {
 
 
 		const bool* keys = SDL_GetKeyboardState(nullptr);
-		
-		SDL_GetWindowSize(window, &w, &h);
-		
-		Player.collisionHorizontal(grounds);
-		Player.collision(grounds);
-
-		Player.update(keys, dt);
-		Player.updateState(keys);
-		Player.updateAnimation(dt);
-		parallax.update(Player.rect.x, Player.rect.y);
 
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderClear(renderer);
-		SDL_RenderFillRect(renderer, nullptr);
 
 		parallax.render();
 
-		for (auto& ground : grounds) {
-			ground->render(camera);
-		}
-
-		camera.setCameraOnPlayer(Player);
-		Player.clampToScreen(levelWidth, levelHeight);
-		Player.render(camera);
-		
+		playScene.update(keys, dt);
+		playScene.displayScene(MyRessources);
 
 		SDL_RenderPresent(renderer);
-
-		/*sM.initKeys(keys);
-		sM.manageState();*/
 
 		frameTime = SDL_GetTicks() - frameStart;
 
 		if (frameTime < FRAME_DELAY)  // Delay for 60FPS
 			SDL_Delay(FRAME_DELAY - frameTime);
 	}
-                                 
+
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
