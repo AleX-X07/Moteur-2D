@@ -11,37 +11,27 @@ LoadRessources::LoadRessources(SDL_Renderer* rend) : renderer(rend) {
     bg_layer4 = nullptr;
 }
 
-// Load all texture
-void LoadRessources::loadAllTexture() {
+// Load one texture
+void LoadRessources::loadTexture(const char* _path, SDL_Texture*& _MyTexture)
+{
     SDL_Surface* surface;
 
-    // Background Home
-    surface = IMG_Load("assets/sprite_Kitty.png");
-    player = SDL_CreateTextureFromSurface(renderer, surface);
-    SDL_DestroySurface(surface);
-
-    surface = IMG_Load("assets/dirt.png");
-    ground = SDL_CreateTextureFromSurface(renderer, surface);
-    SDL_SetTextureScaleMode(ground, SDL_SCALEMODE_NEAREST); 
-    SDL_DestroySurface(surface);
-
-    surface = IMG_Load("assets/BG_layer1.png");
-    bg_layer1 = SDL_CreateTextureFromSurface(renderer, surface);
-    SDL_DestroySurface(surface);
-
-    surface = IMG_Load("assets/BG_layer2.png");
-    bg_layer2 = SDL_CreateTextureFromSurface(renderer, surface);
-    SDL_DestroySurface(surface);
-
-    surface = IMG_Load("assets/BG_layer3.png");
-    bg_layer3 = SDL_CreateTextureFromSurface(renderer, surface);
-    SDL_DestroySurface(surface);
-
-    surface = IMG_Load("assets/BG_layer4.png");
-    bg_layer4 = SDL_CreateTextureFromSurface(renderer, surface);
+    surface = IMG_Load(_path);
+    _MyTexture = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_DestroySurface(surface);
 }
 
+// Load all texture
+void LoadRessources::loadAllTexture() {
+    
+    loadTexture("assets/sprite_Kitty.png", player);
+    loadTexture("assets/dirt.png", ground);
+    loadTexture("assets/BG_layer1.png", bg_layer1);
+    loadTexture("assets/BG_layer2.png", bg_layer2);
+    loadTexture("assets/BG_layer3.png", bg_layer3);
+    loadTexture("assets/BG_layer4.png", bg_layer4);
+    
+}
 // Destructor
 LoadRessources::~LoadRessources() {
     // Destroy all texture
