@@ -4,11 +4,12 @@ Menu::Menu(SDL_Renderer* _rend) {
 }
 
 Menu::~Menu() {
-	
+
 }
 
 void Menu::displayScene(LoadRessources& _MyRessources) {
-	
+
+	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 0);
 	SDL_RenderClear(renderer);
 
 	if (_MyRessources.bg_layer4) {  // Vérifiez que la texture existe

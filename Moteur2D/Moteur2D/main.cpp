@@ -6,6 +6,7 @@
 #include "Camera.h"
 #include "LoadRessources.h"
 #include "Parallax.h"
+#include "SceneManager.h"
 
 int main() {
 	int screenWidth = 1920;
@@ -73,6 +74,9 @@ int main() {
 
 	std::vector<Entity*> grounds = { &Ground, &Ground1, &Ground2, &Ground3, &Ground4, &Ground5, &Ground6, &Ground7, &Ground8, &Ground9 };
 
+	//SceneManager
+	SceneManager sM = SceneManager(renderer);
+
 	//GameLoop
 	bool loopTrue = true;
 	while (loopTrue) {
@@ -91,7 +95,6 @@ int main() {
 		const bool* keys = SDL_GetKeyboardState(nullptr);
 		
 		SDL_GetWindowSize(window, &w, &h);
-		
 		
 		Player.collisionHorizontal(grounds);
 		Player.collision(grounds);
@@ -117,6 +120,9 @@ int main() {
 		
 
 		SDL_RenderPresent(renderer);
+
+		/*sM.initKeys(keys);
+		sM.manageState();*/
 
 		frameTime = SDL_GetTicks() - frameStart;
 
