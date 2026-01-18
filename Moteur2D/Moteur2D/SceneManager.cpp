@@ -1,12 +1,12 @@
 #include "SceneManager.h"
 
-SceneManager::SceneManager(SDL_Renderer* rend) {
+SceneManager::SceneManager(SDL_Renderer* rend, SDL_Window* win) {
 	renderer = rend;
+	window = win;
 	currentState = SceneState::menu;
-	keys = nullptr;
 
-	myMenu = new Menu(renderer);
-	myPlay = new Play(renderer);
+	myMenu = new Menu(renderer,window);
+	myPlay = new Play(renderer,window);
 
 	MyRessources = new LoadRessources(rend);
 	MyRessources->loadAllTexture();
@@ -19,36 +19,30 @@ SceneManager::~SceneManager() {
 	myMenu = nullptr;
 	myPlay = nullptr;
 
-	keys = nullptr;
-
 	delete MyRessources;
 	MyRessources = nullptr;
 }
 
-void SceneManager::initKeys(const bool* _keys)
-{
-	keys = _keys;
+void SceneManager::manageState(SDL_Event& event, keys* _myKeys) {
+	if (currentState == SceneState::menu) {
+		myMenu->nextScene(currentState, event, _myKeys);
+	}
+	else if (currentState == SceneState::play) {
+		myPlay->nextScene(currentState, event, _myKeys);
+	}
 }
 
-void SceneManager::manageState() {
+void SceneManager::displayState() {
 	switch (currentState)
 	{
 	case(SceneState::menu):
 	{
 		myMenu->displayScene(*MyRessources);
-		if (keys[SDL_SCANCODE_SPACE])
-		{
-			currentState = SceneState::play;
-		}
 	}
 	break;
 	case(SceneState::play):
 	{
 		myPlay->displayScene(*MyRessources);
-		if (keys[SDL_SCANCODE_ESCAPE])
-		{
-			currentState = SceneState::menu;
-		}
 	}
 	break;
 	}

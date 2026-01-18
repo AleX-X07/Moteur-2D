@@ -19,6 +19,24 @@
     <Filter Include="Fichiers d%27en-tête\Scene">
       <UniqueIdentifier>{9333c5b0-9111-4cb4-ab05-af6f4ba52346}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\Tool">
+      <UniqueIdentifier>{f0e9cc1d-7347-465b-b863-17f7ae7bd37b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Ressources">
+      <UniqueIdentifier>{3227ac05-4fbd-4d6c-ba34-62f280ea846c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Tool">
+      <UniqueIdentifier>{4fb06e17-778c-4b09-85be-20909ec672d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Ressources">
+      <UniqueIdentifier>{d0a8e437-ae82-41be-b223-5295f3859be3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Scene\Menu">
+      <UniqueIdentifier>{795610ae-b7ac-4867-8ebe-91419849a593}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Scene\Menu">
+      <UniqueIdentifier>{2de05f00-f750-41a3-b14f-322865b2eaee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -27,19 +45,7 @@
     <ClCompile Include="Entity.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="LoadRessources.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Parallax.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="Scene.cpp">
-      <Filter>Fichiers sources\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Menu.cpp">
       <Filter>Fichiers sources\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Play.cpp">
@@ -48,24 +54,30 @@
     <ClCompile Include="SceneManager.cpp">
       <Filter>Fichiers sources\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Parallax.cpp">
+      <Filter>Fichiers sources\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Fichiers sources\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadRessources.cpp">
+      <Filter>Fichiers sources\Ressources</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Fichiers sources\Scene\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Fichiers sources\Scene\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="globals.cpp">
+      <Filter>Fichiers sources\Tool</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="LoadRessources.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="Parallax.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="Scene.h">
-      <Filter>Fichiers d%27en-tête\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Menu.h">
       <Filter>Fichiers d%27en-tête\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Play.h">
@@ -73,6 +85,24 @@
     </ClInclude>
     <ClInclude Include="SceneManager.h">
       <Filter>Fichiers d%27en-tête\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Fichiers d%27en-tête\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="Parallax.h">
+      <Filter>Fichiers d%27en-tête\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadRessources.h">
+      <Filter>Fichiers d%27en-tête\Ressources</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Fichiers d%27en-tête\Scene\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Fichiers d%27en-tête\Scene\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="globals.h">
+      <Filter>Fichiers d%27en-tête\Tool</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
