@@ -72,29 +72,6 @@ int main() {
 		sM.updateState(keys, dt);
 		sM.displayState();
 
-		/*SDL_GetWindowSize(window, &w, &h);
-		
-		Player.collisionHorizontal(grounds);
-		Player.collision(grounds);
-
-		Player.update(keys, dt);
-		Player.updateState(keys);
-		Player.updateAnimation(dt);
-		parallax.update(Player.rect.x, Player.rect.y);
-
-		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-		SDL_RenderClear(renderer);
-
-		parallax.render();
-
-		playScene.update(keys, dt);
-		playScene.displayScene(MyRessources);
-
-
-		SDL_RenderPresent(renderer);
-		SDL_RenderPresent(renderer);*/
-
-
 		frameTime = SDL_GetTicks() - frameStart;
 
 		if (frameTime < FRAME_DELAY)  // Delay for 60FPS

@@ -33,11 +33,11 @@ void Parallax::update(float playerX, float playerY)
             while (layer.offsetX <= -texW) layer.offsetX += texW;
         }
 
-        if (texH > 0)
+        /*if (texH > 0)
         {
             while (layer.offsetY >= texH) layer.offsetY -= texH;
             while (layer.offsetY <= -texH) layer.offsetY += texH;
-        }
+        }*/
     }
 }
 
@@ -51,17 +51,15 @@ void Parallax::render()
         float texH = 0;
         SDL_GetTextureSize(layer.texture, &texW, &texH);
 
-        if (texW == 0 || texH == 0)
-            continue;
+        /*if (texW == 0 || texH == 0)
+            continue;*/
 
-        // Normaliser l'offset pour le wrap
         float normalizedOffset = layer.offsetX;
         if (texW > 0) {
             normalizedOffset = fmod(layer.offsetX, texW);
             if (normalizedOffset > 0) normalizedOffset -= texW;
         }
 
-        // Dessiner en mode tuile pour couvrir tout l'écran
         float startX = normalizedOffset;
 
         for (float x = startX; x < screenWidth; x += texW)
