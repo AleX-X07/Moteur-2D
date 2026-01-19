@@ -4,7 +4,7 @@ Play2::Play2(SDL_Renderer* rend, SDL_Window* win) {
 	renderer = rend;
 	window = win;
 	Player = nullptr;
-	camera = new Camera(1920, 1080, 1500, 1080);
+	camera = new Camera();
 	int w;
 	int h;
 	SDL_GetWindowSize(win, &w, &h);
@@ -44,7 +44,7 @@ void Play2::displayScene(LoadRessources& _MyRessources) {
 		isCreatedGRound = true;
 	}
 	SDL_RenderClear(renderer);
-	playerParallax->render();
+	playerParallax->render(*camera);
 
 	for (auto ground : grounds) {
 		ground->render(*camera);
