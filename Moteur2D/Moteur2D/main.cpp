@@ -2,18 +2,11 @@
 #include <SDL3/SDL.h>
 #include <vector>
 
-#include "Entity.h"
-#include "Camera.h"
-#include "LoadRessources.h"
 #include "SceneManager.h"
 #include "globals.h"
+#include "setTime.h"
 
 int main() {
-	int screenWidth = 1920;
-	int screenHeight = 1080;
-
-	int levelWidth = 1920;
-	int levelHeight = 1080;
 
 	// Creation Window
 	SDL_Window* window;
@@ -22,23 +15,6 @@ int main() {
 	SDL_Init(SDL_INIT_VIDEO);
 	SDL_CreateWindowAndRenderer("Lost Meow", screenWidth, screenHeight, NULL, &window, &renderer);
 
-	//Ressources
-	LoadRessources MyRessources(renderer);
-	MyRessources.loadAllTexture();
-
-	Camera camera(screenWidth, screenHeight, levelWidth, levelHeight);
-
-
-	//Delta time
-	float dt = 1;
-
-	// FPS
-	const int FPS = 60;
-	const int FRAME_DELAY = 1000 / FPS;
-	Uint64 frameStart;
-	int frameTime;
-	Uint64 last_time = SDL_GetTicks();
-
 	int w;
 	int h;
 
@@ -46,13 +22,13 @@ int main() {
 	SceneManager sM = SceneManager(renderer,window);
 	keys myKeys;
 
+	setTime time = setTime(60); // Lock frame rate at 60fps
+
 	//GameLoop
 	bool loopTrue = true;
 	while (loopTrue) {
 
-		float dt = (SDL_GetTicks() - last_time) / 1000.0f;
-		last_time = SDL_GetTicks();
-		frameStart = SDL_GetTicks();
+		time.calculTime();
 		
 		const bool* keys = SDL_GetKeyboardState(nullptr);
 
@@ -68,14 +44,11 @@ int main() {
 			}
 		}
 
-
-		sM.updateState(keys, dt);
+		sM.updateState(keys, time.dt);
 		sM.displayState();
 
-		frameTime = SDL_GetTicks() - frameStart;
+		time.waitForTime();
 
-		if (frameTime < FRAME_DELAY)  // Delay for 60FPS
-			SDL_Delay(FRAME_DELAY - frameTime);
 	}
 
 	SDL_DestroyRenderer(renderer);

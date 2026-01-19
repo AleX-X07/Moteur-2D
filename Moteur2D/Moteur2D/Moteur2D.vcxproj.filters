@@ -72,6 +72,9 @@
     <ClCompile Include="globals.cpp">
       <Filter>Fichiers sources\Tool</Filter>
     </ClCompile>
+    <ClCompile Include="setTime.cpp">
+      <Filter>Fichiers sources\Tool</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
@@ -102,6 +105,9 @@
       <Filter>Fichiers d%27en-tête\Scene\Menu</Filter>
     </ClInclude>
     <ClInclude Include="globals.h">
+      <Filter>Fichiers d%27en-tête\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="setTime.h">
       <Filter>Fichiers d%27en-tête\Tool</Filter>
     </ClInclude>
   </ItemGroup>
