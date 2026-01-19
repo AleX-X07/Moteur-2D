@@ -134,66 +134,37 @@ void Entity::collision(const std::vector<Entity*>& colliders) {
         if (!SDL_HasRectIntersectionFloat(&rect, &c->rect))
             continue;
 
-        float playerLeft = rect.x;
-        float playerRight = rect.x + rect.w;
-        float playerTop = rect.y;
-        float playerBottom = rect.y + rect.h;
+        //x, y, w, h
+        // left, right, top, bottom
+        SDL_FRect playerDirection = { rect.x, rect.x + rect.w, rect.y, rect.y + rect.h };
+        SDL_FRect blockSide = { c->rect.x, c->rect.x + c->rect.w, c->rect.y, c->rect.y + c->rect.h};
+        SDL_FRect overlap = {playerDirection.y - blockSide.x, blockSide.y - playerDirection.x, playerDirection.h - blockSide.w, blockSide.h - playerDirection.w};
 
-        float blockLeft = c->rect.x;
-        float blockRight = c->rect.x + c->rect.w;
-        float blockTop = c->rect.y;
-        float blockBottom = c->rect.y + c->rect.h;
-
-        float overlapLeft = playerRight - blockLeft;
-        float overlapRight = blockRight - playerLeft;
-        float overlapTop = playerBottom - blockTop;
-        float overlapBottom = blockBottom - playerTop;
-
-        if (overlapTop < overlapLeft && overlapTop < overlapRight && overlapTop < overlapBottom) {
+        // Collision with the ground
+        if (overlap.w < overlap.x && overlap.w < overlap.y && overlap.w < overlap.h) {
             if (velocityY >= 0) {  
-                rect.y = blockTop - rect.h;
+                rect.y = blockSide.w - rect.h;
                 onGround = true;
                 velocityY = 0;
             }
         }
-        else if (overlapBottom < overlapLeft && overlapBottom < overlapRight && overlapBottom < overlapTop) {
+        else if(overlap.h < overlap.x && overlap.h < overlap.y && overlap.h < overlap.w) {
             if (velocityY < 0) {
-                rect.y = blockBottom;
+                rect.y = blockSide.h;
                 velocityY = 0;
             }
         }
-    }
-}
 
-void Entity::collisionHorizontal(const std::vector<Entity*>& colliders) {
-    for (auto c : colliders) {
-        if (!SDL_HasRectIntersectionFloat(&rect, &c->rect))
-            continue;
-
-        float playerLeft = rect.x;
-        float playerRight = rect.x + rect.w;
-        float playerTop = rect.y;
-        float playerBottom = rect.y + rect.h;
-
-        float blockLeft = c->rect.x;
-        float blockRight = c->rect.x + c->rect.w;
-        float blockTop = c->rect.y;
-        float blockBottom = c->rect.y + c->rect.h;
-
-        // Calculer les chevauchements
-        float overlapLeft = playerRight - blockLeft;
-        float overlapRight = blockRight - playerLeft;
-        float overlapTop = playerBottom - blockTop;
-        float overlapBottom = blockBottom - playerTop;
-        if (overlapLeft < overlapTop && overlapLeft < overlapBottom) {
-            if (velocityX > 0 || (playerRight > blockLeft && playerLeft < blockLeft)) {
-                rect.x = blockLeft - rect.w;
+        // Collision horizontal
+        else if (overlap.x < overlap.w && overlap.x < overlap.h) {
+            if (velocityX > 0 || (playerDirection.y > blockSide.x && playerDirection.x < blockSide.x)) {
+                rect.x = blockSide.x - rect.w;
                 velocityX = 0;
             }
         }
-        else if (overlapRight < overlapTop && overlapRight < overlapBottom) {
-            if (velocityX < 0 || (playerLeft < blockRight && playerRight > blockRight)) {
-                rect.x = blockRight;
+        else if (overlap.y < overlap.w && overlap.y < overlap.h) {
+            if (velocityX < 0 || (playerDirection.y < blockSide.y && playerDirection.y > blockSide.y)) {
+                rect.x = blockSide.y;
                 velocityX = 0;
             }
         }

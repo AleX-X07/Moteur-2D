@@ -80,7 +80,7 @@ void Play::update(const bool* keys, float dt) {
 		playerParallax->update(Player->rect.x, Player->rect.y);
 		Player->update(keys, dt);
 		Player->collision(grounds);
-		Player->collisionHorizontal(grounds);
+		//Player->collisionHorizontal(grounds);
 		Player->updateState(keys);
 		Player->updateAnimation(dt);
 		camera->setCameraOnPlayer(*Player);
