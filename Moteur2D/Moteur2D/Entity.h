@@ -69,7 +69,6 @@ public:
 	void updateAnimation(float dt);
 
 	void collision(const std::vector<Entity*>& colliders);
-	void collisionHorizontal(const std::vector<Entity*>& colliders);
 
 	// Render/Update
 	void render(Camera& camera);

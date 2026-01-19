@@ -69,7 +69,7 @@ void Play::update(const bool* keys, float dt) {
 	if (Player) {
 		Player->update(keys, dt);
 		Player->collision(grounds);
-		Player->collisionHorizontal(grounds);
+		//Player->collisionHorizontal(grounds);
 		Player->updateState(keys);
 		Player->updateAnimation(dt);
 		camera->setCameraOnPlayer(*Player);
