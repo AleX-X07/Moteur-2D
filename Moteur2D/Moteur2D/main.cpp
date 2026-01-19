@@ -19,7 +19,7 @@ int main() {
 	SceneManager sM = SceneManager(renderer,window);
 	keys myKeys;
 
-	setTime time = setTime(120); // Lock frame rate at 60fps
+	setTime time = setTime(120); // Lock frame rate at 120fps
 
 	//GameLoop
 	bool loopTrue = true;

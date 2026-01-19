@@ -6,10 +6,6 @@ Entity::Entity() {
 }
 
 Entity::Entity(SDL_Texture* _MyTexture, SDL_Renderer* _renderer) {
-    posX = 0;
-    posY = 850;
-    sizeX = 50;
-    sizeY = 50;
     speed = 200.0f;
     jumpForce = 350.0f;
     gravity = 900.0f;
@@ -18,14 +14,10 @@ Entity::Entity(SDL_Texture* _MyTexture, SDL_Renderer* _renderer) {
     collide = false;
     MyTexture = _MyTexture;
     renderer = _renderer;
-    rect = { posX, posY, sizeX, sizeY };
+    rect = { 0, 850, 50, 50 };
 }
 
 Entity::Entity(SDL_Texture* _MyTexture, SDL_Renderer* _renderer, float x, float y, float w, float h, int _speed, bool _collide) {
-    posX = x;
-    posY = y;
-    sizeX = w;
-    sizeY = h;
     speed = _speed;
     jumpForce = 350.0f;
     gravity = 900.0f;
@@ -34,7 +26,7 @@ Entity::Entity(SDL_Texture* _MyTexture, SDL_Renderer* _renderer, float x, float 
     collide = _collide;
     MyTexture = _MyTexture;
     renderer = _renderer;
-    rect = { posX, posY, sizeX, sizeY };
+    rect = { x, y, w, h };
 }
 
 Entity::~Entity() {
