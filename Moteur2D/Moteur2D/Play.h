@@ -1,9 +1,11 @@
 #pragma once
 
+#include <vector>
+
 #include "Entity.h"
 #include "Scene.h"
 #include "Camera.h"
-#include <vector>
+#include "Parallax.h"
 
 class Play : public Scene
 {
@@ -12,6 +14,7 @@ private:
     std::vector<Entity*> grounds;
 	Camera* camera;
     bool isCreatedGRound = false;
+    Parallax* playerParallax;
 
 public:
     Play(SDL_Renderer* rend, SDL_Window* win);

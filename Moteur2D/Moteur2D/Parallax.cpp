@@ -21,13 +21,8 @@ void Parallax::update(float playerX, float playerY)
 {
     for (auto& layer : layers)
     {
-        // Le déplacement du parallaxe dépend du déplacement de la caméra
-        // speed = 0.0 -> fond statique
-        // speed = 1.0 -> suit exactement la caméra
-        // speed < 1.0 -> effet parallaxe (plus lent que la caméra)
         layer.offsetX = -playerX * layer.speed;
 
-        // Wrap l'offset pour éviter les gros nombres
         float texW = 0;
         float texH = 0;
         SDL_GetTextureSize(layer.texture, &texW, &texH);

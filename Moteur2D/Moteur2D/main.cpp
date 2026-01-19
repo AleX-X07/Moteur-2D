@@ -5,7 +5,6 @@
 #include "Entity.h"
 #include "Camera.h"
 #include "LoadRessources.h"
-#include "Parallax.h"
 #include "SceneManager.h"
 #include "globals.h"
 
@@ -29,11 +28,6 @@ int main() {
 
 	Camera camera(screenWidth, screenHeight, levelWidth, levelHeight);
 
-	Parallax parallax(renderer, screenWidth, screenHeight);
-	parallax.addLayer(MyRessources.bg_layer1, 0.1f); // Proche = rapide
-	parallax.addLayer(MyRessources.bg_layer2, 0.3f); // Moyen
-	parallax.addLayer(MyRessources.bg_layer3, 0.5f); // Lointain = lent
-	parallax.addLayer(MyRessources.bg_layer4, 0.8f); // Lointain = lent
 
 	//Delta time
 	float dt = 1;
