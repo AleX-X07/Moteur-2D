@@ -171,6 +171,13 @@ void Entity::collision(const std::vector<Entity*>& colliders) {
     }
 }
 
+void Entity::respawn(){
+    if (rect.y >= levelHeight){
+        rect.y = 850;
+        rect.x = 0;
+    }
+}
+
 void Entity::render(Camera& camera) {
     SDL_FRect screenRect = camera.worldToScreen(rect);
 

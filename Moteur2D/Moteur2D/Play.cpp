@@ -76,18 +76,22 @@ void Play::displayScene(LoadRessources& _MyRessources) {
 }
 
 void Play::update(const bool* keys, float dt) {
+
 	if (Player) {
 		playerParallax->update(Player->rect.x, Player->rect.y);
 		Player->update(keys, dt);
 		Player->collision(grounds);
 		Player->updateState(keys);
 		Player->updateAnimation(dt);
+		Player->clampToScreen(levelWidth + 50, levelHeight + 50);
 		camera->setCameraOnPlayer(*Player);
+		Player->respawn();
 	}
 }
 
 void Play::nextScene(SceneState& currentScene, SDL_Event& event, keys* _myKeys) {
-	if (_myKeys->myKeys[SDL_SCANCODE_ESCAPE]) {
+	if (_myKeys->myKeys[SDL_SCANCODE_ESCAPE]) 
 		currentScene = menu;
-	}
+	if (Player->rect.x == levelWidth)
+		currentScene = play2;
 }

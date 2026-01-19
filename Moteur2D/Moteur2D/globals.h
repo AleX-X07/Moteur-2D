@@ -3,7 +3,7 @@
 const int screenWidth = 1920;
 const int screenHeight = 1080;
 
-const int levelWidth = 1920;
+const int levelWidth = 1500;
 const int levelHeight = 1080;
 
 

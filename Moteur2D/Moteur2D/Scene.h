@@ -7,6 +7,7 @@
 enum SceneState { // enum for state of scene
 	menu,
 	play,
+	play2,
 	quit,
 };
 
