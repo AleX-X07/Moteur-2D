@@ -75,6 +75,9 @@
     <ClCompile Include="setTime.cpp">
       <Filter>Fichiers sources\Tool</Filter>
     </ClCompile>
+    <ClCompile Include="Play2.cpp">
+      <Filter>Fichiers sources\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
@@ -109,6 +112,9 @@
     </ClInclude>
     <ClInclude Include="setTime.h">
       <Filter>Fichiers d%27en-tête\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="Play2.h">
+      <Filter>Fichiers d%27en-tête\Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

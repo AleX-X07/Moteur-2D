@@ -57,7 +57,8 @@ void Parallax::render()
         float normalizedOffset = layer.offsetX;
         if (texW > 0) {
             normalizedOffset = fmod(layer.offsetX, texW);
-            if (normalizedOffset > 0) normalizedOffset -= texW;
+            if (normalizedOffset > 0) 
+                normalizedOffset -= texW;
         }
 
         float startX = normalizedOffset;

@@ -4,6 +4,7 @@
 #include "Scene.h"
 #include "Menu.h"
 #include "Play.h"
+#include "Play2.h"
 
 class SceneManager
 {
@@ -16,6 +17,7 @@ public:
 
 	Scene* myMenu;
 	Scene* myPlay;
+	Scene* myPlay2;
 
 	LoadRessources* MyRessources;
 

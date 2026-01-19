@@ -7,6 +7,7 @@ SceneManager::SceneManager(SDL_Renderer* rend, SDL_Window* win) {
 
 	myMenu = new Menu(renderer,window);
 	myPlay = new Play(renderer,window);
+	myPlay2 = new Play2(renderer, window);
 
 	MyRessources = new LoadRessources(rend);
 	MyRessources->loadAllTexture();
@@ -30,26 +31,32 @@ void SceneManager::manageState(SDL_Event& event, keys* _myKeys) {
 	else if (currentState == SceneState::play) {
 		myPlay->nextScene(currentState, event, _myKeys);
 	}
+	else if (currentState == SceneState::play2) {
+		myPlay2->nextScene(currentState, event, _myKeys);
+	}
 }
 
 void SceneManager::displayState() {
 	switch (currentState)
 	{
 	case(SceneState::menu):
-	{
 		myMenu->displayScene(*MyRessources);
-	}
-	break;
+		break;
 	case(SceneState::play):
-	{
 		myPlay->displayScene(*MyRessources);
+		break;
+	case(SceneState::play2):
+		myPlay2->displayScene(*MyRessources);
+		break;
 	}
-	break;
-	}
+
 }
 
 void SceneManager::updateState(const bool* keys, float dt) {
 	if (currentState == SceneState::play) {
 		static_cast<Play*>(myPlay)->update(keys, dt);
+	}
+	else if (currentState == SceneState::play2) {
+		static_cast<Play*>(myPlay2)->update(keys, dt);
 	}
 }

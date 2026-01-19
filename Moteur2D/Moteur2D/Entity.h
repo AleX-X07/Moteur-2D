@@ -2,6 +2,7 @@
 #include <vector>
 #include <SDL3/SDL.h>
 #include<SDL3_image/SDL_image.h>
+#include "globals.h"
 
 class Camera;
 
@@ -69,6 +70,7 @@ public:
 	void updateAnimation(float dt);
 
 	void collision(const std::vector<Entity*>& colliders);
+	void respawn();
 
 	// Render/Update
 	void render(Camera& camera);
