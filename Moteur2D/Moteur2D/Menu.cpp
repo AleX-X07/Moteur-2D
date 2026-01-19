@@ -8,22 +8,6 @@ Menu::~Menu() {
 
 }
 
-bool isClicked(SDL_Event& event, SDL_FRect& buttonRect) {
-	if (event.type == SDL_EVENT_MOUSE_BUTTON_DOWN) {
-		if (event.button.button == SDL_BUTTON_LEFT) {
-			float mouseX = event.button.x;
-			float mouseY = event.button.y;
-			if (mouseX >= buttonRect.x &&
-				mouseX <= buttonRect.x + buttonRect.w &&
-				mouseY >= buttonRect.y &&
-				mouseY <= buttonRect.y + buttonRect.h) {
-				return true;
-			}
-		}
-	}
-	return false;
-}
-
 void Menu::addButton(SDL_Texture* MyTexture, float x, float y, float scale, SceneState _MyButtonType) {
 	Button MyButton(window, renderer, MyTexture, x, y, scale);
 	MyButton.MyButtonType = _MyButtonType;

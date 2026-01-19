@@ -22,3 +22,4 @@ void Play::nextScene(SceneState& currentScene, SDL_Event& event, keys* _myKeys) 
 		currentScene = quit;
 	}
 }
+
