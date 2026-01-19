@@ -33,11 +33,11 @@ void Parallax::update(float playerX, float playerY)
             while (layer.offsetX <= -texW) layer.offsetX += texW;
         }
 
-        /*if (texH > 0)
+        if (texH > 0)
         {
             while (layer.offsetY >= texH) layer.offsetY -= texH;
             while (layer.offsetY <= -texH) layer.offsetY += texH;
-        }*/
+        }
     }
 }
 
