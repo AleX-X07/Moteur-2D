@@ -4,7 +4,7 @@ Play::Play(SDL_Renderer* rend, SDL_Window* win) {
 	renderer = rend;
 	window = win;
 	Player = nullptr;
-	camera = new Camera(1920, 1080, 1500, 1080);
+	camera = new Camera();
 	int w, h;
 	SDL_GetWindowSize(win, &w, &h);
 	playerParallax = new Parallax(rend, w ,h);
@@ -66,7 +66,7 @@ void Play::displayScene(LoadRessources& _MyRessources) {
 		isCreatedGRound = true;
 	}
 	SDL_RenderClear(renderer);
-	playerParallax->render();
+	playerParallax->render(*camera);
 
 	for (auto ground : grounds) {
 		ground->render(*camera);
@@ -80,7 +80,6 @@ void Play::update(const bool* keys, float dt) {
 		playerParallax->update(Player->rect.x, Player->rect.y);
 		Player->update(keys, dt);
 		Player->collision(grounds);
-		//Player->collisionHorizontal(grounds);
 		Player->updateState(keys);
 		Player->updateAnimation(dt);
 		camera->setCameraOnPlayer(*Player);

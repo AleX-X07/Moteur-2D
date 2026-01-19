@@ -1,11 +1,6 @@
 #include "Camera.h"
-Camera::Camera(float sw, float sh, float lw, float lh) {
-
-    screenWidth = sw;
-    screenHeight = sh;
-    levelWidth = lw;
-    levelHeight = lh;
-    sizeC = { 0,0,sw,sh };
+Camera::Camera() {
+    sizeC = { 0,0,screenWidth,screenHeight };
 }
 
 void Camera::setCameraOnPlayer(Entity& player) {
@@ -22,8 +17,10 @@ void Camera::setCameraOnPlayer(Entity& player) {
     // Clamp inside world
     if (sizeC.x < 0) sizeC.x = 0;
     if (sizeC.y < 0) sizeC.y = 0;
-    if (sizeC.x + sizeC.w > levelWidth) sizeC.x = levelWidth - sizeC.w;
-    if (sizeC.y + sizeC.h > levelHeight) sizeC.y = levelHeight - sizeC.h;
+    if (sizeC.x + sizeC.w > levelWidth) 
+        sizeC.x = levelWidth - sizeC.w;
+    if (sizeC.y + sizeC.h > levelHeight) 
+        sizeC.y = levelHeight - sizeC.h;
 }
 
 

@@ -1,9 +1,9 @@
 #include "Parallax.h"
+#include "Camera.h"
+
 
 Parallax::Parallax(SDL_Renderer* _renderer, float screenW, float screenH) {
     renderer = _renderer;
-    screenWidth = screenW;
-    screenHeight = screenH;
 }
 
 
@@ -14,6 +14,10 @@ void Parallax::addLayer(SDL_Texture* tex, float speed)
     layer.speed = speed;
     layer.offsetX = 0.0f;
     layer.offsetY = 0.0f;
+    float w;
+    float h;
+    SDL_GetTextureSize(tex, &w, &h);
+    layer.rect = { 0,0,w,h };
     layers.push_back(layer);
 }
 
@@ -22,53 +26,32 @@ void Parallax::update(float playerX, float playerY)
     for (auto& layer : layers)
     {
         layer.offsetX = -playerX * layer.speed;
-
-        float texW = 0;
-        float texH = 0;
-        SDL_GetTextureSize(layer.texture, &texW, &texH);
-
-        if (texW > 0)
-        {
-            while (layer.offsetX >= texW) layer.offsetX -= texW;
-            while (layer.offsetX <= -texW) layer.offsetX += texW;
-        }
-
-        if (texH > 0)
-        {
-            while (layer.offsetY >= texH) layer.offsetY -= texH;
-            while (layer.offsetY <= -texH) layer.offsetY += texH;
-        }
     }
 }
 
-void Parallax::render()
-{
+void Parallax::render(Camera& camera)
+{   
     for (auto& layer : layers)
     {
-        if (!layer.texture) continue;
+        SDL_FRect screenRect = camera.worldToScreen(layer.rect);
 
-        float texW = 0;
-        float texH = 0;
-        SDL_GetTextureSize(layer.texture, &texW, &texH);
+        layer.offsetX = -camera.sizeC.x;
 
-        /*if (texW == 0 || texH == 0)
-            continue;*/
-
-        float normalizedOffset = layer.offsetX;
-        if (texW > 0) {
-            normalizedOffset = fmod(layer.offsetX, texW);
-            if (normalizedOffset > 0) normalizedOffset -= texW;
+        float normalizedOffset = layer.offsetX - (camera.sizeC.x * layer.speed);
+        if (layer.rect.w > 0) {
+            normalizedOffset = fmod(layer.offsetX, layer.rect.w);
+            if (normalizedOffset > 0) normalizedOffset -= layer.rect.w;
         }
 
         float startX = normalizedOffset;
 
-        for (float x = startX; x < screenWidth; x += texW)
+        for (float x = startX; x < levelWidth; x += layer.rect.w)
         {
             SDL_FRect dst{
                 x,
-                screenHeight - texH,
-                texW,
-                texH
+                levelHeight - layer.rect.h/1.5 - camera.sizeC.y * layer.speed,
+                layer.rect.w,
+                layer.rect.h
             };
 
             SDL_RenderTexture(renderer, layer.texture, nullptr, &dst);
