@@ -24,4 +24,5 @@ public:
 
 	void manageState(SDL_Event& event, keys* _myKeys);
 	void displayState();
+	void updateState(const bool* keys, float dt);
 };

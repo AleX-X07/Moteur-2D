@@ -74,6 +74,8 @@ int main() {
 			}
 		}
 
+
+		sM.updateState(keys, dt);
 		sM.displayState();
 
 		/*SDL_GetWindowSize(window, &w, &h);

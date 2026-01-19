@@ -47,3 +47,9 @@ void SceneManager::displayState() {
 	break;
 	}
 }
+
+void SceneManager::updateState(const bool* keys, float dt) {
+	if (currentState == SceneState::play) {
+		static_cast<Play*>(myPlay)->update(keys, dt);
+	}
+}

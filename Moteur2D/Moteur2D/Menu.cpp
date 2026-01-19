@@ -33,7 +33,7 @@ void Menu::addButton(SDL_Texture* MyTexture, float x, float y, float scale, Scen
 
 void Menu::displayScene(LoadRessources& _MyRessources) {
 
-	SDL_SetRenderDrawColor(renderer, 0, 255, 0, 0);
+	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 	SDL_RenderClear(renderer);
 	if (!buttonsCreated) {
 		addButton(_MyRessources.play_button, 0, -100, 10, play);

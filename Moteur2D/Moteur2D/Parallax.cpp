@@ -28,7 +28,8 @@ void Parallax::update(float playerX, float playerY)
         layer.offsetX = -playerX * layer.speed;
 
         // Wrap l'offset pour éviter les gros nombres
-        float texW = 0, texH = 0;
+        float texW = 0;
+        float texH = 0;
         SDL_GetTextureSize(layer.texture, &texW, &texH);
 
         if (texW > 0)
@@ -51,7 +52,8 @@ void Parallax::render()
     {
         if (!layer.texture) continue;
 
-        float texW = 0, texH = 0;
+        float texW = 0;
+        float texH = 0;
         SDL_GetTextureSize(layer.texture, &texW, &texH);
 
         if (texW == 0 || texH == 0)
@@ -71,9 +73,9 @@ void Parallax::render()
         {
             SDL_FRect dst{
                 x,
-                static_cast<float>(screenHeight - texH),
-                static_cast<float>(texW),
-                static_cast<float>(texH)
+                screenHeight - texH,
+                texW,
+                texH
             };
 
             SDL_RenderTexture(renderer, layer.texture, nullptr, &dst);
