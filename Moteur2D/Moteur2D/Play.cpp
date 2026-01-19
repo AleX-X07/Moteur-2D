@@ -5,6 +5,9 @@ Play::Play(SDL_Renderer* rend, SDL_Window* win) {
 	window = win;
 	Player = nullptr;
 	camera = new Camera(1920, 1080, 1500, 1080);
+	int w, h;
+	SDL_GetWindowSize(win, &w, &h);
+	playerParallax = new Parallax(rend, w ,h);
 }
 
 Play::~Play() {
@@ -13,6 +16,7 @@ Play::~Play() {
 		delete ground;
 	}
 	delete camera;
+	delete playerParallax;
 }
 
 void Play::createGameObjects(LoadRessources& _MyRessources) {
@@ -55,9 +59,15 @@ void Play::createGameObjects(LoadRessources& _MyRessources) {
 void Play::displayScene(LoadRessources& _MyRessources) {
 	if (!isCreatedGRound) {
 		createGameObjects(_MyRessources);
+		playerParallax->addLayer(_MyRessources.bg_layer1, 0.1f); 
+		playerParallax->addLayer(_MyRessources.bg_layer2, 0.3f); 
+		playerParallax->addLayer(_MyRessources.bg_layer3, 0.5f); 
+		playerParallax->addLayer(_MyRessources.bg_layer4, 0.8f); 
 		isCreatedGRound = true;
 	}
 	SDL_RenderClear(renderer);
+	playerParallax->render();
+
 	for (auto ground : grounds) {
 		ground->render(*camera);
 	}
@@ -67,6 +77,7 @@ void Play::displayScene(LoadRessources& _MyRessources) {
 
 void Play::update(const bool* keys, float dt) {
 	if (Player) {
+		playerParallax->update(Player->rect.x, Player->rect.y);
 		Player->update(keys, dt);
 		Player->collision(grounds);
 		//Player->collisionHorizontal(grounds);
