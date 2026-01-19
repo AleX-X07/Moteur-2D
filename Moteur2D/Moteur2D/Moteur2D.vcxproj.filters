@@ -37,12 +37,15 @@
     <Filter Include="Fichiers sources\Scene\Menu">
       <UniqueIdentifier>{2de05f00-f750-41a3-b14f-322865b2eaee}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\Entity">
+      <UniqueIdentifier>{492cc6a6-aefa-42d0-afc1-ecd4572a0d76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Entity">
+      <UniqueIdentifier>{6d2fac4b-eeb2-43e7-a76c-2d54e887b426}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
@@ -75,11 +78,11 @@
     <ClCompile Include="setTime.cpp">
       <Filter>Fichiers sources\Tool</Filter>
     </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Fichiers sources\Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Entity.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>Fichiers d%27en-tête\Scene</Filter>
     </ClInclude>
@@ -109,6 +112,9 @@
     </ClInclude>
     <ClInclude Include="setTime.h">
       <Filter>Fichiers d%27en-tête\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Fichiers d%27en-tête\Entity</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
