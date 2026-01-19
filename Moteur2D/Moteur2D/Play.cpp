@@ -66,6 +66,9 @@ void Play::displayScene(LoadRessources& _MyRessources) {
 		ground->render(*camera);
 	}
 	Player->render(*camera);
+
+	
+	SDL_RenderPresent(renderer);
 }
 
 void Play::update(const bool* keys, float dt) {
@@ -76,5 +79,10 @@ void Play::update(const bool* keys, float dt) {
 		Player->updateState(keys);
 		Player->updateAnimation(dt);
 		camera->setCameraOnPlayer(*Player);
+}
+
+void Play::nextScene(SceneState& currentScene, SDL_Event& event, keys* _myKeys) {
+	if (_myKeys->myKeys[SDL_SCANCODE_SPACE]) {
+		currentScene = quit;
 	}
 }

@@ -7,12 +7,13 @@
 #include "LoadRessources.h"
 #include "Parallax.h"
 #include "SceneManager.h"
+#include "globals.h"
 
 int main() {
 	int screenWidth = 1920;
 	int screenHeight = 1080;
 
-	int levelWidth = 1500;
+	int levelWidth = 1920;
 	int levelHeight = 1080;
 
 	// Creation Window
@@ -47,26 +48,43 @@ int main() {
 	int w;
 	int h;
 
-	Play playScene(renderer);
-	playScene.createGameObjects(MyRessources);
-	SceneManager sM = SceneManager(renderer);
+	//SceneManager
+	SceneManager sM = SceneManager(renderer,window);
+	keys myKeys;
 
 	//GameLoop
 	bool loopTrue = true;
 	while (loopTrue) {
 
-		SDL_Event event;
-		while (SDL_PollEvent(&event)) {
-			if (event.type == SDL_EVENT_QUIT) 
-				loopTrue = false;
-		}
-
 		float dt = (SDL_GetTicks() - last_time) / 1000.0f;
 		last_time = SDL_GetTicks();
 		frameStart = SDL_GetTicks();
-
-
+		
 		const bool* keys = SDL_GetKeyboardState(nullptr);
+
+		myKeys.initKeys(keys);
+
+		SDL_Event event;
+		while (SDL_PollEvent(&event)) {
+
+			sM.manageState(event, &myKeys);
+
+			if (sM.currentState == SceneState::quit) {
+				loopTrue = false;
+			}
+		}
+
+		sM.displayState();
+
+		/*SDL_GetWindowSize(window, &w, &h);
+		
+		Player.collisionHorizontal(grounds);
+		Player.collision(grounds);
+
+		Player.update(keys, dt);
+		Player.updateState(keys);
+		Player.updateAnimation(dt);
+		parallax.update(Player.rect.x, Player.rect.y);
 
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderClear(renderer);
@@ -76,7 +94,10 @@ int main() {
 		playScene.update(keys, dt);
 		playScene.displayScene(MyRessources);
 
+
 		SDL_RenderPresent(renderer);
+		SDL_RenderPresent(renderer);*/
+
 
 		frameTime = SDL_GetTicks() - frameStart;
 

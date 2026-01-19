@@ -30,8 +30,12 @@ void LoadRessources::loadAllTexture() {
     loadTexture("assets/BG_layer2.png", bg_layer2);
     loadTexture("assets/BG_layer3.png", bg_layer3);
     loadTexture("assets/BG_layer4.png", bg_layer4);
-    
+    loadTexture("assets/Menu/play.png", play_button);
+    SDL_SetTextureScaleMode(play_button, SDL_SCALEMODE_NEAREST);
+    loadTexture("assets/Menu/exit.png", exit_button);
+    SDL_SetTextureScaleMode(exit_button, SDL_SCALEMODE_NEAREST);
 }
+
 // Destructor
 LoadRessources::~LoadRessources() {
     // Destroy all texture

@@ -19,5 +19,4 @@ public:
     void createGameObjects(LoadRessources& _MyRessources);
     void displayScene(LoadRessources& _MyRessources) override;
 	void update(const bool* keys, float dt);
-
 };

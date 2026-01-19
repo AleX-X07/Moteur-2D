@@ -10,13 +10,7 @@ class SceneManager
 public:
 
 	SDL_Renderer* renderer;
-
-	const bool* keys;
-
-	enum class SceneState {
-		menu,
-		play,
-	};
+	SDL_Window* window;
 
 	SceneState currentState;
 
@@ -25,9 +19,9 @@ public:
 
 	LoadRessources* MyRessources;
 
-	SceneManager(SDL_Renderer* rend);
+	SceneManager(SDL_Renderer* rend, SDL_Window* win);
 	~SceneManager();
 
-	void initKeys(const bool* _keys);
-	void manageState();
+	void manageState(SDL_Event& event, keys* _myKeys);
+	void displayState();
 };

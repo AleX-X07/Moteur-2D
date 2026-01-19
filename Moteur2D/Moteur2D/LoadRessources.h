@@ -16,6 +16,8 @@ public:
 	SDL_Texture* bg_layer2; 
 	SDL_Texture* bg_layer3;
 	SDL_Texture* bg_layer4;
+	SDL_Texture* play_button;
+	SDL_Texture* exit_button;
 
 	// Constructor
 	LoadRessources(SDL_Renderer* rend);
