@@ -9,6 +9,14 @@ LoadRessources::LoadRessources(SDL_Renderer* rend) : renderer(rend) {
     bg_layer2 = nullptr;
     bg_layer3 = nullptr;
     bg_layer4 = nullptr;
+    
+    background_1 = nullptr;
+    background_2 = nullptr;
+    background_3 = nullptr;
+    background_4 = nullptr;
+    background_5 = nullptr;
+    background_6 = nullptr;
+
 }
 
 // Load one texture
@@ -34,28 +42,23 @@ void LoadRessources::loadAllTexture() {
     SDL_SetTextureScaleMode(play_button, SDL_SCALEMODE_NEAREST);
     loadTexture("assets/Menu/exit.png", exit_button);
     SDL_SetTextureScaleMode(exit_button, SDL_SCALEMODE_NEAREST);
+
+    loadTexture("assets/background/pixel-frame-0.png", background_1);
+    loadTexture("assets/background/pixel-frame-0_1.png", background_2);
+    loadTexture("assets/background/pixel-frame-0_2.png", background_3);
+    loadTexture("assets/background/pixel-frame-0_3.png", background_4);
+    loadTexture("assets/background/pixel-frame-0_4.png", background_5);
+    loadTexture("assets/background/pixel-frame-0_5.png", background_6);
+
+    mesTexture = { player, ground, bg_layer1, bg_layer2, bg_layer3, bg_layer4 , background_1, background_2, background_3, background_4, background_5, background_6, play_button, exit_button };
 }
 
 // Destructor
 LoadRessources::~LoadRessources() {
     // Destroy all texture
-    if (player) {
-        SDL_DestroyTexture(player);
-    }
-
-    if (ground) {
-        SDL_DestroyTexture(ground);
-    }
-    if (bg_layer1) {
-        SDL_DestroyTexture(bg_layer1);
-    }
-    if (bg_layer2) {
-        SDL_DestroyTexture(bg_layer2);
-    }
-    if (bg_layer3) {
-        SDL_DestroyTexture(bg_layer3);
-    }
-    if (bg_layer4) {
-        SDL_DestroyTexture(bg_layer4);
+    for (auto t : mesTexture) {
+        if (t) {
+            SDL_DestroyTexture(t);
+        }
     }
 }

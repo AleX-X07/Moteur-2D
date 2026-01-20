@@ -19,6 +19,15 @@ public:
 	SDL_Texture* play_button;
 	SDL_Texture* exit_button;
 
+	SDL_Texture* background_1;
+	SDL_Texture* background_2;
+	SDL_Texture* background_3;
+	SDL_Texture* background_4;
+	SDL_Texture* background_5;
+	SDL_Texture* background_6;
+
+	std::vector<SDL_Texture*> mesTexture;
+
 	// Constructor
 	LoadRessources(SDL_Renderer* rend);
 

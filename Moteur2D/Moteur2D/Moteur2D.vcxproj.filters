@@ -81,6 +81,9 @@
     <ClCompile Include="Entity.cpp">
       <Filter>Fichiers sources\Entity</Filter>
     </ClCompile>
+    <ClCompile Include="Play2.cpp">
+      <Filter>Fichiers sources\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -115,6 +118,9 @@
     </ClInclude>
     <ClInclude Include="Entity.h">
       <Filter>Fichiers d%27en-tête\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Play2.h">
+      <Filter>Fichiers d%27en-tête\Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
