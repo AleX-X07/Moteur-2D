@@ -16,7 +16,7 @@ struct keys // struct for the keys
 	void initKeys(const bool* _keys);
 };
 
-struct physics 
+struct Physics 
 {
     float speed;
     float jumpForce;
@@ -24,4 +24,5 @@ struct physics
     float velocityX;
     float velocityY;
     float cooldownJump;
+    bool isGround;
 };

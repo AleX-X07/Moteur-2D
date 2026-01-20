@@ -20,7 +20,7 @@ public:
 	virtual ~GameObject();
 
 	bool isColliding(GameObject& gameObject);
-	virtual void render(Camera& camera);
 
-	virtual void update(float dt) = 0;
+	virtual void render(Camera& camera);
+	virtual void update(float dt);
 };

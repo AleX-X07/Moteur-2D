@@ -15,10 +15,15 @@ enum class PlayerState {
 class Player : public GameObject
 {
 private:
-    physics myPhysics;
-    bool isGround;
+    Physics myPhysics;
+    PlayerState currentState;
+
 public:
-    Player() : GameObject() {};
-    //virtual ~Player() override;
-}; 
+    Player();
+    Player(SDL_Renderer* ren, SDL_Texture* tex, float x, float y, float w, float h, float _speed);
+    virtual ~Player();
+
+    virtual void render(Camera& camera);
+    virtual void update(float dt) override;
+};
 

@@ -32,3 +32,7 @@ void GameObject::render(Camera& camera) {
 		SDL_RenderTexture(renderer, texture, nullptr, &screenRect);
 	}
 }
+
+void GameObject::update(float dt) {
+
+}
