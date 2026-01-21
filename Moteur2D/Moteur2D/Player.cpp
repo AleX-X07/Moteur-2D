@@ -56,6 +56,50 @@ void Player::updateAnimation(float dt) {
     }
 }
 
+void Player::updateState(const bool* keys) {
+    previousState = currentState;
+    bool _movingLeft = keys[SDL_SCANCODE_LEFT] || keys[SDL_SCANCODE_A];
+    bool _movingRight = keys[SDL_SCANCODE_RIGHT] || keys[SDL_SCANCODE_D];
+
+    if (onGround) {
+        if (_movingLeft && !_movingRight) {
+            currentState = PlayerState::movingLeft;
+        }
+        else if (_movingRight && !_movingLeft) {
+            currentState = PlayerState::movingRight;
+        }
+        else {
+            currentState = PlayerState::idle;
+        }
+    }
+    else { // Seulement si on n'est PAS au sol
+        if (_movingLeft && !_movingRight) {
+            if (velocityY < 0)
+                currentState = PlayerState::jumpingLeft;
+            else
+                currentState = PlayerState::fallingLeft;
+        }
+        else if (_movingRight && !_movingLeft) {
+            if (velocityY < 0)
+                currentState = PlayerState::jumpingRight;
+            else
+                currentState = PlayerState::fallingRight;
+        }
+        else {
+            if (velocityY < 0)
+                currentState = PlayerState::jumpingRight;
+            else
+                currentState = PlayerState::fallingRight;
+        }
+    }
+
+    if (currentState != previousState) {
+        currentFrame = 0;
+        animationTimer = 0.0f;
+    }
+
+}
+
 void Player::colliders() {
     myPhysics.onGround = false;
 
@@ -175,4 +219,5 @@ void Player::update(const bool* keys, float dt) {
 
     respawn();
     clampToScreen();
+    updateAnimation(dt);
 }

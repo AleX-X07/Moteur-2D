@@ -27,6 +27,7 @@ public:
     void respawn();
     void clampToScreen();
     void updateAnimation(float dt);
+    void updateState(const bool* keys);
 
     virtual void colliders() override;
     virtual void render(Camera& camera) override;
