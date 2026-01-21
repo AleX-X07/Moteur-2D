@@ -1,5 +1,7 @@
 #include "globals.h"
 
+std::vector<GameObject*> myGameObject;
+
 keys::keys(){
 	myKeys = nullptr;
 }

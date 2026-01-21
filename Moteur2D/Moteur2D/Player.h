@@ -2,7 +2,7 @@
 
 #include "GameObject.h"
 
-enum class PlayerState {
+enum class PlayerStateOpti {
     idle,
     movingLeft,
     movingRight,
@@ -16,14 +16,20 @@ class Player : public GameObject
 {
 private:
     Physics myPhysics;
-    PlayerState currentState;
+    PlayerStateOpti currentState;
+    Animation myAnimation;
 
 public:
     Player();
     Player(SDL_Renderer* ren, SDL_Texture* tex, float x, float y, float w, float h, float _speed);
     virtual ~Player();
 
-    virtual void render(Camera& camera);
-    virtual void update(float dt) override;
+    void respawn();
+    void clampToScreen();
+    void updateAnimation(float dt);
+
+    virtual void colliders() override;
+    virtual void render(Camera& camera) override;
+    virtual void update(const bool* keys, float dt) override;
 };
 

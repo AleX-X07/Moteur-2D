@@ -21,6 +21,9 @@ public:
 
 	bool isColliding(GameObject& gameObject);
 
+	SDL_FRect& getRect();
+
+	virtual void colliders();
 	virtual void render(Camera& camera);
-	virtual void update(float dt);
+	virtual void update(const bool* keys, float dt);
 };

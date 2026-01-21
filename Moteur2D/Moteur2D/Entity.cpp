@@ -123,8 +123,9 @@ void Entity::collision(const std::vector<Entity*>& colliders) {
     onGround = false;
     
     for (auto c : colliders) {
-        if (!SDL_HasRectIntersectionFloat(&rect, &c->rect))
+        if (!isColliding(*c)) {
             continue;
+        }
 
         //x, y, w, h
         // left, right, top, bottom
@@ -163,8 +164,8 @@ void Entity::collision(const std::vector<Entity*>& colliders) {
     }
 }
 
-void Entity::respawn(){
-    if (rect.y >= levelHeight){
+void Entity::respawn() {
+    if (rect.y >= levelHeight) {
         rect.y = 850;
         rect.x = 0;
     }

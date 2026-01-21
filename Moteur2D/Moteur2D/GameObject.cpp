@@ -25,6 +25,14 @@ bool GameObject::isColliding(GameObject& gameObject) {
 	return true;
 }
 
+SDL_FRect& GameObject::getRect() {
+	return rect;
+}
+
+void GameObject::colliders() {
+	
+}
+
 void GameObject::render(Camera& camera) {
 	SDL_FRect screenRect = camera.worldToScreen(rect);
 
@@ -33,6 +41,6 @@ void GameObject::render(Camera& camera) {
 	}
 }
 
-void GameObject::update(float dt) {
+void GameObject::update(const bool* keys, float dt) {
 
 }
