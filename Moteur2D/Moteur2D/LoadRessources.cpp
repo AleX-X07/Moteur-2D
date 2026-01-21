@@ -17,6 +17,8 @@ LoadRessources::LoadRessources(SDL_Renderer* rend) : renderer(rend) {
     background_5 = nullptr;
     background_6 = nullptr;
 
+    play_button = nullptr;
+    exit_button = nullptr;
 }
 
 // Load one texture
