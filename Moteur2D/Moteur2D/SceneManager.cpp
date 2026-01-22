@@ -17,11 +17,9 @@ SceneManager::~SceneManager() {
 
 	delete myMenu;
 	delete myPlay;
-	myMenu = nullptr;
-	myPlay = nullptr;
-
+	delete myPlay2;
 	delete MyRessources;
-	MyRessources = nullptr;
+
 }
 
 void SceneManager::manageState(SDL_Event& event, keys* _myKeys) {
@@ -49,7 +47,6 @@ void SceneManager::displayState() {
 		myPlay2->displayScene(*MyRessources);
 		break;
 	}
-
 }
 
 void SceneManager::updateState(const bool* keys, float dt) {

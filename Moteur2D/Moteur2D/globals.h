@@ -1,11 +1,13 @@
 #pragma once
+#include <vector>
+
+class GameObject;
 
 const int screenWidth = 1920;
 const int screenHeight = 1080;
 
 const int levelWidth = 1500;
 const int levelHeight = 1080;
-
 
 struct keys // struct for the keys
 {
@@ -16,3 +18,23 @@ struct keys // struct for the keys
 	void initKeys(const bool* _keys);
 };
 
+struct Physics 
+{
+    float speed;
+    float jumpForce;
+    float gravity;
+    float velocityX;
+    float velocityY;
+    float cooldownJump;
+    bool onGround;
+	float nowTimeJump;
+};
+
+struct Animation {
+	int currentFrame;
+	float animationTimer;
+	float frameDuration;
+	int maxFrames;
+	float spriteWidth;
+	float spriteHeight;
+};

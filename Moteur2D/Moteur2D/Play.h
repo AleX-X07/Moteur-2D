@@ -2,15 +2,17 @@
 
 #include <vector>
 
-#include "Entity.h"
+#include "globals.h"
 #include "Scene.h"
 #include "Camera.h"
 #include "Parallax.h"
+#include "GameObject.h"
+#include "Player.h"
 
 class Play : public Scene{
 private:
-    Entity* Player;
-    std::vector<Entity*> grounds;
+    Player* myPlayer;
+    std::vector<GameObject*> gameObject;
 	Camera* camera;
     bool isCreatedGRound = false;
     Parallax* playerParallax;

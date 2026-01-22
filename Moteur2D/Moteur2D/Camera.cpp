@@ -3,7 +3,7 @@ Camera::Camera() {
     sizeC = { 0,0,screenWidth,screenHeight };
 }
 
-void Camera::setCameraOnPlayer(Entity& player) {
+void Camera::setCameraOnPlayer(Player& player) {
 
     float viewW = screenWidth / zoom;
     float viewH = screenHeight / zoom;
@@ -11,8 +11,8 @@ void Camera::setCameraOnPlayer(Entity& player) {
     sizeC.w = viewW;
     sizeC.h = viewH;
 
-    sizeC.x = (player.rect.x + player.rect.w / 2) - viewW / 2;
-    sizeC.y = (player.rect.y + player.rect.h / 2) - viewH / 2;
+    sizeC.x = (player.getRect().x + player.getRect().w / 2) - viewW / 2;
+    sizeC.y = (player.getRect().y + player.getRect().h / 2) - viewH / 2;
 
     // Clamp inside world
     if (sizeC.x < 0) sizeC.x = 0;
