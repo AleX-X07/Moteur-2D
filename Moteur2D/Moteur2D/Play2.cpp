@@ -21,6 +21,8 @@ Play2::~Play2() {
 }
 
 void Play2::createGameObjects(LoadRessources& _MyRessources) {
+	camera->reset();
+
 	myPlayer = new Player(renderer, _MyRessources.player, 50, 820, 50, 50, 200.0f);
 
 	GameObject* Ground = new GameObject(renderer, _MyRessources.ground, 0, 880, 200, 250);
@@ -81,7 +83,7 @@ void Play2::nextScene(SceneState& currentScene, SDL_Event& event, keys* _myKeys)
 	if (_myKeys->myKeys[SDL_SCANCODE_ESCAPE]) {
 		currentScene = menu;
 	}
-	if (myPlayer->getRect().x <= 0) {
+	/*if (myPlayer->getRect().x <= 0) {
 		currentScene = play;
-	}
+	}*/
 }

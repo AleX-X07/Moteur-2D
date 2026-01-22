@@ -17,5 +17,6 @@ public:
 
 	void setCameraOnPlayer(Player& player);
 	SDL_FRect worldToScreen(SDL_FRect& worldRect) const;
+	void reset();
 };
 

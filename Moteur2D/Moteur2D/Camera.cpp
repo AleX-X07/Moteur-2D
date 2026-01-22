@@ -32,3 +32,7 @@ SDL_FRect Camera::worldToScreen(SDL_FRect& worldRect) const {
         worldRect.h * zoom
     };
 }
+
+void Camera::reset() {
+    sizeC = { 0, 0, screenWidth, screenHeight };
+}

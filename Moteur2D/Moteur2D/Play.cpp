@@ -20,6 +20,8 @@ Play::~Play() {
 }
 
 void Play::createGameObjects(LoadRessources& _MyRessources) {
+	camera->reset();
+
 	myPlayer = new Player(renderer, _MyRessources.player, 50, 820, 50, 50, 200.0f);
 
 	Enemy1 = new Enemy(_MyRessources.enemy, renderer, 850, 780, 30, 30, 50.0f);
