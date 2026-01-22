@@ -20,7 +20,6 @@ public:
     SDL_Renderer* renderer;
     Parallax(SDL_Renderer* rend, float sw, float sh);
     void addLayer(SDL_Texture* texture, float scrollSpeed);
-    void update(float playerX, float playerY);
     void render(Camera& camera);
     ~Parallax();
 };

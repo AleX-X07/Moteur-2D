@@ -29,6 +29,24 @@ void Play2::createGameObjects(LoadRessources& _MyRessources) {
 	GameObject* Ground1 = new GameObject(renderer, _MyRessources.ground, 300, 820, 100, 300);
 	gameObject.push_back(Ground1);
 
+	GameObject* Ground2 = new GameObject(renderer, _MyRessources.ground, 400, 760, 100, 300);
+	gameObject.push_back(Ground2);
+
+	GameObject* Ground3 = new GameObject(renderer, _MyRessources.ground, 500, 700, 100, 300);
+	gameObject.push_back(Ground3);
+
+	GameObject* Ground4 = new GameObject(renderer, _MyRessources.ground, 600, 640, 100, 50);
+	gameObject.push_back(Ground4);
+
+	GameObject* Ground5 = new GameObject(renderer, _MyRessources.ground, 400, 580, 100, 10);
+	gameObject.push_back(Ground5);
+
+	GameObject* Ground6 = new GameObject(renderer, _MyRessources.ground, 600, 520, 100, 10);
+	gameObject.push_back(Ground6);
+
+	GameObject* Ground7 = new GameObject(renderer, _MyRessources.ground, 400, 460, 100, 10);
+	gameObject.push_back(Ground7);
+
 }
 
 void Play2::displayScene(LoadRessources& _MyRessources) {
@@ -52,7 +70,6 @@ void Play2::displayScene(LoadRessources& _MyRessources) {
 
 void Play2::update(const bool* keys, float dt) {
 	if (myPlayer) {
-		playerParallax->update(myPlayer->getRect().x, myPlayer->getRect().y);
 		myPlayer->update(keys, dt);
 		myPlayer->colliders(gameObject);
 		myPlayer->updateState(keys);

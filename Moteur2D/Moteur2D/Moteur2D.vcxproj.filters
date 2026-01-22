@@ -90,6 +90,9 @@
     <ClCompile Include="Play2.cpp">
       <Filter>Fichiers sources\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Fichiers sources\Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -133,6 +136,9 @@
     </ClInclude>
     <ClInclude Include="Play2.h">
       <Filter>Fichiers d%27en-tête\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Fichiers d%27en-tête\Entity</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

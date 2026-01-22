@@ -7,7 +7,7 @@ Parallax::Parallax(SDL_Renderer* _renderer, float screenW, float screenH) {
 }
 
 
-void Parallax::addLayer(SDL_Texture* tex, float speed)
+void Parallax::addLayer(SDL_Texture* tex, float speed) 
 {
     ParallaxLayer layer;
     layer.texture = tex;
@@ -21,14 +21,6 @@ void Parallax::addLayer(SDL_Texture* tex, float speed)
     layers.push_back(layer);
 }
 
-void Parallax::update(float playerX, float playerY)
-{
-    for (auto& layer : layers)
-    {
-        layer.offsetX = -playerX * layer.speed;
-    }
-}
-
 void Parallax::render(Camera& camera)
 {   
     for (auto& layer : layers)
@@ -40,7 +32,9 @@ void Parallax::render(Camera& camera)
         float normalizedOffset = layer.offsetX - (camera.sizeC.x * layer.speed);
         if (layer.rect.w > 0) {
             normalizedOffset = fmod(layer.offsetX, layer.rect.w);
-            if (normalizedOffset > 0) normalizedOffset -= layer.rect.w;
+            if (normalizedOffset > 0) {
+                normalizedOffset -= layer.rect.w;
+            }
         }
 
         float startX = normalizedOffset;

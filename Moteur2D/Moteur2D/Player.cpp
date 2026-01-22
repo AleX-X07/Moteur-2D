@@ -27,7 +27,7 @@ Player::~Player() {
 
 void Player::respawn() {
         rect.y = 850;
-        rect.x = 0;
+        rect.x = 50;
 }
 
 void Player::clampToScreen() {

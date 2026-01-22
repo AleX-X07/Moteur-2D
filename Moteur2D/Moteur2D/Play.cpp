@@ -22,13 +22,13 @@ Play::~Play() {
 void Play::createGameObjects(LoadRessources& _MyRessources) {
 	myPlayer = new Player(renderer, _MyRessources.player, 50, 820, 50, 50, 200.0f);
 
-	Enemy1 = new Enemy(_MyRessources.enemy, renderer, 850, 780, 50, 50, 50.0f);
+	Enemy1 = new Enemy(_MyRessources.enemy, renderer, 850, 780, 30, 30, 50.0f);
 	Enemies.push_back(Enemy1);
 
-	Enemy2 = new Enemy(_MyRessources.enemy, renderer, 1300, 600, 50, 50, 50.0f);
+	Enemy2 = new Enemy(_MyRessources.enemy, renderer, 1300, 600, 30, 30, 50.0f);
 	Enemies.push_back(Enemy2);
 
-	Enemy3 = new Enemy(_MyRessources.enemy, renderer, 1150, 500, 50, 50, 50.0f);
+	Enemy3 = new Enemy(_MyRessources.enemy, renderer, 1150, 500, 30, 30, 50.0f);
 	Enemies.push_back(Enemy3);
 
 	auto Ground = new GameObject(renderer, _MyRessources.ground, 0, 880, 200 ,250);
@@ -78,30 +78,25 @@ void Play::displayScene(LoadRessources& _MyRessources) {
 		ground->render(*camera);
 	}
 	myPlayer->render(*camera);
-	Enemy1->render(*camera);
-	Enemy2->render(*camera);	
-	Enemy3->render(*camera);
+	for (auto e : Enemies) {
+		e->render(*camera);
+	}
 	SDL_RenderPresent(renderer);
 }
 
 void Play::update(const bool* keys, float dt) {
 
 	if (myPlayer) {
-		playerParallax->update(myPlayer->getRect().x, myPlayer->getRect().y);
 		myPlayer->update(keys, dt);
 		myPlayer->colliders(gameObject);
 		myPlayer->updateState(keys);
 		myPlayer->collideEnemies(Enemies);
 		camera->setCameraOnPlayer(*myPlayer);
 
-		Enemy1->update(keys, dt);
-		Enemy1->colliders(gameObject);
-
-		Enemy2->update(keys, dt);
-		Enemy2->colliders(gameObject);
-		Enemy3->update(keys, dt);
-		Enemy3->colliders(gameObject);
-
+		for (auto e : Enemies) {
+			e->update(keys, dt);
+			e->colliders(gameObject);
+		}
 	}
 }
 
