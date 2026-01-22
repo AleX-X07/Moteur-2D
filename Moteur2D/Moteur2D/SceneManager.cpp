@@ -54,6 +54,6 @@ void SceneManager::updateState(const bool* keys, float dt) {
 		static_cast<Play*>(myPlay)->update(keys, dt);
 	}
 	else if (currentState == SceneState::play2) {
-		static_cast<Play*>(myPlay2)->update(keys, dt);
+		static_cast<Play2*>(myPlay2)->update(keys, dt);
 	}
 }
