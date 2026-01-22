@@ -80,12 +80,13 @@ void Play::update(const bool* keys, float dt) {
 		myPlayer->colliders(gameObject);
 		myPlayer->updateState(keys);
 		camera->setCameraOnPlayer(*myPlayer);
+		std::cout << myPlayer->getRect().x << std::endl;
 	}
 }
 
 void Play::nextScene(SceneState& currentScene, SDL_Event& event, keys* _myKeys) {
 	if (_myKeys->myKeys[SDL_SCANCODE_ESCAPE]) 
 		currentScene = menu;
-	if (myPlayer->getRect().x == levelWidth)
+	if (myPlayer->getRect().x >= levelWidth)
 		currentScene = play2;
 }
