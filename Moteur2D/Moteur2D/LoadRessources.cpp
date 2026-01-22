@@ -17,6 +17,8 @@ LoadRessources::LoadRessources(SDL_Renderer* rend) : renderer(rend) {
     background_5 = nullptr;
     background_6 = nullptr;
 
+    background_menu = nullptr;
+
 }
 
 // Load one texture
@@ -42,6 +44,9 @@ void LoadRessources::loadAllTexture() {
     SDL_SetTextureScaleMode(play_button, SDL_SCALEMODE_NEAREST);
     loadTexture("assets/Menu/exit.png", exit_button);
     SDL_SetTextureScaleMode(exit_button, SDL_SCALEMODE_NEAREST);
+    loadTexture("assets/Menu/menu_bg.jpg", background_menu);
+    SDL_SetTextureScaleMode(background_menu, SDL_SCALEMODE_NEAREST);
+
 
     loadTexture("assets/background/pixel-frame-0.png", background_1);
     loadTexture("assets/background/pixel-frame-0_1.png", background_2);
@@ -50,7 +55,8 @@ void LoadRessources::loadAllTexture() {
     loadTexture("assets/background/pixel-frame-0_4.png", background_5);
     loadTexture("assets/background/pixel-frame-0_5.png", background_6);
 
-    mesTexture = { player, ground, bg_layer1, bg_layer2, bg_layer3, bg_layer4 , background_1, background_2, background_3, background_4, background_5, background_6, play_button, exit_button };
+
+    mesTexture = { player, ground, bg_layer1, bg_layer2, bg_layer3, bg_layer4 , background_1, background_2, background_3, background_4, background_5, background_6, play_button, exit_button, background_menu };
 }
 
 // Destructor

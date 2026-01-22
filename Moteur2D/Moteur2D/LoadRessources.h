@@ -26,6 +26,8 @@ public:
 	SDL_Texture* background_5;
 	SDL_Texture* background_6;
 
+	SDL_Texture* background_menu;
+
 	std::vector<SDL_Texture*> mesTexture;
 
 	// Constructor
