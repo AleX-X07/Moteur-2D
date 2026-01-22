@@ -36,5 +36,6 @@ public:
     virtual void colliders(std::vector<GameObject*>& gameObject) override;
     virtual void render(Camera& camera) override;
     virtual void update(const bool* keys, float dt) override;
+    void collideEnemies(std::vector<GameObject*>& _enemies);
 };
 

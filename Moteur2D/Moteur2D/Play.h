@@ -14,7 +14,10 @@ class Play : public Scene{
 private:
     Player* myPlayer;
     Enemy* Enemy1;
+    Enemy* Enemy2;
+    Enemy* Enemy3;
     std::vector<GameObject*> gameObject;
+    std::vector<GameObject*> Enemies;
 	Camera* camera;
     bool isCreatedGRound = false;
     Parallax* playerParallax;
