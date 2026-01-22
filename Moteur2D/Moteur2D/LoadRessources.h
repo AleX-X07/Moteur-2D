@@ -12,6 +12,7 @@ public:
 	//Texture
 	SDL_Texture* player;
 	SDL_Texture* ground;
+	SDL_Texture* enemy;
 	SDL_Texture* bg_layer1; 
 	SDL_Texture* bg_layer2; 
 	SDL_Texture* bg_layer3;

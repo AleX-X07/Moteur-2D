@@ -22,34 +22,36 @@ Play::~Play() {
 void Play::createGameObjects(LoadRessources& _MyRessources) {
 	myPlayer = new Player(renderer, _MyRessources.player, 50, 820, 50, 50, 200.0f);
 
-	GameObject* Ground = new GameObject(renderer, _MyRessources.ground, 0, 880, 200 ,250);
+	Enemy1 = new Enemy(_MyRessources.enemy, renderer, 850, 780, 50, 50, 50.0f);
+
+	auto Ground = new GameObject(renderer, _MyRessources.ground, 0, 880, 200 ,250);
 	gameObject.push_back(Ground);
 
-	GameObject* Ground1 = new GameObject(renderer, _MyRessources.ground, 300, 820, 100, 300);
+	auto Ground1 = new GameObject(renderer, _MyRessources.ground, 300, 820, 100, 300);
 	gameObject.push_back(Ground1);
 
-	GameObject* Ground2 = new GameObject(renderer, _MyRessources.ground, 500, 800, 150, 50);
+	auto Ground2 = new GameObject(renderer, _MyRessources.ground, 500, 800, 150, 50);
 	gameObject.push_back(Ground2);
 
-	GameObject* Ground3 = new GameObject(renderer, _MyRessources.ground, 700, 830, 200, 40);
+	auto Ground3 = new GameObject(renderer, _MyRessources.ground, 700, 830, 200, 40);
 	gameObject.push_back(Ground3);
 
-	GameObject* Ground4 = new GameObject(renderer, _MyRessources.ground, 1000, 780, 200, 120);
+	auto Ground4 = new GameObject(renderer, _MyRessources.ground, 1000, 780, 200, 120);
 	gameObject.push_back(Ground4);
 
-	GameObject* Ground5 = new GameObject(renderer, _MyRessources.ground, 1100, 730, 200, 150);
+	auto Ground5 = new GameObject(renderer, _MyRessources.ground, 1100, 730, 200, 150);
 	gameObject.push_back(Ground5);
 
-	GameObject* Ground6 = new GameObject(renderer, _MyRessources.ground, 890, 670, 140, 40);
+	auto Ground6 = new GameObject(renderer, _MyRessources.ground, 890, 670, 140, 40);
 	gameObject.push_back(Ground6);
 
-	GameObject* Ground7 = new GameObject(renderer, _MyRessources.ground, 830, 620, 100, 40);
+	auto Ground7 = new GameObject(renderer, _MyRessources.ground, 830, 620, 100, 40);
 	gameObject.push_back(Ground7);
 
-	GameObject* Ground8 = new GameObject(renderer, _MyRessources.ground, 1050, 580, 200, 20);
+	auto Ground8 = new GameObject(renderer, _MyRessources.ground, 1050, 580, 200, 20);
 	gameObject.push_back(Ground8);
 
-	GameObject* Ground9 = new GameObject(renderer, _MyRessources.ground, 1350, 550, 200, 600);
+	auto Ground9 = new GameObject(renderer, _MyRessources.ground, 1350, 550, 200, 600);
 	gameObject.push_back(Ground9);
 }
 
@@ -69,6 +71,7 @@ void Play::displayScene(LoadRessources& _MyRessources) {
 		ground->render(*camera);
 	}
 	myPlayer->render(*camera);
+	Enemy1->render(*camera);
 	SDL_RenderPresent(renderer);
 }
 
@@ -80,6 +83,8 @@ void Play::update(const bool* keys, float dt) {
 		myPlayer->colliders(gameObject);
 		myPlayer->updateState(keys);
 		camera->setCameraOnPlayer(*myPlayer);
+		Enemy1->update(keys, dt);
+		Enemy1->colliders(gameObject);
 	}
 }
 

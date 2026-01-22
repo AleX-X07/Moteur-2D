@@ -8,10 +8,12 @@
 #include "Parallax.h"
 #include "GameObject.h"
 #include "Player.h"
+#include "Enemy.h"
 
 class Play : public Scene{
 private:
     Player* myPlayer;
+    Enemy* Enemy1;
     std::vector<GameObject*> gameObject;
 	Camera* camera;
     bool isCreatedGRound = false;
