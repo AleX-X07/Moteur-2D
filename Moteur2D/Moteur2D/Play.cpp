@@ -23,6 +23,8 @@ void Play::createGameObjects(LoadRessources& _MyRessources) {
 	myPlayer = new Player(renderer, _MyRessources.player, 50, 820, 50, 50, 200.0f);
 
 	Enemy1 = new Enemy(_MyRessources.enemy, renderer, 850, 780, 50, 50, 50.0f);
+	Enemy2 = new Enemy(_MyRessources.enemy, renderer, 1300, 600, 50, 50, 50.0f);
+	Enemy3 = new Enemy(_MyRessources.enemy, renderer, 1150, 500, 50, 50, 50.0f);
 
 	auto Ground = new GameObject(renderer, _MyRessources.ground, 0, 880, 200 ,250);
 	gameObject.push_back(Ground);
@@ -39,16 +41,16 @@ void Play::createGameObjects(LoadRessources& _MyRessources) {
 	auto Ground4 = new GameObject(renderer, _MyRessources.ground, 1000, 780, 200, 120);
 	gameObject.push_back(Ground4);
 
-	auto Ground5 = new GameObject(renderer, _MyRessources.ground, 1100, 730, 200, 150);
+	auto Ground5 = new GameObject(renderer, _MyRessources.ground, 1100, 730, 200, 150);//
 	gameObject.push_back(Ground5);
 
-	auto Ground6 = new GameObject(renderer, _MyRessources.ground, 890, 670, 140, 40);
+	auto Ground6 = new GameObject(renderer, _MyRessources.ground, 890, 670, 140, 40); 
 	gameObject.push_back(Ground6);
 
 	auto Ground7 = new GameObject(renderer, _MyRessources.ground, 830, 620, 100, 40);
 	gameObject.push_back(Ground7);
 
-	auto Ground8 = new GameObject(renderer, _MyRessources.ground, 1050, 580, 200, 20);
+	auto Ground8 = new GameObject(renderer, _MyRessources.ground, 1050, 580, 200, 20); //
 	gameObject.push_back(Ground8);
 
 	auto Ground9 = new GameObject(renderer, _MyRessources.ground, 1350, 550, 200, 600);
@@ -72,6 +74,8 @@ void Play::displayScene(LoadRessources& _MyRessources) {
 	}
 	myPlayer->render(*camera);
 	Enemy1->render(*camera);
+	Enemy2->render(*camera);	
+	Enemy3->render(*camera);
 	SDL_RenderPresent(renderer);
 }
 
@@ -85,6 +89,10 @@ void Play::update(const bool* keys, float dt) {
 		camera->setCameraOnPlayer(*myPlayer);
 		Enemy1->update(keys, dt);
 		Enemy1->colliders(gameObject);
+		Enemy2->update(keys, dt);
+		Enemy2->colliders(gameObject);
+		Enemy3->update(keys, dt);
+		Enemy3->colliders(gameObject);
 	}
 }
 
