@@ -23,7 +23,7 @@ public:
 
 	SDL_FRect& getRect();
 
-	virtual void colliders();
+	virtual void colliders(std::vector<GameObject*>& colliders);
 	virtual void render(Camera& camera);
 	virtual void update(const bool* keys, float dt);
 };

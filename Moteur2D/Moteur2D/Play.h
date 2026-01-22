@@ -6,10 +6,12 @@
 #include "Scene.h"
 #include "Camera.h"
 #include "Parallax.h"
+#include "Enemy.h"
 
 class Play : public Scene{
 private:
     Entity* Player;
+    Enemy* Enemy1;
     std::vector<Entity*> grounds;
 	Camera* camera;
     bool isCreatedGRound = false;

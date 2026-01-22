@@ -5,6 +5,7 @@ LoadRessources::LoadRessources(SDL_Renderer* rend) : renderer(rend) {
     // Initialize of all texture to nullptr
     player = nullptr;
     ground = nullptr;
+    enemy = nullptr;
     bg_layer1 = nullptr;
     bg_layer2 = nullptr;
     bg_layer3 = nullptr;
@@ -26,6 +27,7 @@ void LoadRessources::loadAllTexture() {
     
     loadTexture("assets/sprite_Kitty.png", player);
     loadTexture("assets/dirt.png", ground);
+    loadTexture("assets/Kitty.png", enemy);
     loadTexture("assets/BG_layer1.png", bg_layer1);
     loadTexture("assets/BG_layer2.png", bg_layer2);
     loadTexture("assets/BG_layer3.png", bg_layer3);
@@ -41,6 +43,9 @@ LoadRessources::~LoadRessources() {
     // Destroy all texture
     if (player) {
         SDL_DestroyTexture(player);
+    }
+    if (enemy) {
+        SDL_DestroyTexture(enemy);
     }
 
     if (ground) {

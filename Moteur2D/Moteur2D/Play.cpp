@@ -21,9 +21,10 @@ Play::~Play() {
 
 void Play::createGameObjects(LoadRessources& _MyRessources) {
 	Player = new Entity(_MyRessources.player, renderer);
-	Player->setColor(0, 255, 0, 255);
 	Player->rect.x = 50;  
 	Player->rect.y = 820;
+
+	Enemy1 = new Enemy(_MyRessources.enemy, renderer, 900, 750, 50, 50, 50.0f);
 
 	auto Ground = new Entity(_MyRessources.ground, renderer, 0, 880, 200, 250, 0, false);
 	grounds.push_back(Ground);  
@@ -72,6 +73,7 @@ void Play::displayScene(LoadRessources& _MyRessources) {
 		ground->render(*camera);
 	}
 	Player->render(*camera);
+	Enemy1->render(*camera);
 	SDL_RenderPresent(renderer);
 }
 
@@ -86,6 +88,7 @@ void Play::update(const bool* keys, float dt) {
 		Player->clampToScreen(levelWidth + 50, levelHeight + 50);
 		camera->setCameraOnPlayer(*Player);
 		Player->respawn();
+		Enemy1->update(keys, dt);
 	}
 }
 
