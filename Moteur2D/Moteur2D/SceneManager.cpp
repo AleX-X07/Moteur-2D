@@ -4,6 +4,7 @@ SceneManager::SceneManager(SDL_Renderer* rend, SDL_Window* win) {
 	renderer = rend;
 	window = win;
 	currentState = SceneState::menu;
+	previousState = SceneState::menu;
 
 	myMenu = new Menu(renderer,window);
 	myPlay = new Play(renderer,window);
@@ -23,6 +24,7 @@ SceneManager::~SceneManager() {
 }
 
 void SceneManager::manageState(SDL_Event& event, keys* _myKeys) {
+	previousState = currentState;
 	if (currentState == SceneState::menu) {
 		myMenu->nextScene(currentState, event, _myKeys);
 	}
@@ -32,11 +34,13 @@ void SceneManager::manageState(SDL_Event& event, keys* _myKeys) {
 	else if (currentState == SceneState::play2) {
 		myPlay2->nextScene(currentState, event, _myKeys);
 	}
+	if (previousState == SceneState::play2 && currentState == SceneState::play) {
+		static_cast<Play*>(myPlay)->setPlayerSpawnFromPlay2();
+	}
 }
 
 void SceneManager::displayState() {
-	switch (currentState)
-	{
+	switch (currentState){
 	case(SceneState::menu):
 		myMenu->displayScene(*MyRessources);
 		break;

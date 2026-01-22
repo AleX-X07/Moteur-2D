@@ -26,8 +26,8 @@ Player::~Player() {
 }
 
 void Player::respawn() {
-        rect.y = 850;
-        rect.x = 50;
+    rect.y = 850;
+    rect.x = 50;
 }
 
 void Player::clampToScreen() {
@@ -76,22 +76,28 @@ void Player::updateState(const bool* keys) {
     }
     else { // Seulement si on n'est PAS au sol
         if (_movingLeft && !_movingRight) {
-            if (myPhysics.velocityY < 0)
+            if (myPhysics.velocityY < 0) {
                 currentState = PlayerStateOpti::jumpingLeft;
-            else
+            }
+            else {
                 currentState = PlayerStateOpti::fallingLeft;
+            }
         }
         else if (_movingRight && !_movingLeft) {
-            if (myPhysics.velocityY < 0)
+            if (myPhysics.velocityY < 0) {
                 currentState = PlayerStateOpti::jumpingRight;
-            else
+            }
+            else {
                 currentState = PlayerStateOpti::fallingRight;
+            }
         }
         else {
-            if (myPhysics.velocityY < 0)
+            if (myPhysics.velocityY < 0) {
                 currentState = PlayerStateOpti::jumpingRight;
-            else
+            }
+            else {
                 currentState = PlayerStateOpti::fallingRight;
+            }
         }
     }
 
@@ -196,11 +202,12 @@ void Player::update(const bool* keys, float dt) {
 
     // move left and right
     myPhysics.velocityX = 0;
-    if (keys[SDL_SCANCODE_LEFT] || keys[SDL_SCANCODE_A])
+    if (keys[SDL_SCANCODE_LEFT] || keys[SDL_SCANCODE_A]) {
         myPhysics.velocityX = -myPhysics.speed;
-
-    if (keys[SDL_SCANCODE_RIGHT] || keys[SDL_SCANCODE_D])
+    }
+    if (keys[SDL_SCANCODE_RIGHT] || keys[SDL_SCANCODE_D]) {
         myPhysics.velocityX = myPhysics.speed;
+    }
 
     // jump
     if (keys[SDL_SCANCODE_SPACE] && myPhysics.onGround && myPhysics.nowTimeJump > myPhysics.cooldownJump) {

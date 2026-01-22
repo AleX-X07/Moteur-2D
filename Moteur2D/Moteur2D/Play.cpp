@@ -101,9 +101,19 @@ void Play::update(const bool* keys, float dt) {
 	}
 }
 
+void Play::setPlayerSpawnFromPlay2() {
+	if (myPlayer) {
+		myPlayer->getRect().x = levelWidth - 50;
+		myPlayer->getRect().y = 550;
+	}
+}
+
 void Play::nextScene(SceneState& currentScene, SDL_Event& event, keys* _myKeys) {
-	if (_myKeys->myKeys[SDL_SCANCODE_ESCAPE]) 
+	if (_myKeys->myKeys[SDL_SCANCODE_ESCAPE]) {
 		currentScene = menu;
-	if (myPlayer->getRect().x >= levelWidth)
+	}
+	if (myPlayer->getRect().x >= levelWidth - 40) {
+		myPlayer->getRect().x = levelWidth - 40;
 		currentScene = play2;
+	}
 }

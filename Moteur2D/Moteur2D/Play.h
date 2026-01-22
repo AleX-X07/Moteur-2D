@@ -29,5 +29,6 @@ public:
     void createGameObjects(LoadRessources& _MyRessources);
     void displayScene(LoadRessources& _MyRessources) override;
 	void update(const bool* keys, float dt);
+    void setPlayerSpawnFromPlay2();
     void nextScene(SceneState& currentScene, SDL_Event& event, keys* _myKeys) override;
 };

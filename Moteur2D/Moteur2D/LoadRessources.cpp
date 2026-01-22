@@ -10,13 +10,6 @@ LoadRessources::LoadRessources(SDL_Renderer* rend) : renderer(rend) {
     bg_layer2 = nullptr;
     bg_layer3 = nullptr;
     bg_layer4 = nullptr;
-    
-    background_1 = nullptr;
-    background_2 = nullptr;
-    background_3 = nullptr;
-    background_4 = nullptr;
-    background_5 = nullptr;
-    background_6 = nullptr;
 
     background_menu = nullptr;
 
@@ -49,15 +42,7 @@ void LoadRessources::loadAllTexture() {
     loadTexture("assets/Menu/menu_bg.jpg", background_menu);
     SDL_SetTextureScaleMode(background_menu, SDL_SCALEMODE_NEAREST);
 
-
-    loadTexture("assets/background/pixel-frame-0.png", background_1);
-    loadTexture("assets/background/pixel-frame-0_1.png", background_2);
-    loadTexture("assets/background/pixel-frame-0_2.png", background_3);
-    loadTexture("assets/background/pixel-frame-0_3.png", background_4);
-    loadTexture("assets/background/pixel-frame-0_4.png", background_5);
-    loadTexture("assets/background/pixel-frame-0_5.png", background_6);
-
-    mesTexture = { player, ground, enemy, bg_layer1, bg_layer2, bg_layer3, bg_layer4 , background_1, background_2, background_3, background_4, background_5, background_6, play_button, exit_button, background_menu };
+    mesTexture = { player, ground, enemy, bg_layer1, bg_layer2, bg_layer3, bg_layer4, play_button, exit_button, background_menu };
 
 }
 

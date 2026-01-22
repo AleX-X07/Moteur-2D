@@ -21,7 +21,7 @@ Play2::~Play2() {
 }
 
 void Play2::createGameObjects(LoadRessources& _MyRessources) {
-	myPlayer = new Player(renderer, _MyRessources.player, 50, 820, 50, 50, 200.0f);
+	myPlayer = new Player(renderer, _MyRessources.player, 20, 820, 50, 50, 200.0f);
 
 	GameObject* Ground = new GameObject(renderer, _MyRessources.ground, 0, 880, 200, 250);
 	gameObject.push_back(Ground);

@@ -46,6 +46,7 @@ int main() {
 
 		time.waitForTime();
 
+
 	}
 
 	SDL_DestroyRenderer(renderer);

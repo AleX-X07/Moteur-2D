@@ -14,6 +14,7 @@ public:
 	SDL_Window* window;
 
 	SceneState currentState;
+	SceneState previousState;
 
 	Scene* myMenu;
 	Scene* myPlay;
