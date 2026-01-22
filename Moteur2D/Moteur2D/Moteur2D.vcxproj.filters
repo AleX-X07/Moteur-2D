@@ -13,36 +13,132 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Fichiers sources\Scene">
+      <UniqueIdentifier>{75987757-5cd2-4173-8fbc-2cdbb03760b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Scene">
+      <UniqueIdentifier>{9333c5b0-9111-4cb4-ab05-af6f4ba52346}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Tool">
+      <UniqueIdentifier>{f0e9cc1d-7347-465b-b863-17f7ae7bd37b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Ressources">
+      <UniqueIdentifier>{3227ac05-4fbd-4d6c-ba34-62f280ea846c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Tool">
+      <UniqueIdentifier>{4fb06e17-778c-4b09-85be-20909ec672d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Ressources">
+      <UniqueIdentifier>{d0a8e437-ae82-41be-b223-5295f3859be3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Scene\Menu">
+      <UniqueIdentifier>{795610ae-b7ac-4867-8ebe-91419849a593}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Scene\Menu">
+      <UniqueIdentifier>{2de05f00-f750-41a3-b14f-322865b2eaee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Entity">
+      <UniqueIdentifier>{492cc6a6-aefa-42d0-afc1-ecd4572a0d76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Entity">
+      <UniqueIdentifier>{6d2fac4b-eeb2-43e7-a76c-2d54e887b426}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>Fichiers sources</Filter>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Fichiers sources\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Fichiers sources</Filter>
+    <ClCompile Include="Play.cpp">
+      <Filter>Fichiers sources\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="LoadRessources.cpp">
-      <Filter>Fichiers sources</Filter>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Fichiers sources\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Parallax.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Fichiers sources\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Fichiers sources\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadRessources.cpp">
+      <Filter>Fichiers sources\Ressources</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Fichiers sources\Scene\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Fichiers sources\Scene\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="globals.cpp">
+      <Filter>Fichiers sources\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="setTime.cpp">
+      <Filter>Fichiers sources\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="Play2.cpp">
+      <Filter>Fichiers sources\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Fichiers sources\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Fichiers sources\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Play2.cpp">
+      <Filter>Fichiers sources\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Fichiers sources\Entity</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Entity.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+    <ClInclude Include="Scene.h">
+      <Filter>Fichiers d%27en-tête\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Play.h">
+      <Filter>Fichiers d%27en-tête\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Fichiers d%27en-tête\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="LoadRessources.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\Tool</Filter>
     </ClInclude>
     <ClInclude Include="Parallax.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadRessources.h">
+      <Filter>Fichiers d%27en-tête\Ressources</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Fichiers d%27en-tête\Scene\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Fichiers d%27en-tête\Scene\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="globals.h">
+      <Filter>Fichiers d%27en-tête\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="setTime.h">
+      <Filter>Fichiers d%27en-tête\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="Play2.h">
+      <Filter>Fichiers d%27en-tête\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Fichiers d%27en-tête\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Fichiers d%27en-tête\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Play2.h">
+      <Filter>Fichiers d%27en-tête\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Fichiers d%27en-tête\Entity</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

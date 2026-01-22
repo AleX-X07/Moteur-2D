@@ -5,63 +5,53 @@ LoadRessources::LoadRessources(SDL_Renderer* rend) : renderer(rend) {
     // Initialize of all texture to nullptr
     player = nullptr;
     ground = nullptr;
+    enemy = nullptr;
     bg_layer1 = nullptr;
     bg_layer2 = nullptr;
     bg_layer3 = nullptr;
     bg_layer4 = nullptr;
+
+    background_menu = nullptr;
+
+}
+
+// Load one texture
+void LoadRessources::loadTexture(const char* _path, SDL_Texture*& _MyTexture)
+{
+    SDL_Surface* surface;
+
+    surface = IMG_Load(_path);
+    _MyTexture = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_DestroySurface(surface);
 }
 
 // Load all texture
 void LoadRessources::loadAllTexture() {
-    SDL_Surface* surface;
+    
+    loadTexture("assets/sprite_Kitty.png", player);
+    loadTexture("assets/dirt.png", ground);
+    loadTexture("assets//sprite_Kitty.png", enemy);
+    loadTexture("assets/BG_layer1.png", bg_layer1);
+    loadTexture("assets/BG_layer2.png", bg_layer2);
+    loadTexture("assets/BG_layer3.png", bg_layer3);
+    loadTexture("assets/BG_layer4.png", bg_layer4);
+    loadTexture("assets/Menu/play.png", play_button);
+    SDL_SetTextureScaleMode(play_button, SDL_SCALEMODE_NEAREST);
+    loadTexture("assets/Menu/exit.png", exit_button);
+    SDL_SetTextureScaleMode(exit_button, SDL_SCALEMODE_NEAREST);
+    loadTexture("assets/Menu/menu_bg.jpg", background_menu);
+    SDL_SetTextureScaleMode(background_menu, SDL_SCALEMODE_NEAREST);
 
-    // Background Home
-    surface = IMG_Load("assets/sprite_Kitty.png");
-    player = SDL_CreateTextureFromSurface(renderer, surface);
-    SDL_DestroySurface(surface);
+    mesTexture = { player, ground, enemy, bg_layer1, bg_layer2, bg_layer3, bg_layer4, play_button, exit_button, background_menu };
 
-    surface = IMG_Load("assets/ground.png");
-    ground = SDL_CreateTextureFromSurface(renderer, surface);
-
-    SDL_SetTextureScaleMode(ground, SDL_SCALEMODE_NEAREST);
-
-    surface = IMG_Load("assets/BG_layer1.png");
-    bg_layer1 = SDL_CreateTextureFromSurface(renderer, surface);
-    SDL_DestroySurface(surface);
-
-    surface = IMG_Load("assets/BG_layer2.png");
-    bg_layer2 = SDL_CreateTextureFromSurface(renderer, surface);
-    SDL_DestroySurface(surface);
-
-    surface = IMG_Load("assets/BG_layer3.png");
-    bg_layer3 = SDL_CreateTextureFromSurface(renderer, surface);
-    SDL_DestroySurface(surface);
-
-    surface = IMG_Load("assets/BG_layer4.png");
-    bg_layer4 = SDL_CreateTextureFromSurface(renderer, surface);
-    SDL_DestroySurface(surface);
 }
 
 // Destructor
 LoadRessources::~LoadRessources() {
     // Destroy all texture
-    if (player) {
-        SDL_DestroyTexture(player);
-    }
-
-    if (ground) {
-        SDL_DestroyTexture(ground);
-    }
-    if (bg_layer1) {
-        SDL_DestroyTexture(bg_layer1);
-    }
-    if (bg_layer2) {
-        SDL_DestroyTexture(bg_layer2);
-    }
-    if (bg_layer3) {
-        SDL_DestroyTexture(bg_layer3);
-    }
-    if (bg_layer4) {
-        SDL_DestroyTexture(bg_layer4);
+    for (auto t : mesTexture) {
+        if (t) {
+            SDL_DestroyTexture(t);
+        }
     }
 }

@@ -1,0 +1,63 @@
+#include "SceneManager.h"
+
+SceneManager::SceneManager(SDL_Renderer* rend, SDL_Window* win) {
+	renderer = rend;
+	window = win;
+	currentState = SceneState::menu;
+	previousState = SceneState::menu;
+
+	myMenu = new Menu(renderer,window);
+	myPlay = new Play(renderer,window);
+	myPlay2 = new Play2(renderer, window);
+
+	MyRessources = new LoadRessources(rend);
+	MyRessources->loadAllTexture();
+}
+
+SceneManager::~SceneManager() {
+
+	delete myMenu;
+	delete myPlay;
+	delete myPlay2;
+	delete MyRessources;
+
+}
+
+void SceneManager::manageState(SDL_Event& event, keys* _myKeys) {
+	previousState = currentState;
+	if (currentState == SceneState::menu) {
+		myMenu->nextScene(currentState, event, _myKeys);
+	}
+	else if (currentState == SceneState::play) {
+		myPlay->nextScene(currentState, event, _myKeys);
+	}
+	else if (currentState == SceneState::play2) {
+		myPlay2->nextScene(currentState, event, _myKeys);
+	}
+	if (previousState == SceneState::play2 && currentState == SceneState::play) {
+		static_cast<Play*>(myPlay)->setPlayerSpawnFromPlay2();
+	}
+}
+
+void SceneManager::displayState() {
+	switch (currentState){
+	case(SceneState::menu):
+		myMenu->displayScene(*MyRessources);
+		break;
+	case(SceneState::play):
+		myPlay->displayScene(*MyRessources);
+		break;
+	case(SceneState::play2):
+		myPlay2->displayScene(*MyRessources);
+		break;
+	}
+}
+
+void SceneManager::updateState(const bool* keys, float dt) {
+	if (currentState == SceneState::play) {
+		static_cast<Play*>(myPlay)->update(keys, dt);
+	}
+	else if (currentState == SceneState::play2) {
+		static_cast<Play2*>(myPlay2)->update(keys, dt);
+	}
+}

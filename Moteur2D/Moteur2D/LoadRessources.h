@@ -12,15 +12,23 @@ public:
 	//Texture
 	SDL_Texture* player;
 	SDL_Texture* ground;
+	SDL_Texture* enemy;
 	SDL_Texture* bg_layer1; 
 	SDL_Texture* bg_layer2; 
 	SDL_Texture* bg_layer3;
 	SDL_Texture* bg_layer4;
+	SDL_Texture* play_button;
+	SDL_Texture* exit_button;
+
+	SDL_Texture* background_menu;
+
+	std::vector<SDL_Texture*> mesTexture;
 
 	// Constructor
 	LoadRessources(SDL_Renderer* rend);
 
 	// Load all texture
+	void loadTexture(const char* _path, SDL_Texture*& _MyTexture);
 	void loadAllTexture();
 
 	// Destructor
