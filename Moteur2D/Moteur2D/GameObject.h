@@ -23,6 +23,7 @@ public:
 
 	SDL_FRect& getRect();
 
+	virtual void updateStateEnemy();
 	virtual void colliders(std::vector<GameObject*>& gameObject);
 	virtual void render(Camera& camera);
 	virtual void update(const bool* keys, float dt);

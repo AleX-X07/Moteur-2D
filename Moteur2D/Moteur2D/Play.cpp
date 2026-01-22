@@ -46,7 +46,7 @@ void Play::createGameObjects(LoadRessources& _MyRessources) {
 	auto Ground4 = new GameObject(renderer, _MyRessources.ground, 1000, 780, 200, 120);
 	gameObject.push_back(Ground4);
 
-	auto Ground5 = new GameObject(renderer, _MyRessources.ground, 1100, 730, 200, 150);//
+	auto Ground5 = new GameObject(renderer, _MyRessources.ground, 1100, 730, 200, 150);
 	gameObject.push_back(Ground5);
 
 	auto Ground6 = new GameObject(renderer, _MyRessources.ground, 890, 670, 140, 40); 
@@ -55,7 +55,7 @@ void Play::createGameObjects(LoadRessources& _MyRessources) {
 	auto Ground7 = new GameObject(renderer, _MyRessources.ground, 830, 620, 100, 40);
 	gameObject.push_back(Ground7);
 
-	auto Ground8 = new GameObject(renderer, _MyRessources.ground, 1050, 580, 200, 20); //
+	auto Ground8 = new GameObject(renderer, _MyRessources.ground, 1050, 580, 200, 20); 
 	gameObject.push_back(Ground8);
 
 	auto Ground9 = new GameObject(renderer, _MyRessources.ground, 1350, 550, 200, 600);
@@ -78,9 +78,10 @@ void Play::displayScene(LoadRessources& _MyRessources) {
 		ground->render(*camera);
 	}
 	myPlayer->render(*camera);
-	for (auto e : Enemies) {
-		e->render(*camera);
-	}
+
+	for (auto enemy : Enemies) {
+		enemy->render(*camera);
+	}	
 	SDL_RenderPresent(renderer);
 }
 
@@ -93,9 +94,9 @@ void Play::update(const bool* keys, float dt) {
 		myPlayer->collideEnemies(Enemies);
 		camera->setCameraOnPlayer(*myPlayer);
 
-		for (auto e : Enemies) {
-			e->update(keys, dt);
-			e->colliders(gameObject);
+		for(auto enemy : Enemies) {
+			enemy->update(keys, dt);
+			enemy->colliders(gameObject);
 		}
 	}
 }

@@ -29,6 +29,9 @@ SDL_FRect& GameObject::getRect() {
 	return rect;
 }
 
+void GameObject::updateStateEnemy() {
+}
+
 void GameObject::colliders(std::vector<GameObject*>& gameObject) {
 	
 }
