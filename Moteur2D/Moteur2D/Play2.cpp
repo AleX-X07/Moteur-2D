@@ -70,4 +70,6 @@ void Play2::nextScene(SceneState& currentScene, SDL_Event& event, keys* _myKeys)
 	if (_myKeys->myKeys[SDL_SCANCODE_ESCAPE]) {
 		currentScene = menu;
 	}
+	if (Player->rect.x == 0)
+		currentScene = play;
 }
