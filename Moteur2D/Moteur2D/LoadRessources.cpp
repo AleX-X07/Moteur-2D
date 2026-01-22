@@ -35,7 +35,7 @@ void LoadRessources::loadAllTexture() {
     
     loadTexture("assets/sprite_Kitty.png", player);
     loadTexture("assets/dirt.png", ground);
-    loadTexture("assets/Kitty.png", enemy);
+    loadTexture("assets//sprite_Kitty.png", enemy);
     loadTexture("assets/BG_layer1.png", bg_layer1);
     loadTexture("assets/BG_layer2.png", bg_layer2);
     loadTexture("assets/BG_layer3.png", bg_layer3);

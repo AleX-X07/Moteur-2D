@@ -31,14 +31,18 @@ void Player::respawn() {
 }
 
 void Player::clampToScreen() {
-    if (rect.x < 0)
+    if (rect.x < 0) {
         rect.x = 0;
-    if (rect.y < 0)
+    }
+    if (rect.y < 0) {
         rect.y = 0;
-    if (rect.x + rect.w > screenWidth + rect.w)
+    }
+    if (rect.x + rect.w > screenWidth + rect.w) {
         rect.x = (screenWidth + rect.w) - rect.w;
-    if (rect.y + rect.h > screenHeight + rect.h)
-        rect.y = (screenHeight + rect.h ) - rect.h;
+    }
+    if (rect.y + rect.h > screenHeight + rect.h) {
+        rect.y = (screenHeight + rect.h) - rect.h;
+    }
 }
 
 void Player::updateAnimation(float dt) {

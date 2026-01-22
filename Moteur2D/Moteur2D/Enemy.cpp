@@ -2,6 +2,12 @@
 #include "Camera.h"
 
 Enemy::Enemy() {
+    texture = nullptr;
+    renderer = nullptr;
+    rect = { 0,0,0,0 };
+    physicsEnemy = { 0,0,0,0,0,0,false,0 };
+	currentState = EnemyState::movingLeft;
+	animationEnemy = { 0,0,0,0,0,0 };
 }
 
 Enemy::Enemy(SDL_Texture* _MyTexture, SDL_Renderer* rend, float x, float y, float w, float h, float _speed) {
@@ -9,16 +15,65 @@ Enemy::Enemy(SDL_Texture* _MyTexture, SDL_Renderer* rend, float x, float y, floa
     renderer = rend;
     rect = { x,y,w,h };
     physicsEnemy = { _speed, 350.0f, 900.0f, 0, 0, 0.3f, false };
+    currentState = EnemyState::movingLeft;
+    animationEnemy = { 0,0,0.2f,4,127.8f,128.2f };
 }
 
 Enemy::~Enemy() {
 
 }
 
+void Enemy::updateAnimationEnemy(float dt){
+    animationEnemy.animationTimer += dt;
+    if (animationEnemy.animationTimer >= animationEnemy.frameDuration) {
+        animationEnemy.animationTimer = 0.0f;
+        animationEnemy.currentFrame++;
+
+        if (animationEnemy.currentFrame >= animationEnemy.maxFrames) {
+            animationEnemy.currentFrame = 0;
+        }
+	}
+}
+
+void Enemy::updateStateEnemy() {
+	previousState = currentState;
+    if (isBorderLeft) {
+        currentState = EnemyState::movingLeft;
+    }
+    else {
+        currentState = EnemyState::movingRight;
+	}   
+
+    if (currentState != previousState) {
+        animationEnemy.currentFrame = 0;
+        animationEnemy.animationTimer = 0.0f;
+    }
+}
+
 
 void Enemy::render(Camera& camera) {
     SDL_FRect screenRect = camera.worldToScreen(rect);
-    SDL_RenderTexture(renderer, texture, nullptr, &screenRect);
+    if (texture) {
+        int animationRow = 0;
+        switch (currentState) {
+        case EnemyState::movingRight:
+            animationRow = 1;
+            break;
+        case EnemyState::movingLeft:
+            animationRow = 2;
+            break;
+        }
+
+        SDL_FRect srcRectEnemy = {
+           animationEnemy.currentFrame * animationEnemy.spriteWidth,  // x position
+           animationRow * animationEnemy.spriteHeight, // y position
+           animationEnemy.spriteWidth,                 // largeur
+           animationEnemy.spriteHeight                 // hauteur
+        };
+
+        SDL_RenderTexture(renderer, texture, &srcRectEnemy, &screenRect);
+    }
+    
 }
 
 void Enemy::update(const bool* keys, float dt) {
@@ -33,6 +88,9 @@ void Enemy::update(const bool* keys, float dt) {
         physicsEnemy.velocityY += physicsEnemy.gravity * dt;
         rect.y += physicsEnemy.velocityY * dt;
     }
+    updateAnimationEnemy(dt);
+    updateStateEnemy();
+
 }
 
 void Enemy::colliders(std::vector<GameObject*>& colliders) {

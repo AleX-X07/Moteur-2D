@@ -12,11 +12,9 @@ enum class PlayerStateOpti {
     fallingRight
 };
 
-class Player : public GameObject
-{
+class Player : public GameObject{
 private:
     Physics myPhysics;
-    //PlayerStateOpti currentState;
     Animation myAnimation;
 
     PlayerStateOpti currentState = PlayerStateOpti::idle;
