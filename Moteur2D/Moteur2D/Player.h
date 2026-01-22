@@ -16,8 +16,11 @@ class Player : public GameObject
 {
 private:
     Physics myPhysics;
-    PlayerStateOpti currentState;
+    //PlayerStateOpti currentState;
     Animation myAnimation;
+
+    PlayerStateOpti currentState = PlayerStateOpti::idle;
+    PlayerStateOpti previousState = PlayerStateOpti::idle;
 
 public:
     Player();
@@ -29,7 +32,7 @@ public:
     void updateAnimation(float dt);
     void updateState(const bool* keys);
 
-    virtual void colliders() override;
+    virtual void colliders(std::vector<GameObject*>& gameObject) override;
     virtual void render(Camera& camera) override;
     virtual void update(const bool* keys, float dt) override;
 };

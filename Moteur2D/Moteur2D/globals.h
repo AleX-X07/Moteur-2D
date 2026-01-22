@@ -9,8 +9,6 @@ const int screenHeight = 1080;
 const int levelWidth = 1500;
 const int levelHeight = 1080;
 
-extern std::vector<GameObject*> myGameObject;
-
 struct keys // struct for the keys
 {
 	const bool* myKeys;
@@ -29,6 +27,7 @@ struct Physics
     float velocityY;
     float cooldownJump;
     bool onGround;
+	float nowTimeJump;
 };
 
 struct Animation {

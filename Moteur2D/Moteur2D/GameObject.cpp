@@ -29,7 +29,7 @@ SDL_FRect& GameObject::getRect() {
 	return rect;
 }
 
-void GameObject::colliders() {
+void GameObject::colliders(std::vector<GameObject*>& gameObject) {
 	
 }
 

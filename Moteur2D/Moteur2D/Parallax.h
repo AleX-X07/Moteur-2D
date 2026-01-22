@@ -2,7 +2,6 @@
 #include <SDL3/SDL.h>
 #include <vector>
 
-#include "Entity.h"
 #include "globals.h"
 
 class Camera;

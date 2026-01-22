@@ -3,7 +3,7 @@
 Play::Play(SDL_Renderer* rend, SDL_Window* win) {
 	renderer = rend;
 	window = win;
-	Player = nullptr;
+	myPlayer = nullptr;
 	camera = new Camera();
 	int w, h;
 	SDL_GetWindowSize(win, &w, &h);
@@ -11,49 +11,46 @@ Play::Play(SDL_Renderer* rend, SDL_Window* win) {
 }
 
 Play::~Play() {
-	delete Player;
-	for (auto ground : grounds) {
-		delete ground;
+	delete myPlayer;
+	for (auto gameObject : gameObject) {
+		delete gameObject;
 	}
 	delete camera;
 	delete playerParallax;
 }
 
 void Play::createGameObjects(LoadRessources& _MyRessources) {
-	Player = new Entity(_MyRessources.player, renderer);
-	Player->setColor(0, 255, 0, 255);
-	Player->rect.x = 50;  
-	Player->rect.y = 820;
+	myPlayer = new Player(renderer, _MyRessources.player, 50, 820, 50, 50, 200.0f);
 
-	auto Ground = new Entity(_MyRessources.ground, renderer, 0, 880, 200, 250, 0, false);
-	grounds.push_back(Ground);  
+	GameObject* Ground = new GameObject(renderer, _MyRessources.ground, 0, 880, 200 ,250);
+	gameObject.push_back(Ground);
 
-	auto Ground1 = new Entity(_MyRessources.ground, renderer, 300, 820, 100, 300, 0, false);
-	grounds.push_back(Ground1); 
+	GameObject* Ground1 = new GameObject(renderer, _MyRessources.ground, 300, 820, 100, 300);
+	gameObject.push_back(Ground1);
 
-	auto Ground2 = new Entity(_MyRessources.ground, renderer, 500, 800, 150, 50, 0, false);
-	grounds.push_back(Ground2); 
+	GameObject* Ground2 = new GameObject(renderer, _MyRessources.ground, 500, 800, 150, 50);
+	gameObject.push_back(Ground2);
 
-	auto Ground3 = new Entity(_MyRessources.ground, renderer, 700, 830, 200, 40, 0, false);
-	grounds.push_back(Ground3); 
+	GameObject* Ground3 = new GameObject(renderer, _MyRessources.ground, 700, 830, 200, 40);
+	gameObject.push_back(Ground3);
 
-	auto Ground4 = new Entity(_MyRessources.ground, renderer, 1000, 780, 200, 120, 0, false);
-	grounds.push_back(Ground4); 
+	GameObject* Ground4 = new GameObject(renderer, _MyRessources.ground, 1000, 780, 200, 120);
+	gameObject.push_back(Ground4);
 
-	auto Ground5 = new Entity(_MyRessources.ground, renderer, 1100, 730, 200, 150, 0, false);
-	grounds.push_back(Ground5); 
+	GameObject* Ground5 = new GameObject(renderer, _MyRessources.ground, 1100, 730, 200, 150);
+	gameObject.push_back(Ground5);
 
-	auto Ground6 = new Entity(_MyRessources.ground, renderer, 890, 670, 140, 40, 0, false);
-	grounds.push_back(Ground6); 
+	GameObject* Ground6 = new GameObject(renderer, _MyRessources.ground, 890, 670, 140, 40);
+	gameObject.push_back(Ground6);
 
-	auto Ground7 = new Entity(_MyRessources.ground, renderer, 830, 620, 100, 40, 0, false);
-	grounds.push_back(Ground7);  
+	GameObject* Ground7 = new GameObject(renderer, _MyRessources.ground, 830, 620, 100, 40);
+	gameObject.push_back(Ground7);
 
-	auto Ground8 = new Entity(_MyRessources.ground, renderer, 1050, 580, 200, 20, 0, false);
-	grounds.push_back(Ground8); 
+	GameObject* Ground8 = new GameObject(renderer, _MyRessources.ground, 1050, 580, 200, 20);
+	gameObject.push_back(Ground8);
 
-	auto Ground9 = new Entity(_MyRessources.ground, renderer, 1350, 550, 200, 600, 0, false);
-	grounds.push_back(Ground9);  
+	GameObject* Ground9 = new GameObject(renderer, _MyRessources.ground, 1350, 550, 200, 600);
+	gameObject.push_back(Ground9);
 }
 
 void Play::displayScene(LoadRessources& _MyRessources) {
@@ -68,30 +65,27 @@ void Play::displayScene(LoadRessources& _MyRessources) {
 	SDL_RenderClear(renderer);
 	playerParallax->render(*camera);
 
-	for (auto ground : grounds) {
+	for (auto ground : gameObject) {
 		ground->render(*camera);
 	}
-	Player->render(*camera);
+	myPlayer->render(*camera);
 	SDL_RenderPresent(renderer);
 }
 
 void Play::update(const bool* keys, float dt) {
 
-	if (Player) {
-		playerParallax->update(Player->rect.x, Player->rect.y);
-		Player->update(keys, dt);
-		Player->collision(grounds);
-		Player->updateState(keys);
-		Player->updateAnimation(dt);
-		Player->clampToScreen(levelWidth + 50, levelHeight + 50);
-		camera->setCameraOnPlayer(*Player);
-		Player->respawn();
+	if (myPlayer) {
+		playerParallax->update(myPlayer->getRect().x, myPlayer->getRect().y);
+		myPlayer->update(keys, dt);
+		myPlayer->colliders(gameObject);
+		myPlayer->updateState(keys);
+		camera->setCameraOnPlayer(*myPlayer);
 	}
 }
 
 void Play::nextScene(SceneState& currentScene, SDL_Event& event, keys* _myKeys) {
 	if (_myKeys->myKeys[SDL_SCANCODE_ESCAPE]) 
 		currentScene = menu;
-	if (Player->rect.x == levelWidth)
+	if (myPlayer->getRect().x == levelWidth)
 		currentScene = play2;
 }

@@ -1,8 +1,8 @@
 #pragma once
 #include <SDL3/SDL.h>
 
-#include "Entity.h"
 #include "globals.h"
+#include "Player.h"
 
 class Camera
 {
@@ -15,7 +15,7 @@ public:
 
 	Camera();
 
-	void setCameraOnPlayer(Entity& player);
+	void setCameraOnPlayer(Player& player);
 	SDL_FRect worldToScreen(SDL_FRect& worldRect) const;
 };
 

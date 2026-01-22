@@ -6,7 +6,7 @@ Player::Player() : GameObject() {
 	texture = nullptr;
 	renderer = nullptr;
 	rect = { 0,0,0,0 };
-	myPhysics = { 0,0,0,0,0,0,false };
+	myPhysics = { 0,0,0,0,0,0,false,0 };
 	currentState = PlayerStateOpti::idle;
     myAnimation = { 0,0,0,0,0,0 };
 }
@@ -15,7 +15,7 @@ Player::Player(SDL_Renderer* ren, SDL_Texture* tex, float x, float y, float w, f
 	texture = tex;
 	renderer = ren;
 	rect = { x,y,w,h };
-	myPhysics = { _speed, 350.0f, 900.0f, 0, 0, 0.3f, false };
+	myPhysics = { _speed, 350.0f, 900.0f, 0, 0, 0.3f, false, 0 };
 	currentState = PlayerStateOpti::idle;
     myAnimation = { 0,0,0.2f,4,127.8f,128.2f };
 }
@@ -37,10 +37,10 @@ void Player::clampToScreen() {
         rect.x = 0;
     if (rect.y < 0)
         rect.y = 0;
-    if (rect.x + rect.w > screenWidth)
-        rect.x = screenWidth - rect.w;
-    if (rect.y + rect.h > screenHeight)
-        rect.y = screenHeight - rect.h;
+    if (rect.x + rect.w > screenWidth + rect.w)
+        rect.x = (screenWidth + rect.w) - rect.w;
+    if (rect.y + rect.h > screenHeight + rect.h)
+        rect.y = (screenHeight + rect.h ) - rect.h;
 }
 
 void Player::updateAnimation(float dt) {
@@ -61,49 +61,49 @@ void Player::updateState(const bool* keys) {
     bool _movingLeft = keys[SDL_SCANCODE_LEFT] || keys[SDL_SCANCODE_A];
     bool _movingRight = keys[SDL_SCANCODE_RIGHT] || keys[SDL_SCANCODE_D];
 
-    if (onGround) {
+    if (myPhysics.onGround) {
         if (_movingLeft && !_movingRight) {
-            currentState = PlayerState::movingLeft;
+            currentState = PlayerStateOpti::movingLeft;
         }
         else if (_movingRight && !_movingLeft) {
-            currentState = PlayerState::movingRight;
+            currentState = PlayerStateOpti::movingRight;
         }
         else {
-            currentState = PlayerState::idle;
+            currentState = PlayerStateOpti::idle;
         }
     }
     else { // Seulement si on n'est PAS au sol
         if (_movingLeft && !_movingRight) {
-            if (velocityY < 0)
-                currentState = PlayerState::jumpingLeft;
+            if (myPhysics.velocityY < 0)
+                currentState = PlayerStateOpti::jumpingLeft;
             else
-                currentState = PlayerState::fallingLeft;
+                currentState = PlayerStateOpti::fallingLeft;
         }
         else if (_movingRight && !_movingLeft) {
-            if (velocityY < 0)
-                currentState = PlayerState::jumpingRight;
+            if (myPhysics.velocityY < 0)
+                currentState = PlayerStateOpti::jumpingRight;
             else
-                currentState = PlayerState::fallingRight;
+                currentState = PlayerStateOpti::fallingRight;
         }
         else {
-            if (velocityY < 0)
-                currentState = PlayerState::jumpingRight;
+            if (myPhysics.velocityY < 0)
+                currentState = PlayerStateOpti::jumpingRight;
             else
-                currentState = PlayerState::fallingRight;
+                currentState = PlayerStateOpti::fallingRight;
         }
     }
 
     if (currentState != previousState) {
-        currentFrame = 0;
-        animationTimer = 0.0f;
+        myAnimation.currentFrame = 0;
+        myAnimation.animationTimer = 0.0f;
     }
 
 }
 
-void Player::colliders() {
+void Player::colliders(std::vector<GameObject*>& gameObject) {
     myPhysics.onGround = false;
 
-    for (auto c : myGameObject) {
+    for (auto c : gameObject) {
         if (!isColliding(*c)) {
             continue;
         }
@@ -148,7 +148,6 @@ void Player::colliders() {
 }
 
 void Player::render(Camera& camera) {
-	//GameObject::render(camera);
 
     SDL_FRect screenRect = camera.worldToScreen(rect);
 
@@ -191,8 +190,7 @@ void Player::render(Camera& camera) {
 }
 
 void Player::update(const bool* keys, float dt) {
-    float nowTimeJump = 0.0f;
-    nowTimeJump += dt;
+    myPhysics.nowTimeJump += dt;
 
     // move left and right
     myPhysics.velocityX = 0;
@@ -203,9 +201,9 @@ void Player::update(const bool* keys, float dt) {
         myPhysics.velocityX = myPhysics.speed;
 
     // jump
-    if (keys[SDL_SCANCODE_SPACE] && myPhysics.onGround && nowTimeJump > myPhysics.cooldownJump) {
+    if (keys[SDL_SCANCODE_SPACE] && myPhysics.onGround && myPhysics.nowTimeJump > myPhysics.cooldownJump) {
         myPhysics.velocityY = -myPhysics.jumpForce;
-        nowTimeJump = 0;
+        myPhysics.nowTimeJump = 0;
         myPhysics.onGround = false;
     }
 
