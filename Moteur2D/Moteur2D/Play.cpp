@@ -23,8 +23,13 @@ void Play::createGameObjects(LoadRessources& _MyRessources) {
 	myPlayer = new Player(renderer, _MyRessources.player, 50, 820, 50, 50, 200.0f);
 
 	Enemy1 = new Enemy(_MyRessources.enemy, renderer, 850, 780, 50, 50, 50.0f);
+	Enemies.push_back(Enemy1);
+
 	Enemy2 = new Enemy(_MyRessources.enemy, renderer, 1300, 600, 50, 50, 50.0f);
+	Enemies.push_back(Enemy2);
+
 	Enemy3 = new Enemy(_MyRessources.enemy, renderer, 1150, 500, 50, 50, 50.0f);
+	Enemies.push_back(Enemy3);
 
 	auto Ground = new GameObject(renderer, _MyRessources.ground, 0, 880, 200 ,250);
 	gameObject.push_back(Ground);
@@ -86,6 +91,7 @@ void Play::update(const bool* keys, float dt) {
 		myPlayer->update(keys, dt);
 		myPlayer->colliders(gameObject);
 		myPlayer->updateState(keys);
+		myPlayer->collideEnemies(Enemies);
 		camera->setCameraOnPlayer(*myPlayer);
 		Enemy1->update(keys, dt);
 		Enemy1->colliders(gameObject);
@@ -93,6 +99,7 @@ void Play::update(const bool* keys, float dt) {
 		Enemy2->colliders(gameObject);
 		Enemy3->update(keys, dt);
 		Enemy3->colliders(gameObject);
+
 	}
 }
 

@@ -219,3 +219,11 @@ void Player::update(const bool* keys, float dt) {
     clampToScreen();
     updateAnimation(dt);
 }
+
+void Player::collideEnemies(std::vector<GameObject*>& _enemies){
+    for (auto e : _enemies) {
+        if (isColliding(*e)) {
+            respawn();
+        }
+    }
+}
