@@ -26,10 +26,8 @@ Player::~Player() {
 }
 
 void Player::respawn() {
-    if (rect.y >= levelHeight) {
         rect.y = 850;
         rect.x = 0;
-    }
 }
 
 void Player::clampToScreen() {
@@ -215,7 +213,9 @@ void Player::update(const bool* keys, float dt) {
     // Update horizontal position
     rect.x += myPhysics.velocityX * dt;
 
-    respawn();
+    if (rect.y >= levelHeight) {
+        respawn();
+    }
     clampToScreen();
     updateAnimation(dt);
 }
