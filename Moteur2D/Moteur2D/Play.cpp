@@ -15,6 +15,9 @@ Play::~Play() {
 	for (auto gameObject : gameObject) {
 		delete gameObject;
 	}
+	for (auto e : Enemies) {
+		delete e;
+	}
 	delete camera;
 	delete playerParallax;
 }
