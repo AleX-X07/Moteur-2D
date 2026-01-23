@@ -1,8 +1,6 @@
 #include "LoadRessources.h"
 
-// Constructor
 LoadRessources::LoadRessources(SDL_Renderer* rend) : renderer(rend) {
-    // Initialize of all texture to nullptr
     player = nullptr;
     ground = nullptr;
     enemy = nullptr;
@@ -15,7 +13,6 @@ LoadRessources::LoadRessources(SDL_Renderer* rend) : renderer(rend) {
 
 }
 
-// Load one texture
 void LoadRessources::loadTexture(const char* _path, SDL_Texture*& _MyTexture)
 {
     SDL_Surface* surface;
@@ -25,7 +22,6 @@ void LoadRessources::loadTexture(const char* _path, SDL_Texture*& _MyTexture)
     SDL_DestroySurface(surface);
 }
 
-// Load all texture
 void LoadRessources::loadAllTexture() {
     
     loadTexture("assets/sprite_Kitty.png", player);
@@ -46,9 +42,7 @@ void LoadRessources::loadAllTexture() {
 
 }
 
-// Destructor
 LoadRessources::~LoadRessources() {
-    // Destroy all texture
     for (auto t : mesTexture) {
         if (t) {
             SDL_DestroyTexture(t);

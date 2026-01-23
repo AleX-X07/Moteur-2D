@@ -65,10 +65,10 @@ void Enemy::render(Camera& camera) {
         }
 
         SDL_FRect srcRectEnemy = {
-           animationEnemy.currentFrame * animationEnemy.spriteWidth,  // x position
-           animationRow * animationEnemy.spriteHeight, // y position
-           animationEnemy.spriteWidth,                 // largeur
-           animationEnemy.spriteHeight                 // hauteur
+           animationEnemy.currentFrame * animationEnemy.spriteWidth,  
+           animationRow * animationEnemy.spriteHeight, 
+           animationEnemy.spriteWidth,                 
+           animationEnemy.spriteHeight                 
         };
 
         SDL_RenderTexture(renderer, texture, &srcRectEnemy, &screenRect);
