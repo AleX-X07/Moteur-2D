@@ -14,7 +14,6 @@ void Camera::setCameraOnPlayer(Player& player) {
     sizeC.x = (player.getRect().x + player.getRect().w / 2) - viewW / 2;
     sizeC.y = (player.getRect().y + player.getRect().h / 2) - viewH / 2;
 
-    // Clamp inside world
     if (sizeC.x < 0) {
         sizeC.x = 0;
     }

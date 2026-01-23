@@ -8,20 +8,17 @@
 
 int main() {
 
-	// Creation Window
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 
 	SDL_Init(SDL_INIT_VIDEO);
 	SDL_CreateWindowAndRenderer("Lost Meow", screenWidth, screenHeight, NULL, &window, &renderer);
 
-	//SceneManager
 	SceneManager sM = SceneManager(renderer,window);
 	keys myKeys;
 
-	setTime time = setTime(120); // Lock frame rate at 120fps
+	setTime time = setTime(120); 
 
-	//GameLoop
 	bool loopTrue = true;
 	while (loopTrue) {
 

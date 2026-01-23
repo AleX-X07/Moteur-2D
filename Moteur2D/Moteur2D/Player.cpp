@@ -74,7 +74,7 @@ void Player::updateState(const bool* keys) {
             currentState = PlayerStateOpti::idle;
         }
     }
-    else { // Seulement si on n'est PAS au sol
+    else {
         if (_movingLeft && !_movingRight) {
             if (myPhysics.velocityY < 0) {
                 currentState = PlayerStateOpti::jumpingLeft;
@@ -124,7 +124,6 @@ void Player::colliders(std::vector<GameObject*>& gameObject) {
         SDL_FRect blockSide = { cRect.x, cRect.x + cRect.w, cRect.y, cRect.y + cRect.h };
         SDL_FRect overlap = { playerDirection.y - blockSide.x, blockSide.y - playerDirection.x, playerDirection.h - blockSide.w, blockSide.h - playerDirection.w };
 
-        // Collision with the ground
         if (overlap.w < overlap.x && overlap.w < overlap.y && overlap.w < overlap.h) {
             if (myPhysics.velocityY >= 0) {
                 rect.y = blockSide.w - rect.h;
@@ -139,7 +138,6 @@ void Player::colliders(std::vector<GameObject*>& gameObject) {
             }
         }
 
-        // Collision horizontal
         else if (overlap.x < overlap.w && overlap.x < overlap.h) {
             if (myPhysics.velocityX > 0 || (playerDirection.y > blockSide.x && playerDirection.x < blockSide.x)) {
                 rect.x = blockSide.x - rect.w;
@@ -160,7 +158,6 @@ void Player::render(Camera& camera) {
     SDL_FRect screenRect = camera.worldToScreen(rect);
 
     if (texture) {
-        // Déterminer la ligne du spritesheet selon l'état
         int animationRow = 0;
         switch (currentState) {
         case PlayerStateOpti::idle:
@@ -187,10 +184,10 @@ void Player::render(Camera& camera) {
         }
 
         SDL_FRect srcRect = {
-            myAnimation.currentFrame * myAnimation.spriteWidth,  // x position
-            animationRow * myAnimation.spriteHeight, // y position
-            myAnimation.spriteWidth,                 // largeur
-            myAnimation.spriteHeight                 // hauteur
+            myAnimation.currentFrame * myAnimation.spriteWidth,  
+            animationRow * myAnimation.spriteHeight, 
+            myAnimation.spriteWidth,                
+            myAnimation.spriteHeight                
         };
 
         SDL_RenderTexture(renderer, texture, &srcRect, &screenRect);
@@ -200,7 +197,6 @@ void Player::render(Camera& camera) {
 void Player::update(const bool* keys, float dt) {
     myPhysics.nowTimeJump += dt;
 
-    // move left and right
     myPhysics.velocityX = 0;
     if (keys[SDL_SCANCODE_LEFT] || keys[SDL_SCANCODE_A]) {
         myPhysics.velocityX = -myPhysics.speed;
@@ -209,7 +205,6 @@ void Player::update(const bool* keys, float dt) {
         myPhysics.velocityX = myPhysics.speed;
     }
 
-    // jump
     if (keys[SDL_SCANCODE_SPACE] && myPhysics.onGround && myPhysics.nowTimeJump > myPhysics.cooldownJump) {
         myPhysics.velocityY = -myPhysics.jumpForce;
         myPhysics.nowTimeJump = 0;
@@ -221,7 +216,6 @@ void Player::update(const bool* keys, float dt) {
         rect.y += myPhysics.velocityY * dt;
     }
 
-    // Update horizontal position
     rect.x += myPhysics.velocityX * dt;
 
     if (rect.y >= levelHeight) {
